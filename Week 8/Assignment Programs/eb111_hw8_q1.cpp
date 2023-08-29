@@ -44,9 +44,16 @@ int minInArray(int arr[], int arrSize) {
 
 int indexLocation(int min, string& location) {
     int newMin = 0;
+    string temp;
 
     if ( min == newMin ) {
-
+        temp = to_string(min);
+        location = location + " " + temp;
+    }
+    else if ( min < newMin ) {
+        temp = to_string(min);
+        location = "";
+        location = temp;
     }
 
     return location;
