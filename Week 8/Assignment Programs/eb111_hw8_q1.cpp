@@ -3,7 +3,7 @@
 using namespace std;
 
 int minInArray(int arr[3], int arrSize);
-int minimumFinder(int& min, int newMin);
+int minimumFinder(int& min, int indexLocation);
 
 const int ARRSIZE = 20;
 
@@ -20,14 +20,19 @@ int main () {
         cin>>arr[i];
         i++;
     }
+    
+    smol == arr[0];
 
     for ( i = 0; i < 5; i++ ) {
-        smol = minimumFinder(arr[i], i);
+        
+        if ( smol > arr[i] ) {
+            smol = minimumFinder(arr[i], i);
+        }
     }
 
     // minInput = minInArray(arr, arrSize);
 
-    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices: 45"<<endl;
+    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices: "<<smol<<endl;
 
 }
 
@@ -51,15 +56,15 @@ int minInArray(int arr[], int arrSize) {
     return smallArr;
 }
 
-int minimumFinder(int& min, int newMin) {
+int minimumFinder(int& min, int indexLocation) {
     int temp = 0;
 
-    if ( newMin == temp ) {
-        newMin = min;
+    if ( indexLocation == 0 ) {
+        temp = min;
     }
-    else if ( min < newMin ) {
-        newMin = min;
+    else if ( min < indexLocation ) {
+        temp = min;
     }
 
-    return newMin;
+    return temp;
 }
