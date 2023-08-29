@@ -41,15 +41,10 @@ void printArray(int arr[], int arrSize){
 void reverseArray(int arr[], int arrSize) {
     int temp, i;
 
-    for ( i = 0 ; i < arrSize ; i++ ) {
+    for ( i = 0 ; i < arrSize/2 ; i++ ) {
         temp = arr[i];
         arr[i] = arr[arrSize - ( 1 + i)];
         arr[arrSize - ( 1 + i)] = temp;
-    }
-    for ( i = arrSize/2 ; i < arrSize ; i++ ) {
-        temp = arr[arrSize - ( 1 + i)];
-        arr[arrSize - ( 1 + i)] = arr[i];
-        arr[i] = temp;
     }
 }
 
