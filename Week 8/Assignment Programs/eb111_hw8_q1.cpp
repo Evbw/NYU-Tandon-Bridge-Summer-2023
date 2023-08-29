@@ -25,21 +25,30 @@ int main () {
 }
 
 int minInArray(int arr[], int arrSize) {
-    int smallArr;
+    int smallArr, i = 0;
     string str;
 
-    for ( int i = 0; i < arrSize; i++ ) {
-        if ( i = 0 ) {
-            smallArr = arr[i];
-            // str = to_string(i);
-            // indexLocation(smallArr, str);
-        }
-        else if ( arr[i] < arr[i-1] ) {
-            smallArr = arr[i];
-            // str = to_string(i);
-            // indexLocation(smallArr, str);
-        }
-    }
+    smallArr = arr[i];
+
+    // if ( i = 0 ) {
+    //     smallArr = arr[i];
+    // }
+    // else if ( arr[i] < arr[i-1] ) {
+    //     smallArr = arr[i];
+    // }
+
+    // for ( i = 0; i < arrSize; i++ ) {
+    //     // if ( i = 0 ) {
+    //     //     smallArr = arr[i];
+    //     //     // str = to_string(i);
+    //     //     // indexLocation(smallArr, str);
+    //     // }
+    //     // else if ( arr[i] < arr[i-1] ) {
+    //     //     smallArr = arr[i];
+    //     //     // str = to_string(i);
+    //     //     // indexLocation(smallArr, str);
+    //     // }
+    // }
 
     return smallArr;
 }
