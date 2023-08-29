@@ -49,7 +49,20 @@ void reverseArray(int arr[], int arrSize) {
 }
 
 void removeOdd(int arr[], int& arrSize) {
+    int temp, i;
 
+    for ( i = 0 ; i < arrSize ; i++ ) {
+        if ( arr[i] % 2 == 1 ) {
+            cout<<"arr[i] "<<arr[i]<<endl;
+            temp = arr[i];
+            arr[i] = arr[arrSize - ( 1 + i)];
+            cout<<"arr[i]2 "<<arr[i]<<endl;
+            cout<<"arr[arrSize - ( 1 + i)] "<<arr[arrSize - ( 1 + i)]<<endl;
+            arr[arrSize - ( 1 + i)] = temp;
+            cout<<"arr[arrSize - ( 1 + i)]2 "<<arr[arrSize - ( 1 + i)]<<endl;
+            arrSize--;
+        }
+    }
 }
 
 void splitParity(int arr[], int arrSize) {
