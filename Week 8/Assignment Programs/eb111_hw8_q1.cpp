@@ -4,8 +4,9 @@ using namespace std;
 
 int minInArray(int arr[3], int arrSize);
 int minimumFinder(int min, int indexLocation, int& temp);
+int indexLocations(int temp, int num, int indexLocation);
 
-const int ARRSIZE = 20;
+const int ARRAYSIZE = 20;
 
 int main () {
     int arr[5];
@@ -21,16 +22,15 @@ int main () {
         i++;
     }
 
-    smol = temp = arr[0];
+    // smol = temp = arr[0];
 
-    for ( i = 0; i < 5; i++ ) {
-        cout<<"array value for loop "<<smol<<endl;
-        if ( smol > arr[i] ) {
-            smol = minimumFinder(arr[i], i, temp);
-        }
-    }
+    // for ( i = 0; i < 5; i++ ) {
+    //     if ( smol > arr[i] ) {
+    //         smol = minimumFinder(arr[i], i, temp);
+    //     }
+    // }
 
-    // minInput = minInArray(arr, arrSize);
+    minInput = minInArray(arr, arrSize);
 
     cout<<"The minimum value is "<<minInput<<", and it is located in the following indices: "<<smol<<endl;
 
@@ -38,8 +38,7 @@ int main () {
 
 int minInArray(int arr[], int arrSize) {
     int smallArr = 0, i = 0;
-    string str;
-
+    
     for ( i = 0; i < arrSize; i++ ) {
         if ( i == 0 ) {
             smallArr = arr[i];
@@ -58,18 +57,18 @@ int minInArray(int arr[], int arrSize) {
 
 int minimumFinder(int min, int indexLocation, int& temp) {
 
-    cout<<"function index "<<indexLocation<<endl;
-    cout<<"function min "<<min<<endl;
-
     if ( indexLocation == 0 ) {
         temp = min;
         cout<<temp<<endl;
     }
     else if ( min < temp ) {
         temp = min;
-        cout<<"conditional temp "<<temp<<endl;
-        cout<<"conditional min "<<min<<endl;
     }
 
     return temp;
 }
+
+// int indexLocations(int num, int indexLocation) {
+
+
+// }
