@@ -1,11 +1,10 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-int minInArray(int arr[3], int arrSize);
-void indexLocations(int arr[20], int num, int indexLocation);
-
 const int ARRAYSIZE = 20;
+
+int minInArray(int arr[ARRAYSIZE], int arrSize);
+void indexLocations(int arr[ARRAYSIZE], int num, int indexLocation);
 
 int main () {
     int arr[5];
