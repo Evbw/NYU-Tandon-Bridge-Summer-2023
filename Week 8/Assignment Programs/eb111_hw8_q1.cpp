@@ -7,7 +7,7 @@ int indexLocation(int min, string& location);
 
 int main () {
     int arr[3];
-    int arrSize = 20, i = 0, minInput = 0;
+    int arrSize = 3, i = 0, minInput = 0;
     int indices;
     string location;
 
@@ -25,17 +25,17 @@ int main () {
 }
 
 int minInArray(int arr[], int arrSize) {
-    int smallArr, i = 0;
+    int smallArr = 0, i = 0;
     string str;
 
-    smallArr = arr[i];
-
-    // if ( i = 0 ) {
-    //     smallArr = arr[i];
-    // }
-    // else if ( arr[i] < arr[i-1] ) {
-    //     smallArr = arr[i];
-    // }
+    if ( i == 0 ) {
+        cout<<i<<endl;
+        smallArr = arr[i];
+    }
+    else if ( arr[i] < arr[i-1] ) {
+        cout<<i<<endl;
+        smallArr = arr[i];
+    }
 
     // for ( i = 0; i < arrSize; i++ ) {
     //     // if ( i = 0 ) {
