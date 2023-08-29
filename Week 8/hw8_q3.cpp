@@ -65,15 +65,16 @@ void removeOdd(int arr[], int& arrSize) {
 }
 
 void splitParity(int arr[], int arrSize) {
-    int temp = 0;
+    int temp, i;
 
-    for ( int i = arrSize ; i >= 0 ; i-- ) {
+    for ( i = 0 ; i < arrSize ; i++ ) {
         
-        if ( arr[i] % 2 == 1  ) {
-            temp = arr[arrSize - 1];
-            arr[arrSize - 1] = arr[i];
-            arr[i] = temp;
+        if ( arr[i] % 2 == 1 ) {
+            
+            temp = arr[i];
+            arr[i] = arr[arrSize - 1];
+            arr[arrSize - 1] = temp;
         }
     }
-
+    reverseArray(arr, arrSize);
 }
