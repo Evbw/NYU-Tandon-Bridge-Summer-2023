@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 void reverseArray(int arr[], int arrSize);
@@ -14,8 +13,8 @@ int main () {
     int arr2[10] = {21, 12, 6, 7, 14};
     int arr2Size = 5;
 
-    int arr3[10] = {3, 6, 4, 1, 12, 7, 77, 778, 779};
-    int arr3Size = 9;
+    int arr3[10] = {3, 6, 4, 1, 12,};
+    int arr3Size = 5;
 
     reverseArray(arr1, arr1Size);
     printArray(arr1, arr1Size);
@@ -75,6 +74,4 @@ void splitParity(int arr[], int arrSize) {
             count++;
         }
     }
-
-    // reverseArray(arr, arrSize);
 }
