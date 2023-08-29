@@ -20,10 +20,12 @@ int main () {
 }
 
 void isPalindrome(string str) {
-    int n;
+    int n, m;
     string newword;
 
     for ( n = str.length() - 1; n >= 0; n-- ) {
-        cout<<str[n];
+        newword += str[n];
     }
+    cout<<"new word "<<newword<<endl;
+    cout<<"str      "<<str<<endl;
 }
