@@ -65,18 +65,13 @@ void removeOdd(int arr[], int& arrSize) {
 }
 
 void splitParity(int arr[], int arrSize) {
-    int temp, i, count = 1;
+    int temp, i, count = 0;
 
     for ( i = 0 ; i < arrSize ; i++ ) {
-        if ( arr[i] % 2 == 0 ) {
-            cout<<"arr["<<i<<"] "<<arr[i]<<endl;
+        if ( arr[i] % 2 == 1 ) {
             temp = arr[i];
-            cout<<"temp "<<temp<<endl;
-            arr[i] = arr[arrSize - count];
-            cout<<"arr["<<i<<"]2 "<<arr[i]<<endl;
-            cout<<"arr["<<arrSize - count<<"] "<<arr[arrSize - count]<<endl;
-            arr[arrSize - count] = temp;
-            cout<<"arr["<<arrSize - count<<"]2 "<<arr[arrSize - count]<<endl;
+            arr[i] = arr[count];
+            arr[count] = temp;
             count++;
         }
     }
