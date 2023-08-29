@@ -3,24 +3,32 @@
 using namespace std;
 
 int minInArray(int arr[3], int arrSize);
-int indexLocation(int min, string& location);
+int indexLocation(int min, int location);
+
+const int ARRSIZE = 20;
 
 int main () {
-    int arr[3];
-    int arrSize = 3, i = 0, minInput = 0;
+    int arr[5];
+    int arrSize = 5, i = 0, minInput = 0;
     int indices;
-    string location;
+    int location = 0;
+    int test1 = 45, test2 = 5, test3 = 5, test4 = 99, test5 = 5;
 
     cout<<"Please enter 20 integers separated by a space:"<<endl;
     
-    while ( i < 3 ) {
+    while ( i < 5 ) {
         cin>>arr[i];
+        
         i++;
     }
 
-    minInput = minInArray(arr, arrSize);
+    for ( i = 0; i < 5; i++ ) {
+        indices = indexLocation(arr[i], i);
+    }
 
-    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices: 1 3 6 14"<<endl;
+    // minInput = minInArray(arr, arrSize);
+
+    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices: "<<location<<endl;
 
 }
 
@@ -44,19 +52,17 @@ int minInArray(int arr[], int arrSize) {
     return smallArr;
 }
 
-// int indexLocation(int min, string& location) {
-//     int newMin = 0;
-//     string temp;
+int indexLocation(int min, int location) {
+    int newMin = 0, temp;
 
-//     if ( min == newMin ) {
-//         temp = to_string(min);
-//         location = location + " " + temp;
-//     }
-//     else if ( min < newMin ) {
-//         temp = to_string(min);
-//         location = "";
-//         location = temp;
-//     }
+    if ( min == newMin ) {
+        temp = min;
+    }
+    else if ( min < newMin ) {
+        temp = min;
+        
+        location = temp;
+    }
 
-//     return location;
-// }
+    return location;
+}
