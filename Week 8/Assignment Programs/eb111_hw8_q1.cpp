@@ -28,27 +28,18 @@ int minInArray(int arr[], int arrSize) {
     int smallArr = 0, i = 0;
     string str;
 
-    if ( i == 0 ) {
-        cout<<i<<endl;
-        smallArr = arr[i];
+    for ( i = 0; i < arrSize; i++ ) {
+        if ( i == 0 ) {
+            smallArr = arr[i];
+            // str = to_string(i);
+            // indexLocation(smallArr, str);
+        }
+        else if ( arr[i] < arr[i-1] ) {
+            smallArr = arr[i];
+            // str = to_string(i);
+            // indexLocation(smallArr, str);
+        }
     }
-    else if ( arr[i] < arr[i-1] ) {
-        cout<<i<<endl;
-        smallArr = arr[i];
-    }
-
-    // for ( i = 0; i < arrSize; i++ ) {
-    //     // if ( i = 0 ) {
-    //     //     smallArr = arr[i];
-    //     //     // str = to_string(i);
-    //     //     // indexLocation(smallArr, str);
-    //     // }
-    //     // else if ( arr[i] < arr[i-1] ) {
-    //     //     smallArr = arr[i];
-    //     //     // str = to_string(i);
-    //     //     // indexLocation(smallArr, str);
-    //     // }
-    // }
 
     return smallArr;
 }
