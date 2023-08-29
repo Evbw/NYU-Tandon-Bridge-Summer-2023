@@ -4,7 +4,7 @@ using namespace std;
 
 void reverseArray(int arr[], int arrSize);
 void removeOdd(int arr[], int& arrSize);
-void splitParity(int arr[], int arrSize)''
+void splitParity(int arr[], int arrSize);
 
 int main () {
     int arr1[10] = {9, 2, 14, 12, -3};
@@ -45,4 +45,6 @@ void removeOdd(int arr[], int& arrSize) {
 
 }
 
-void splitParity(int arr[], int arrSize)
+void splitParity(int arr[], int arrSize) {
+    
+}
