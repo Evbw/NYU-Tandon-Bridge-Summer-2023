@@ -15,7 +15,7 @@ int main () {
     int arr2Size = 5;
 
     int arr3[10] = {3, 6, 4, 1, 12, 7, 77, 778, 779};
-    int arr3Size = 10;
+    int arr3Size = 9;
 
     reverseArray(arr1, arr1Size);
     printArray(arr1, arr1Size);
@@ -65,26 +65,21 @@ void removeOdd(int arr[], int& arrSize) {
 }
 
 void splitParity(int arr[], int arrSize) {
-    int temp, i, count;
+    int temp, i, count = 1;
 
     for ( i = 0 ; i < arrSize ; i++ ) {
-        if ( arr[i] % 2 == 1 ) {
+        if ( arr[i] % 2 == 0 ) {
+            cout<<"arr["<<i<<"] "<<arr[i]<<endl;
+            temp = arr[i];
+            cout<<"temp "<<temp<<endl;
+            arr[i] = arr[arrSize - count];
+            cout<<"arr["<<i<<"]2 "<<arr[i]<<endl;
+            cout<<"arr["<<arrSize - count<<"] "<<arr[arrSize - count]<<endl;
+            arr[arrSize - count] = temp;
+            cout<<"arr["<<arrSize - count<<"]2 "<<arr[arrSize - count]<<endl;
             count++;
         }
     }
 
-    for ( i = 0 ; i < arrSize ; i++ ) {
-        if ( arr[i] % 2 == 0 ) {
-            temp = arr[i];
-            arr[i] = arr[arrSize - 1];
-            arr[arrSize - 1] = temp;
-        }
-    }
-
-    for ( i = 0 ; i < count ; i++ ) {
-        if ( arr[i] % 2 == 1 ) {
-            cout<<"arr["<<i<<"] "<<arr[i]<<endl;
-        }
-    }
     // reverseArray(arr, arrSize);
 }
