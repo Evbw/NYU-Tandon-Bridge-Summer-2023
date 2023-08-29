@@ -21,7 +21,7 @@ int main () {
         i++;
     }
 
-    smol = arr[0];
+    smol = temp = arr[0];
 
     for ( i = 0; i < 5; i++ ) {
         cout<<"array value for loop "<<smol<<endl;
@@ -65,7 +65,7 @@ int minimumFinder(int min, int indexLocation, int& temp) {
         temp = min;
         cout<<temp<<endl;
     }
-    else if ( min < indexLocation ) {
+    else if ( min < temp ) {
         temp = min;
         cout<<"conditional temp "<<temp<<endl;
         cout<<"conditional min "<<min<<endl;
