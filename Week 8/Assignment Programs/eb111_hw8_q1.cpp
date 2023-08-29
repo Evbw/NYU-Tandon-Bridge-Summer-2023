@@ -3,7 +3,7 @@
 using namespace std;
 
 int minInArray(int arr[3], int arrSize);
-int indexLocation(int min, int location);
+int minimumFinder(int min, int newMin);
 
 const int ARRSIZE = 20;
 
@@ -11,7 +11,7 @@ int main () {
     int arr[5];
     int arrSize = 5, i = 0, minInput = 0;
     int indices;
-    int location = 0;
+    int smol = 0;
     int test1 = 45, test2 = 5, test3 = 5, test4 = 99, test5 = 5;
 
     cout<<"Please enter 20 integers separated by a space:"<<endl;
@@ -22,7 +22,7 @@ int main () {
     }
 
     for ( i = 0; i < 5; i++ ) {
-        indices = indexLocation(arr[i], i);
+        smol = minimumFinder(arr[i], i);
     }
 
     // minInput = minInArray(arr, arrSize);
@@ -39,27 +39,27 @@ int minInArray(int arr[], int arrSize) {
         if ( i == 0 ) {
             smallArr = arr[i];
             // str = to_string(i);
-            // indexLocation(smallArr, str);
+            // minimumFinder(smallArr, str);
         }
         else if ( arr[i] < arr[i-1] ) {
             smallArr = arr[i];
             // str = to_string(i);
-            // indexLocation(smallArr, str);
+            // minimumFinder(smallArr, str);
         }
     }
 
     return smallArr;
 }
 
-int indexLocation(int min, int location) {
-    int newMin = 0, temp;
+int minimumFinder(int min, int newMin) {
+    int temp = 0;
 
-    if ( min == newMin ) {
-        temp = min;
+    if ( newMin == temp ) {
+        newMin = min;
     }
     else if ( min < newMin ) {
         temp = min;
-        location = temp;
+        newMin = temp;
     }
 
     return location;
