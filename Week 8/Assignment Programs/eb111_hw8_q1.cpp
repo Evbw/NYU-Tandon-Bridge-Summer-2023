@@ -24,15 +24,18 @@ int main () {
 
 int minInArray(int arr[], int arrSize) {
     int smallArr;
+    string str;
 
     for ( int i = 0; i < arrSize; i++ ) {
         if ( i = 0 ) {
             smallArr = arr[i];
-            indexLocation(min,location);
+            str = to_string(arr[i]);
+            indexLocation(smallArr, str);
         }
         else if ( arr[i] < arr[i-1] ) {
             smallArr = arr[i];
-            indexLocation(min,location);
+            str = to_string(arr[i]);
+            indexLocation(smallArr, str);
         }
     }
 
@@ -41,4 +44,6 @@ int minInArray(int arr[], int arrSize) {
 
 int indexLocation(int min, string& location) {
 
+
+    return location;
 }
