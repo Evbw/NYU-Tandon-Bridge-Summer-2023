@@ -21,7 +21,11 @@ int main () {
 
     minInput = minInArray(arr, arrSize);
 
-    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices:"<<indexLocations(arr, minInput, smol)<<endl;
+    
+
+    cout<<"The minimum value is "<<minInput<<", and it is located in the following indices:";
+    indexLocations(arr, minInput, smol);
+    cout<<endl;
 
 }
 
