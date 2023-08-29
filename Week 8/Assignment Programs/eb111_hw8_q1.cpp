@@ -29,12 +29,12 @@ int minInArray(int arr[], int arrSize) {
     for ( int i = 0; i < arrSize; i++ ) {
         if ( i = 0 ) {
             smallArr = arr[i];
-            str = to_string(arr[i]);
+            str = to_string(i);
             indexLocation(smallArr, str);
         }
         else if ( arr[i] < arr[i-1] ) {
             smallArr = arr[i];
-            str = to_string(arr[i]);
+            str = to_string(i);
             indexLocation(smallArr, str);
         }
     }
@@ -43,7 +43,11 @@ int minInArray(int arr[], int arrSize) {
 }
 
 int indexLocation(int min, string& location) {
+    int newMin = 0;
 
+    if ( min == newMin ) {
+
+    }
 
     return location;
 }
