@@ -52,7 +52,8 @@ void removeOdd(int arr[], int& arrSize) {
     int temp, i;
 
     for ( i = 0 ; i < arrSize ; i++ ) {
-        if ( arr[i] % 2 == 1 ) {
+        if ( arr[i] % 2 == 1 && i < arrSize/2 ) {
+            cout<<"i "<<i<<endl;
             cout<<"arr[i] "<<arr[i]<<endl;
             temp = arr[i];
             arr[i] = arr[arrSize - ( 1 + i)];
@@ -60,6 +61,9 @@ void removeOdd(int arr[], int& arrSize) {
             cout<<"arr[arrSize - ( 1 + i)] "<<arr[arrSize - ( 1 + i)]<<endl;
             arr[arrSize - ( 1 + i)] = temp;
             cout<<"arr[arrSize - ( 1 + i)]2 "<<arr[arrSize - ( 1 + i)]<<endl;
+            arrSize--;
+        }
+        else if ( arr[i] % 2 == 1 ) {
             arrSize--;
         }
     }
