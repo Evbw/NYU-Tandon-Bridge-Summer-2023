@@ -5,6 +5,7 @@ using namespace std;
 void reverseArray(int arr[], int arrSize);
 void removeOdd(int arr[], int& arrSize);
 void splitParity(int arr[], int arrSize);
+void printArray(int arr1[], int arr1Size);
 
 int main () {
     int arr1[10] = {9, 2, 14, 12, -3};
@@ -38,7 +39,13 @@ void printArray(int arr[], int arrSize){
 }
 
 void reverseArray(int arr[], int arrSize) {
+    int temp, i;
 
+    for ( i = 0 ; i < arrSize; i++ ) {
+        temp = arr[i];
+        arr[i] = temp2 = arr[arrSize - ( 1 + i) ];
+        arr[arrSize - ( 1 + i)] = temp;
+    }
 }
 
 void removeOdd(int arr[], int& arrSize) {
@@ -46,5 +53,5 @@ void removeOdd(int arr[], int& arrSize) {
 }
 
 void splitParity(int arr[], int arrSize) {
-    
+
 }
