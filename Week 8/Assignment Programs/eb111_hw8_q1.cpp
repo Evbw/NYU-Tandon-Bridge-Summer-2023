@@ -18,7 +18,6 @@ int main () {
     
     while ( i < 5 ) {
         cin>>arr[i];
-        
         i++;
     }
 
@@ -60,7 +59,6 @@ int indexLocation(int min, int location) {
     }
     else if ( min < newMin ) {
         temp = min;
-        
         location = temp;
     }
 
