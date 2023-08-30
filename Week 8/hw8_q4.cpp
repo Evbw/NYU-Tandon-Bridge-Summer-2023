@@ -13,11 +13,15 @@ int main () {
 
     num[10] = getRandom(num, numSize);
 
+    for ( int i = 0; i < numSize; i++ ) {
+        cout<<num[i]<<"\t";
+    }
+
 }
 
 int getRandom(int arr[], int arrSize) {
     for ( int i = 0; i < arrSize; i++ ) {
-        arr[i] = rand() % 4;
+        arr[i] = ( rand() % 3 ) + 1;
     }
     return arr[10];
 }
