@@ -8,5 +8,6 @@ int main() {
     cout<<"Please input your first name, middle name, and last name: "<<endl;
     cin>>first>>middle>>last;
 
+    cout<<last<<", "<<first<<" "<<middle[0]<<"."<<endl;
     
 }
