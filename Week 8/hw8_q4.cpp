@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int PIN[5] = {2, 1, 1, 3, 5};
+const int PIN[5] = {1, 2, 3, 4, 5};
 const int PINSIZE = 5;
 
 void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3);
@@ -37,7 +37,10 @@ int main () {
     }
 
     splitEntry(entry, input, entrySize);
-
+    for ( int i = 0; i < entrySize; i++ ) {
+        cout<<entry[i];
+    }
+    cout<<endl;
     encryptedPIN (num, digits, entry, numSize, digitsSize, entrySize);
 
     return 0;
@@ -67,16 +70,20 @@ void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2,
     int PINcheck[5];
     int PINchecksize = 5;
 
-
-
     for ( int i = 0; i < PINSIZE; i++ ) {
-        for ( int j = 0; j < arrSize2; j++ ) {
-            if ( arr3[i] == arr2[j] ) {
+        for ( int j = 0; j < PINSIZE; j++ ) {
+            cout<<"i "<<i<<" ";
+            cout<<"j "<<j<<" ";
+            cout<<"arr["<<i<<"] "<<arr[i]<<" ";
+            cout<<"arr3["<<j<<"] "<<arr[j]<<" "<<endl;
+            if ( i == j && arr[i] == arr3[j] ) {
+                cout<<"pin "<<pin<<" ";
                 pin = 10 * pin + PIN[i];
+                cout<<"pin2 "<<pin<<" "<<endl;
             }
         }
     }
-
+    cout<<pin<<endl;
     splitEntry(PINcheck, pin, PINchecksize);
 
     if ( PIN[0] == PINcheck[0] && PIN[1] == PINcheck[1] && PIN[2] == PINcheck[2] && PIN[3] == PINcheck[3] && PIN[4] == PINcheck[4] ) {
