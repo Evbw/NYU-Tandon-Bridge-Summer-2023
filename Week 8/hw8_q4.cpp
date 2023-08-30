@@ -11,8 +11,8 @@ void splitEntry(int arr[], int num, int arrSize);
 int main () {
     int num[10];
     int digits[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int entry[5];
-    int numSize = 10, digitsSize = 10, entrySize = 5;  
+    int entry[5], PINcheck[5];
+    int numSize = 10, digitsSize = 10, entrySize = 5, PINcheck = 5;  
     int input;  
     srand(time(0));
 
@@ -59,12 +59,20 @@ void splitEntry(int arr[], int num, int arrSize) {
 void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3) {
     int pin = 0;
 
-    for ( int i = 0; i < arrSize1; i++ ) {
+    for ( int i = 0; i < PINSIZE; i++ ) {
         for ( int j = 0; j < arrSize2; j++ ) {
-            if ( i == j && PIN[i] == arr2[j] ) {
+            if ( PIN[i] == arr2[j] ) {
                 pin = 10 * pin + PIN[i];
             }
         }
     }
-    cout<<pin<<endl;
+
+    splitEntry(PINcheck, int num, int arrSize)
+    
+    if (PIN == PINcheck) {
+        cout<<"Your PIN is correct"<<endl;
+    }
+    else {
+        cout<<"Your PIN is not correct"<<endl;
+    }
 }
