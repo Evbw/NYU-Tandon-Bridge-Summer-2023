@@ -1,9 +1,10 @@
 #include <iostream>
 using namespace std;
 
-const int PIN[5] = {2, 1, 1, 3, 5};
+const int PIN[5] = {2, 6, 1, 3, 5};
+const int PINSIZE = 5;
 
-void encryptedPIN (int arr[], int arrSize);
+void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3);
 int getRandom(int arr[], int arrSize);
 void splitEntry(int arr[], int num, int arrSize);
 
@@ -20,23 +21,19 @@ int main () {
     cout<<"Please enter your PIN according to the following mapping:"<<endl;
     cout<<"PIN:\t";
     for ( int i = 0; i < digitsSize; i++ ) {
-        cout<<digits[i]<<'\t';
+        cout<<digits[i]<<" ";
     }
     cout<<endl;
     cout<<"NUM:\t";
     for ( int i = 0; i < numSize; i++ ) {
-        cout<<num[i]<<'\t';
+        cout<<num[i]<<" ";
     }
     cout<<endl;
     cin>>input;
 
     splitEntry(entry, input, entrySize);
 
-    for ( int i = 0; i < entrySize; i++ ) {
-        cout<<entry[i]<<" ";
-    }
-
-    // encryptedPIN (entry, entrySize);
+    encryptedPIN (num, digits, entry, numSize, digitsSize, entrySize);
 
 }
 
@@ -59,6 +56,15 @@ void splitEntry(int arr[], int num, int arrSize) {
 
 }
 
-void encryptedPIN (int arr[], int arrSize) {
+void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3) {
+    int pin = 0;
 
+    for ( int i = 0; i < arrSize1; i++ ) {
+        for ( int j = 0; j < arrSize2; j++ ) {
+            if ( i == j && PIN[i] == arr2[j] ) {
+                pin = 10 * pin + PIN[i];
+            }
+        }
+    }
+    cout<<pin<<endl;
 }
