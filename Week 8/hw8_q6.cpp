@@ -11,10 +11,9 @@ int main() {
 
     for ( int i = 0; i < ( line.length() - 1 ) ; i++ ) {
         if ( line[i] == 32 ) {
-            word = line.substr(j, line[i-1] - j);
-            cout<<line.substr(j, line[i-1] - j)<<endl;
-            j = line[i] + 1;
-
+            word = line.substr(j, i);
+            j = i + 1;
+            cout<<word<<endl;
         }
     }
 }
