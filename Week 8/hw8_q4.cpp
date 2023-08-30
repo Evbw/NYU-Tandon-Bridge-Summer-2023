@@ -18,6 +18,11 @@ int main () {
     for ( int i = 0; i < digitsSize; i++ ) {
         cout<<digits[i]<<'\t';
     }
+    cout<<endl;
+    cout<<"NUM:\t";
+    for ( int i = 0; i < numSize; i++ ) {
+        cout<<num[i]<<'\t';
+    }
 
 }
 
