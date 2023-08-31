@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int PIN[5] = {1, 2, 3, 4, 5};
+const int PIN[5] = {9, 9, 9, 9, 9};
 const int PINSIZE = 5;
 
 void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3);
@@ -12,11 +12,14 @@ int main () {
     int num[10];
     int digits[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     int entry[5];
-    int numSize = 10, digitsSize = 10, entrySize = 5;  
-    int input;  
+    int array[5];
+    int numSize = 10, digitsSize = 10, entrySize = 5, arraySize = 5;
+    int input;
     srand(time(0));
 
     num[10] = getRandom(num, numSize);
+    
+    
 
     cout<<"Please enter your PIN according to the following mapping:"<<endl;
     cout<<"PIN:\t";
@@ -37,10 +40,7 @@ int main () {
     }
 
     splitEntry(entry, input, entrySize);
-    for ( int i = 0; i < entrySize; i++ ) {
-        cout<<entry[i];
-    }
-    cout<<endl;
+
     encryptedPIN (num, digits, entry, numSize, digitsSize, entrySize);
 
     return 0;
@@ -70,22 +70,21 @@ void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2,
     int PINcheck[5];
     int PINchecksize = 5;
 
-    for ( int i = 0; i < PINSIZE; i++ ) {
-        for ( int j = 0; j < PINSIZE; j++ ) {
-            cout<<"i "<<i<<" ";
-            cout<<"j "<<j<<" ";
-            cout<<"arr["<<i<<"] "<<arr[i]<<" ";
-            cout<<"arr3["<<j<<"] "<<arr[j]<<" "<<endl;
-            if ( i == j && arr[i] == arr3[j] ) {
-                cout<<"pin "<<pin<<" ";
-                pin = 10 * pin + PIN[i];
-                cout<<"pin2 "<<pin<<" "<<endl;
-            }
-        }
+    for ( int i = 0; i < PINchecksize; i++ ) {
+        pin = 10 * pin + arr[PIN[i]];
     }
     cout<<pin<<endl;
+    for ( int i = 0; i < arrSize; i++ ) {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+
     splitEntry(PINcheck, pin, PINchecksize);
 
+    for ( int i = 0; i < PINchecksize; i++ ) {
+        cout<<PINcheck[i]<<" ";
+    }
+    cout<<endl;
     if ( PIN[0] == PINcheck[0] && PIN[1] == PINcheck[1] && PIN[2] == PINcheck[2] && PIN[3] == PINcheck[3] && PIN[4] == PINcheck[4] ) {
         cout<<"Your PIN is correct"<<endl;
     }
