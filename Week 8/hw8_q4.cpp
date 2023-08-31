@@ -5,7 +5,7 @@ const int PIN[5] = {0, 0, 0, 0, 0};
 const string PINSTRING = "99999";
 const int PINSIZE = 5;
 
-void encryptedPIN (int arr[], int arr2[], int userInput, int arrSize, int arrSize2, int arrSize3);
+void encryptedPIN (int arr[], int arr2[], int userInput, int arrSize, int arrSize2);
 int getRandom(int arr[], int arrSize);
 void splitEntry(int arr[], int num, int arrSize);
 
@@ -38,7 +38,7 @@ int main () {
 
     // splitEntry(entry, input, entrySize);
 
-    encryptedPIN (num, digits, input, numSize, digitsSize, entrySize);
+    encryptedPIN (num, digits, input, numSize, digitsSize);
 
     return 0;
 }
@@ -62,7 +62,7 @@ void splitEntry(int arr[], int num, int arrSize) {
 
 }
 
-void encryptedPIN (int arr[], int arr2[], int userInput, int arrSize, int arrSize2, int arrSize3) {
+void encryptedPIN (int arr[], int arr2[], int userInput, int arrSize, int arrSize2) {
     int pin = 0;
     int PINcheck[5];
     int PINchecksize = 5;
@@ -78,7 +78,7 @@ void encryptedPIN (int arr[], int arr2[], int userInput, int arrSize, int arrSiz
     //     cout<<PINcheck[i]<<" ";
     // }
     // cout<<endl;
-    
+
     if ( pin == userInput ) {
         cout<<"Your PIN is correct"<<endl;
     }
