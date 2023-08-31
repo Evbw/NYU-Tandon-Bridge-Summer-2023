@@ -9,10 +9,14 @@ int main() {
     cout<<"Please enter a line of text: "<<endl;
     getline(cin, line);
 
-    for ( int i = 0; i < ( line.length() - 1 ) ; i++ ) {
+    for ( int i = 0; i <= ( line.length() - 1 ) ; i++ ) {
         if ( line[i] == 32 ) {
-            word = line.substr(j, i);
+            word = line.substr(j, i - j);
             j = i + 1;
+            cout<<word<<endl;
+        }
+        if ( i == line.length() - 1 ) {
+            word = line.substr(j, ( i + 1 ) - j);
             cout<<word<<endl;
         }
     }
