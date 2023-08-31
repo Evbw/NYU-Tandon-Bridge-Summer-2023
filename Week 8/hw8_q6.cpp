@@ -26,6 +26,9 @@ std::string digitChecker(std::string word) {
         if ( isalpha ( word[i] ) ) {
             return word;
         }
+        else if ( isalpha ( word[word.length()] ) ) {
+            return word;
+        }
         else {
             for ( int i = 0; i <= word.length(); i++ ) {
                 word[i] = 120;
