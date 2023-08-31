@@ -2,9 +2,10 @@
 using namespace std;
 
 const int PIN[5] = {9, 9, 9, 9, 9};
+int PININT = 99999;
 const int PINSIZE = 5;
 
-void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3);
+void encryptedPIN (int arr[], int userInput, int arr3[], int arrSize, int arrSize2, int arrSize3);
 int getRandom(int arr[], int arrSize);
 void splitEntry(int arr[], int num, int arrSize);
 
@@ -39,9 +40,9 @@ int main () {
         return 0;
     }
 
-    splitEntry(entry, input, entrySize);
+    // splitEntry(entry, input, entrySize);
 
-    encryptedPIN (num, digits, entry, numSize, digitsSize, entrySize);
+    encryptedPIN (num, input, entry, numSize, digitsSize, entrySize);
 
     return 0;
 }
@@ -65,27 +66,27 @@ void splitEntry(int arr[], int num, int arrSize) {
 
 }
 
-void encryptedPIN (int arr[], int arr2[], int arr3[], int arrSize, int arrSize2, int arrSize3) {
+void encryptedPIN (int arr[], int userInput, int arr3[], int arrSize, int arrSize2, int arrSize3) {
     int pin = 0;
+    int PINchecker = PININT;
     int PINcheck[5];
     int PINchecksize = 5;
 
-    for ( int i = 0; i < PINchecksize; i++ ) {
-        pin = 10 * pin + arr[PIN[i]];
+    for ( int i = PINchecksize - 1; i >= 0; i-- ) {
+        if ( userInput % 10 == PIN[i]) {
+            cout<<"userInput1 "<<userInput<<endl;
+            cout<<"PIN[i]1 "<<PIN[i]<<endl;
+            pin = 10 * pin + arr[PIN[i]];
+            userInput /= 10;
+            cout<<"userInput2 "<<userInput<<endl;
+        }
+        
     }
-    cout<<pin<<endl;
-    for ( int i = 0; i < arrSize; i++ ) {
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
+    cout<<"pin "<<pin<<endl;
+    // splitEntry(PINcheck, pin, PINchecksize);
 
-    splitEntry(PINcheck, pin, PINchecksize);
-
-    for ( int i = 0; i < PINchecksize; i++ ) {
-        cout<<PINcheck[i]<<" ";
-    }
-    cout<<endl;
-    if ( PIN[0] == PINcheck[0] && PIN[1] == PINcheck[1] && PIN[2] == PINcheck[2] && PIN[3] == PINcheck[3] && PIN[4] == PINcheck[4] ) {
+    // if ( PIN[0] == PINcheck[0] && PIN[1] == PINcheck[1] && PIN[2] == PINcheck[2] && PIN[3] == PINcheck[3] && PIN[4] == PINcheck[4] ) {
+    if ( pin == PINchecker ) {
         cout<<"Your PIN is correct"<<endl;
     }
     else {
