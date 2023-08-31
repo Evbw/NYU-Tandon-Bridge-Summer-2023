@@ -16,21 +16,22 @@ int main() {
         if ( line[i] == 32 || i == line.length() ) {
             word = line.substr(j, i - j);
             j = i + 1;
-            digitChecker(word);
+            std::cout<<digitChecker(word)<<" ";
         }
     }
 }
 
 std::string digitChecker(std::string word) {
     for ( int i = 0; i <= word.length(); i++ ) {
-        if ( isdigit(word[i] ) ) {
-            
+        if ( isalpha ( word[i] ) ) {
+            return word;
+        }
+        else {
+            for ( int i = 0; i <= word.length(); i++ ) {
+                word[i] = 120;
+            }
         }
     }
     
-    for ( int i = 0; i <= word.length(); i++ ) {
-        word[i] = 79;
-    }
-
     return word;
 }
