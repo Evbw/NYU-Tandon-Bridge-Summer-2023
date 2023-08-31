@@ -1,23 +1,36 @@
 #include <iostream>
+#include <cstdlib>
+#include <cctype>
 #include <string>
-using namespace std;
+
+std::string digitChecker(std::string word);
 
 int main() {
-    string line, word;
+    std::string line, word;
     int j = 0;
 
-    cout<<"Please enter a line of text: "<<endl;
-    getline(cin, line);
+    std::cout<<"Please enter a line of text: "<<std::endl;
+    getline(std::cin, line);
 
-    for ( int i = 0; i <= ( line.length() - 1 ) ; i++ ) {
-        if ( line[i] == 32 ) {
+    for ( int i = 0; i <= ( line.length() ) ; i++ ) {
+        if ( line[i] == 32 || i == line.length() ) {
             word = line.substr(j, i - j);
             j = i + 1;
-            cout<<word<<endl;
-        }
-        if ( i == line.length() - 1 ) {
-            word = line.substr(j, ( i + 1 ) - j);
-            cout<<word<<endl;
+            digitChecker(word);
         }
     }
+}
+
+std::string digitChecker(std::string word) {
+    for ( int i = 0; i <= word.length(); i++ ) {
+        if ( isdigit(word[i] ) ) {
+            
+        }
+    }
+    
+    for ( int i = 0; i <= word.length(); i++ ) {
+        word[i] = 79;
+    }
+
+    return word;
 }
