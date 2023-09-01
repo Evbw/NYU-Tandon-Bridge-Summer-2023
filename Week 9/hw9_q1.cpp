@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-std::string wordSplitter (std::string str);
+void wordSplitter (std::string str);
 
 int main() {
     //Initialized string variables, one for input and one for individual words after I split them apart
@@ -15,14 +15,14 @@ int main() {
     wordSplitter (line);
 }
 
-std::string wordSplitter (std::string str) {
+void wordSplitter (std::string str) {
     //Initialized string variable for individual words after I split them apart
     std::string word;
     std::vector<char> letters;
-    int count = 0;
+    int count = 1;
 
     for ( int i = 0; i <= ( str.length() ) ; i++ ) {
-        letters[i] = str[i];
+        letters.push_back(str[i]);
     }
     for ( int i = 0; i <= ( letters.size() ) ; i++ ) {
         //Check if the element of the string is a space or the end of the line
@@ -43,6 +43,5 @@ std::string wordSplitter (std::string str) {
         }
     }
 
-    // cout<<count<<'\t'<<"words"<<endl;
-    return str;
+    std::cout<<count<<'\t'<<"words"<<std::endl;
 }
