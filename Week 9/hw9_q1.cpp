@@ -20,6 +20,7 @@ void wordSplitter (std::string str) {
     std::string word;
     std::vector<char> letters;
     int count = 1;
+    
 
     for ( int i = 0; i <= ( str.length() ) ; i++ ) {
         letters.push_back(str[i]);
@@ -29,17 +30,18 @@ void wordSplitter (std::string str) {
         if ( letters[i] == 32 ) {
             count++;
         }
-        if ( str[i] < 65 || str[i] > 122 ) {
+        if ( letters[i] < 65 || letters[i] > 122 ) {
+            delete the letters!
+            letters.size()--;
+        }
+        else if ( letters[i] > 90 && letters[i] < 97 ) {
             continue;
         }
-        else if ( str[i] > 90 && str[i] < 97 ) {
-            continue;
+        if ( letters[i] >= 65 && letters[i] <= 90 ) {
+            letters[i] = letters[i] + 32;
         }
-        if ( str[i] >= 65 && str[i] <= 90 ) {
-            str[i] = str[i] + 32;
-        }
-        if ( str[i] >= 97 && str[i] <= 122 ) {
-            letters[i] = str[i];
+        if ( letters[i] >= 97 && letters[i] <= 122 ) {
+            letters[i] = letters[i];
         }
     }
 
