@@ -1,12 +1,21 @@
 #include <iostream>
 using namespace std;
-
+//Initialize functions
 void reverseArray(int arr[], int arrSize);
+//Precondition: Array is filled with valid values
+//Postcondition: The array is reversed
 void removeOdd(int arr[], int& arrSize);
+//Precondition: Array is filled with valid values
+//Postcondition: The odd elements of the array are removed and the array size is shrunk
 void splitParity(int arr[], int arrSize);
+//Precondition: Array is filled with valid values
+//Postcondition: The odd elements are moved to the front of the array
 void printArray(int arr1[], int arr1Size);
+//Precondition: Array is filled with valid values
+//Postcondition: The values of the array are printed!
 
 int main () {
+    //Added test suite from the homework doc
     int arr1[10] = {9, 2, 14, 12, -3};
     int arr1Size = 5;
 
@@ -27,8 +36,9 @@ int main () {
 
     return 0;
 }
-
+//The printArray function was included as part of the test suit
 void printArray(int arr[], int arrSize){
+    
     int i;
 
     for (i = 0; i < arrSize; i++) {
@@ -38,8 +48,9 @@ void printArray(int arr[], int arrSize){
 }
 
 void reverseArray(int arr[], int arrSize) {
+    //Initialize variables
     int temp, i;
-
+    //Swap each element of the array up to the middle value
     for ( i = 0 ; i < arrSize/2 ; i++ ) {
         temp = arr[i];
         arr[i] = arr[arrSize - ( 1 + i)];
@@ -48,8 +59,9 @@ void reverseArray(int arr[], int arrSize) {
 }
 
 void removeOdd(int arr[], int& arrSize) {
+    //Initialize variables
     int temp, i;
-
+    //Begin loop to identify odd values, move them to the end, and reduce the size of the array
     for ( i = 0 ; i < arrSize ; i++ ) {
         if ( arr[arrSize - 1] % 2 == 1 ) {
             arrSize--;
@@ -64,8 +76,9 @@ void removeOdd(int arr[], int& arrSize) {
 }
 
 void splitParity(int arr[], int arrSize) {
+    //Initialize variables
     int temp, i, count = 0;
-
+    //Begin loop to identify odd values and move them to the front using the count variable which would only proc once the conditional is hit
     for ( i = 0 ; i < arrSize ; i++ ) {
         if ( arr[i] % 2 == 1 ) {
             temp = arr[i];
