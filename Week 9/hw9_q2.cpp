@@ -27,16 +27,18 @@ void compareAnagram (std::string str, std::string str2) {
     std::vector<char> letters;
     std::vector<char> letters2;
     //Initialize counters for the words and lettesr
-    int wordcount = 1, lettercount = 0;
+    int wordcount = 1, lettercount = 0, i = 0;
+    
+
     //Populate letters vector based on input string
-    for ( int i = 0 ; i <= str.length() ; i++ ) {
+    for ( i = 0 ; i <= str.length() ; i++ ) {
         letters.push_back(str[i]);
     }
-    for ( int i = 0 ; i <= str2.length() ; i++ ) {
+    for ( i = 0 ; i <= str2.length() ; i++ ) {
         letters2.push_back(str2[i]);
     }
 
-    for ( int i = 0 ; i <= letters.size() ; i++ ) {
+    for ( i = 0 ; i <= letters.size() ; i++ ) {
         //If the letter is uppercase, make it lowercase
         if ( letters[i] >= 65 && letters[i] <= 90 ) {
             letters[i] = letters[i] + 32;
@@ -44,8 +46,16 @@ void compareAnagram (std::string str, std::string str2) {
     }
     //Sort the vector alphabetically
     std::sort(letters.begin(), letters.end());
+    char l = 0;
+    while ( l < 97 ) {
 
-    for ( int i = 0 ; i <= letters2.size() ; i++ ) {
+    }
+
+    for ( char k: letters ) {
+        std::cout<<k;
+    }
+
+    for ( i = 0 ; i <= letters2.size() ; i++ ) {
         //If the letter is uppercase, make it lowercase
         if ( letters2[i] >= 65 && letters2[i] <= 90 ) {
             letters2[i] = letters2[i] + 32;
@@ -54,19 +64,16 @@ void compareAnagram (std::string str, std::string str2) {
     //Sort the vector alphabetically
     std::sort(letters2.begin(), letters2.end());
     
+    std::cout<<std::endl;
+    for ( char j: letters2 ) {
+        std::cout<<j;
+    }
+    std::cout<<std::endl;
     if ( letters == letters2 ) {
         std::cout<<"Yup, it's an anagram"<<std::endl;
     }
     else {
         std::cout<<"I have no idea what you're talking about"<<std::endl;
-    }
-    
-    for ( char i: letters ) {
-        std::cout<<i;
-    }
-    std::cout<<std::endl;
-    for ( char i: letters2 ) {
-        std::cout<<i;
     }
 
     //Begin loop to isolate individual letters
