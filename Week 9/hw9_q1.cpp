@@ -19,6 +19,7 @@ void wordSplitter (std::string str) {
     //Initialized string variable for individual words after I split them apart
     std::string word;
     std::vector<char> letters;
+    std::vector<char> lettercount;
     int count = 1;
     
 
@@ -30,26 +31,26 @@ void wordSplitter (std::string str) {
 
     for ( int i = 0; i <= letterssize ; i++ ) {
         //Check if the element of the string is a space or the end of the line
+        
         if ( letters[i] == 32 ) {
-            letters.erase(letters.begin()+i);
             count++;
         }
-        if ( letters[i] < 65 || letters[i] > 122 ) {
-            letters.erase(letters.begin()+i);
-        }
-        else if ( letters[i] > 90 && letters[i] < 97 ) {
-            letters.erase(letters.begin()+i);
-        }
+        // if ( letters[i] < 65 || letters[i] > 122 ) {
+        //     letters.erase(letters.begin()+i);
+        // }
+        // else if ( letters[i] > 90 && letters[i] < 97 ) {
+        //     letters.erase(letters.begin()+i);
+        // }
         if ( letters[i] >= 65 && letters[i] <= 90 ) {
             letters[i] = letters[i] + 32;
         }
         if ( letters[i] >= 97 && letters[i] <= 122 ) {
-            letters[i] = letters[i];
+            lettercount.push_back(letters[i]);
         }
     }
 
-    for ( int i = 0; i <= letters.size(); i++ ) {
-        std::cout<<letters[i]<<std::endl;
+    for ( int i = 0; i <= lettercount.size(); i++ ) {
+        std::cout<<lettercount[i];
     }
 
     std::cout<<count<<'\t'<<"words"<<std::endl;
