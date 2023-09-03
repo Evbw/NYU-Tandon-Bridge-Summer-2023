@@ -38,19 +38,24 @@ void wordSplitter (std::string str) {
             letters[i] = letters[i] + 32;
         }
     }
+    //Sort the letters alphabetically
     std::sort(letters.begin(), letters.end());
-
+    //Begin output. The word count will differentiate the total number of words
     std::cout<<wordcount<<'\t'<<"words"<<std::endl;
-
+    //Begin loop to print out the letter count and the number of individual letters
     for ( int i = 0 ; i <= letters.size() ; i++ ) {
-           
+        //Since the letters are sorted, I can compare one element directly to the next
         if ( letters[i] != letters[i + 1] ) {
-            if ( letters[i] < 97 ) {
+            //Confirming nothing unintended prints out
+            if ( letters[i] < 97 || letters[i] > 122 ) {
                 continue;
             }
+            //Create output
             std::cout<<lettercount<<'\t'<<letters[i]<<std::endl;
+            //Reset lettercount
             lettercount = 1;
         }
+        //If they match, increase the letter count
         else {
             lettercount++;
         }
