@@ -29,7 +29,6 @@ void compareAnagram (std::string str, std::string str2) {
     //Initialize counters for the words and lettesr
     int wordcount = 1, lettercount = 0, i = 0;
     
-
     //Populate letters vector based on input string
     for ( i = 0 ; i <= str.length() ; i++ ) {
         letters.push_back(str[i]);
@@ -46,9 +45,12 @@ void compareAnagram (std::string str, std::string str2) {
     }
     //Sort the vector alphabetically
     std::sort(letters.begin(), letters.end());
-    char l = 0;
-    while ( l < 97 ) {
-
+    
+    for ( i = 0 ; i <= letters.size() ; i++ ) {
+        //If the letter is uppercase, make it lowercase
+        if ( letters[i] < 97 || letters[i] > 122 ) {
+            letters.erase(letters.begin());
+        }
     }
 
     for ( char k: letters ) {
@@ -64,6 +66,13 @@ void compareAnagram (std::string str, std::string str2) {
     //Sort the vector alphabetically
     std::sort(letters2.begin(), letters2.end());
     
+    for ( i = 0 ; i <= letters2.size() ; i++ ) {
+        //If the letter is uppercase, make it lowercase
+        if ( letters2[i] < 97 || letters2[i] > 122 ) {
+            letters2.erase(letters2.begin());
+        }
+    }
+
     std::cout<<std::endl;
     for ( char j: letters2 ) {
         std::cout<<j;
