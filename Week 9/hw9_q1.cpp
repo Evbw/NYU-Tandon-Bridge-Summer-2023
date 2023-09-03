@@ -23,13 +23,11 @@ void wordSplitter (std::string str) {
     int count = 1;
     
 
-    for ( int i = 0; i <= ( str.length() ) ; i++ ) {
+    for ( int i = 0 ; i <= str.length() ; i++ ) {
         letters.push_back(str[i]);
     }
 
-    int letterssize = letters.size();
-
-    for ( int i = 0; i <= letterssize ; i++ ) {
+    for ( int i = 0 ; i <= letters.size() ; i++ ) {
         //Check if the element of the string is a space or the end of the line
         
         if ( letters[i] == 32 ) {
@@ -49,9 +47,10 @@ void wordSplitter (std::string str) {
         }
     }
 
-    for ( int i = 0; i <= lettercount.size(); i++ ) {
-        std::cout<<lettercount[i];
-    }
-
     std::cout<<count<<'\t'<<"words"<<std::endl;
+
+    for ( int i = 0 ; i <= lettercount.size() ; i++ ) {
+        std::cout<<"something else"<<std::endl;
+    }
+    
 }
