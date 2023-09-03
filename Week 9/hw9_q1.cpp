@@ -27,7 +27,7 @@ void wordSplitter (std::string str) {
     for ( int i = 0 ; i <= str.length() ; i++ ) {
         letters.push_back(str[i]);
     }
-    //Being loop to isolate individual letters
+    //Begin loop to isolate individual letters
     for ( int i = 0 ; i <= letters.size() ; i++ ) {
         //Check if the element of the string is a space. If so, increase wordcount        
         if ( letters[i] == 32 ) {
