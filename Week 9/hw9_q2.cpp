@@ -12,7 +12,7 @@ int main() {
     bool seenEmptyLine;
     std::string line, line2;
 
-    std::cout<<"Please a line of text: "<<std::endl;
+    std::cout<<"Please enter a line of text: "<<std::endl;
     getline(std::cin, line);
     std::cout<<"and an anagram to compare it to: "<<std::endl;
     getline(std::cin, line2);
@@ -35,14 +35,38 @@ void compareAnagram (std::string str, std::string str2) {
     for ( int i = 0 ; i <= str2.length() ; i++ ) {
         letters2.push_back(str2[i]);
     }
-    stringLetters (letters);
-    stringLetters (letters2);
-    for ( int i = 0; i <= letters.size(); i++ ) {
-        std::cout<<letters[i];     
+
+    for ( int i = 0 ; i <= letters.size() ; i++ ) {
+        //If the letter is uppercase, make it lowercase
+        if ( letters[i] >= 65 && letters[i] <= 90 ) {
+            letters[i] = letters[i] + 32;
+        }
+    }
+    //Sort the vector alphabetically
+    std::sort(letters.begin(), letters.end());
+
+    for ( int i = 0 ; i <= letters2.size() ; i++ ) {
+        //If the letter is uppercase, make it lowercase
+        if ( letters2[i] >= 65 && letters2[i] <= 90 ) {
+            letters2[i] = letters2[i] + 32;
+        }
+    }
+    //Sort the vector alphabetically
+    std::sort(letters2.begin(), letters2.end());
+    
+    if ( letters == letters2 ) {
+        std::cout<<"Yup, it's an anagram"<<std::endl;
+    }
+    else {
+        std::cout<<"I have no idea what you're talking about"<<std::endl;
+    }
+    
+    for ( char i: letters ) {
+        std::cout<<i;
     }
     std::cout<<std::endl;
-    for ( int j = 0; j <= letters2.size(); j++ ) {
-        std::cout<<letters2[i];
+    for ( char i: letters2 ) {
+        std::cout<<i;
     }
 
     //Begin loop to isolate individual letters
