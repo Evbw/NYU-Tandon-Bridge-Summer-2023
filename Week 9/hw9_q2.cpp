@@ -35,40 +35,49 @@ void compareAnagram (std::string str, std::string str2) {
     for ( int i = 0 ; i <= str2.length() ; i++ ) {
         letters2.push_back(str2[i]);
     }
+    stringLetters (letters);
+    stringLetters (letters2);
+    for ( int i = 0; i <= letters.size(); i++ ) {
+        std::cout<<letters[i];     
+    }
+    std::cout<<std::endl;
+    for ( int j = 0; j <= letters2.size(); j++ ) {
+        std::cout<<letters2[i];
+    }
 
     //Begin loop to isolate individual letters
-    for ( int i = 0 ; i <= letters.size() ; i++ ) {
-        //Check if the element of the string is a space. If so, increase wordcount        
-        if ( letters[i] == 32 ) {
-            wordcount++;
-        }
-        //If the letter is uppercase, make it lowercase
-        if ( letters[i] >= 65 && letters[i] <= 90 ) {
-            letters[i] = letters[i] + 32;
-        }
-    }
-    //Sort the letters alphabetically
-    std::sort(letters.begin(), letters.end());
-    //Begin output. The word count will differentiate the total number of words
-    std::cout<<wordcount<<'\t'<<"words"<<std::endl;
-    //Begin loop to print out the letter count and the number of individual letters
-    for ( int i = 0 ; i <= letters.size() ; i++ ) {
-        //Since the letters are sorted, I can compare one element directly to the next
-        if ( letters[i] != letters[i + 1] ) {
-            //Confirming nothing unintended prints out
-            if ( letters[i] < 97 || letters[i] > 122 ) {
-                continue;
-            }
-            //Create output
-            std::cout<<lettercount<<'\t'<<letters[i]<<std::endl;
-            //Reset lettercount
-            lettercount = 1;
-        }
-        //If they match, increase the letter count
-        else {
-            lettercount++;
-        }
-    }
+    // for ( int i = 0 ; i <= letters.size() ; i++ ) {
+    //     //Check if the element of the string is a space. If so, increase wordcount        
+    //     if ( letters[i] == 32 ) {
+    //         wordcount++;
+    //     }
+    //     //If the letter is uppercase, make it lowercase
+    //     if ( letters[i] >= 65 && letters[i] <= 90 ) {
+    //         letters[i] = letters[i] + 32;
+    //     }
+    // }
+    // //Sort the letters alphabetically
+    // std::sort(letters.begin(), letters.end());
+    // //Begin output. The word count will differentiate the total number of words
+    // std::cout<<wordcount<<'\t'<<"words"<<std::endl;
+    // //Begin loop to print out the letter count and the number of individual letters
+    // for ( int i = 0 ; i <= letters.size() ; i++ ) {
+    //     //Since the letters are sorted, I can compare one element directly to the next
+    //     if ( letters[i] != letters[i + 1] ) {
+    //         //Confirming nothing unintended prints out
+    //         if ( letters[i] < 97 || letters[i] > 122 ) {
+    //             continue;
+    //         }
+    //         //Create output
+    //         std::cout<<lettercount<<'\t'<<letters[i]<<std::endl;
+    //         //Reset lettercount
+    //         lettercount = 1;
+    //     }
+    //     //If they match, increase the letter count
+    //     else {
+    //         lettercount++;
+    //     }
+    // }
     
 }
 
