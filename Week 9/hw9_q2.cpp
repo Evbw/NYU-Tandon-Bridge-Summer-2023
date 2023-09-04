@@ -1,9 +1,11 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 #include <vector>
+
 //Instantiate compareAnagram function to include both strings
-void compareAnagram (std::string str, std::string str2);
+bool compareAnagram (std::string str, std::string str2);
+//Instantiate const int for the alphabet
+const int ALPHABET = 26;
 
 int main() {
     //Instantiate input strings
@@ -14,58 +16,57 @@ int main() {
     std::cout<<"and an another line to see if it's an anagram: "<<std::endl;
     getline(std::cin, line2);
 
-    compareAnagram (line, line2);
-}
-
-void compareAnagram (std::string str, std::string str2) {
-    
-    //Initialize vectors for the strings
-    std::vector<char> letters;
-    std::vector<char> letters2;
-    //Initialize int variable for the loops
-    int i = 0;
-    
-    //Populate letters and letters2 vectors based on input strings
-    for ( i = 0 ; i <= str.length() ; i++ ) {
-        letters.push_back(str[i]);
-    }
-    for ( i = 0 ; i <= str2.length() ; i++ ) {
-        letters2.push_back(str2[i]);
-    }
-    //If the letter is uppercase, make it lowercase
-    for ( i = 0 ; i <= letters.size() ; i++ ) {
-        if ( letters[i] >= 65 && letters[i] <= 90 ) {
-            letters[i] = letters[i] + 32;
-        }
-    }
-
-    for ( i = 0 ; i <= letters2.size() ; i++ ) {
-        if ( letters2[i] >= 65 && letters2[i] <= 90 ) {
-            letters2[i] = letters2[i] + 32;
-        }
-    }
-
-    //Sort the vectors alphabetically
-    std::sort(letters.begin(), letters.end());
-    std::sort(letters2.begin(), letters2.end());
-
-    //Remove characters that we're not directly comparing
-    for ( i = 0 ; i <= letters.size() ; i++ ) {
-        if ( letters[0] < 97 ) {
-            letters.erase(letters.begin());
-        }
-    }
-    for ( i = 0 ; i <= letters2.size() ; i++ ) {
-        if ( letters2[0] < 97 ) {
-            letters2.erase(letters2.begin());
-        }
-    }
-    //Compare current vectors to see if they are anagrams and render output
-    if ( letters == letters2 ) {
+    //Render output if the lines match
+    if ( compareAnagram (line, line2)) {
         std::cout<<"Those are anagrams"<<std::endl;
     }
     else {
         std::cout<<"Those are not anagrams"<<std::endl;
     }
+}
+
+bool compareAnagram (std::string str, std::string str2) {
     
+    //Initialize int variable for the loops and empty array for the alphabet
+    int i = 0;
+    int letterCount[ALPHABET] = {};
+    int letterCount2[ALPHABET] = {};
+    
+    //If the letter is uppercase, make it lowercase
+    for ( i = 0 ; i <= str.length() ; i++ ) {
+       if ( str[i] >= 'A' && str[i] <= 'Z' ) {
+            str[i] = str[i] + 32;
+        }
+    }
+
+    for ( i = 0 ; i <= str2.size() ; i++ ) {
+        if ( str2[i] >= 'A' && str2[i] <= 'Z' ) {
+            str2[i] = str2[i] + 32;
+        }
+    }
+
+    //Add a count for the appropriate index in the letter array if it exists in the string
+    for ( i = 0; i < str.length(); i++ ) {
+        if ( str[i] >= 'a' && str[i] <= 'z' ) {
+            char c = str[i];
+            int index = int (c - 'a');
+            letterCount[index] = letterCount[index] + 1;
+        }
+    }
+
+    for ( i = 0; i < str2.length(); i++ ) {
+        if ( str2[i] >= 'a' && str2[i] <= 'z' ) {
+            char c = str2[i];
+            int index = int (c - 'a');
+            letterCount2[index] = letterCount2[index] + 1;
+        }
+    }
+
+    //Compare current vectors to see if they are anagrams and render output
+    for ( i = 0; i < ALPHABET; i ++ ) {
+        if ( letterCount[i] != letterCount2[i] ) {
+            return false;
+        }
+    }
+    return true;
 }
