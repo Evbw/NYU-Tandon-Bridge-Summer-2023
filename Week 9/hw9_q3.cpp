@@ -6,43 +6,52 @@ int* getPosNums1(int* arr, int arrSize, int& outPosArrSize);
 int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr);
 void getPosNums3(int* arr, int arrSize, int*& outPosArr, int& outPosArrSize);
 void getPosNums4(int* arr, int arrSize, int** outPosArrPtr, int* outPosArrSizePtr);
+void printArray(int* arr, int arrSize);
 
 const int ARRAYSIZE = 6;
 
 int main() {
     
     int arr[ARRAYSIZE] = {3, -1, -3, 0, 6, 4};
-    int outPosArrSize = 0;
-    int* posNums1;
-    int* posNums2;
-    int* posNums3;
-    int* posNums4;
+    
+    int* posNumsPtr1;
+    int posNumsSize1 = 0;
+    int* posNumsPtr2;
+    int* posNumsPtr3;
+    int* posNumsPtr4;
 
-    posNums1 = getPosNums1(arr, ARRAYSIZE, outPosArrSize);
+    posNumsPtr1 = getPosNums1(arr, ARRAYSIZE, posNumsSize1);
+    
+    printArray(posNumsPtr1, posNumsSize1);
+}
 
-    for ( int i = 0; i < outPosArrSize; i++ ) {
-        cout<<posNums1[i]<<endl;
+void printArray(int* arr, int arrSize) {
+    for ( int i = 0; i < arrSize; i++ ) {
+        cout<<arr[i]<<endl;
     }
 }
 
 int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
     
-    for ( int i = 0; i < arrSize; i++ ) {
-        if ( arr[i] > 0 ) {
-            outPosArrSize++;
-        }
-    }
-    
-    int *temp = new int[outPosArrSize];
+    int tempSize = 0;
+    int j = 0;
 
     for ( int i = 0; i < arrSize; i++ ) {
         if ( arr[i] > 0 ) {
-            temp[i] = arr[i];
+            tempSize++;
         }
     }
-    delete[] arr;
-    arr = temp;
-    return arr;
+
+    int *temp = new int[tempSize];
+
+    for ( int i = 0; i < arrSize; i++ ) {
+        if ( arr[i] > 0 ) {
+            temp[j] = arr[i];
+            j++;
+        }
+    }
+    
+    return temp;
 }
 
 int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr) {
