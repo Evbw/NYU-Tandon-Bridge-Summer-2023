@@ -23,7 +23,7 @@ void wordSplitter (std::string str) {
     //Initialize vectors for the string
     std::vector<char> letters;
     //Initialize counters for the words and letters
-    int letterCount[ALPHABET];
+    int letterCount[ALPHABET] = {};
     int wordcount = 1;
     //Populate letters vector based on input string
     for ( int i = 0 ; i <= str.length() ; i++ ) {
@@ -41,37 +41,50 @@ void wordSplitter (std::string str) {
         }
     }
 
-    for ( int i = 0; i < ALPHABET; i++ ) {
-        if 
-    }
-
-
-
-    //Sort the letters alphabetically
-    std::sort(letters.begin(), letters.end());
-    //Begin output. The word count will differentiate the total number of words
-
-
-
-
     std::cout<<wordcount<<'\t'<<"words"<<std::endl;
-    //Begin loop to print out the letter count and the number of individual letters
-    for ( int i = 0 ; i <= letters.size() ; i++ ) {
-        //Since the letters are sorted, I can compare one element directly to the next
-        if ( letters[i] != letters[i + 1] ) {
-            //Confirming nothing unintended prints out
-            if ( letters[i] < 97 || letters[i] > 122 ) {
-                continue;
-            }
-            //Create output
-            std::cout<<lettercount<<'\t'<<letters[i]<<std::endl;
-            //Reset lettercount
-            lettercount = 1;
-        }
-        //If they match, increase the letter count
-        else {
-            lettercount++;
+
+    
+
+    for ( int i = 0; i < ALPHABET; i++ ) {
+        if ( letters[i] >= 97 && letters[i] <= 122 ) {
+            letterCount[i - 97]++;
         }
     }
+    for ( int i = 0; i < ALPHABET; i++ ) {
+        std::cout<<letterCount[(i)];
+    }
+    std::cout<<std::endl;
+
+    for ( int i = 0; i < ALPHABET; i++ ) {
+        if ( letterCount[i - 97] > 0 ) {
+            std::cout<<letterCount[i - 97]<<'\t'<<static_cast<char>(i + 97)<<std::endl;
+        }
+    }
+    // //Sort the letters alphabetically
+    // std::sort(letters.begin(), letters.end());
+    // //Begin output. The word count will differentiate the total number of words
+
+
+
+
+    // std::cout<<wordcount<<'\t'<<"words"<<std::endl;
+    // //Begin loop to print out the letter count and the number of individual letters
+    // for ( int i = 0 ; i <= letters.size() ; i++ ) {
+    //     //Since the letters are sorted, I can compare one element directly to the next
+    //     if ( letters[i] != letters[i + 1] ) {
+    //         //Confirming nothing unintended prints out
+    //         if ( letters[i] < 97 || letters[i] > 122 ) {
+    //             continue;
+    //         }
+    //         //Create output
+    //         std::cout<<lettercount<<'\t'<<letters[i]<<std::endl;
+    //         //Reset lettercount
+    //         lettercount = 1;
+    //     }
+    //     //If they match, increase the letter count
+    //     else {
+    //         lettercount++;
+    //     }
+    // }
     
 }
