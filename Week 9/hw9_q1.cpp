@@ -19,39 +19,46 @@ int main() {
 
 void wordSplitter (std::string str) {
     //Initialize string variable for individual words after I split them apart
+
     std::string word;
+
     //Initialize vectors for the string
+
     std::vector<char> letters;
+
     //Initialize counters for the words and letters
+
     int letterCount[ALPHABET] = {};
     int wordcount = 1;
+
     //Populate letters vector based on input string
-    for ( int i = 0 ; i <= str.length() ; i++ ) {
-        letters.push_back(str[i]);
-    }
+    // for ( int i = 0 ; i <= str.length() ; i++ ) {
+    //     letters.push_back(str[i]);
+    // }
     //Begin loop to isolate individual letters
-    for ( int i = 0 ; i <= letters.size() ; i++ ) {
+    for ( int i = 0 ; i <= str.length() ; i++ ) {
         //Check if the element of the string is a space. If so, increase wordcount        
         if ( letters[i] == 32 ) {
             wordcount++;
         }
         //If the letter is uppercase, make it lowercase
-        if ( letters[i] >= 65 && letters[i] <= 90 ) {
-            letters[i] = letters[i] + 32;
+        if ( str[i] >= 65 && str[i] <= 90 ) {
+            str[i] = str[i] + 32;
         }
     }
 
     std::cout<<wordcount<<'\t'<<"words"<<std::endl;
 
-    
 
-    for ( int i = 0; i < ALPHABET; i++ ) {
-        if ( letters[i] >= 97 && letters[i] <= 122 ) {
-            letterCount[i - 97]++;
+    for ( int i = 0; i < str.length(); i++ ) {
+        if ( str[i] >= 97 && str[i] <= 122 ) {
+            char c = str[i];
+            int index = int (c - 'a');
+            letterCount[i]++;
         }
     }
     for ( int i = 0; i < ALPHABET; i++ ) {
-        std::cout<<letterCount[(i)];
+        std::cout<<letterCount[i];
     }
     std::cout<<std::endl;
 
