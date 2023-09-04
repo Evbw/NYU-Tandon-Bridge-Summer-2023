@@ -42,11 +42,8 @@ void wordSplitter (std::string str) {
     for ( int i = 0; i < str.length(); i++ ) {
         if ( str[i] >= 'a' && str[i] <= 'z' ) {
             char c = str[i];
-            std::cout<<"c "<<c<<std::endl;
             int index = int (c - 'a');
-            std::cout<<"index "<<index<<std::endl;
-            letterCount[i]++;
-            std::cout<<"letterCount[i] "<<letterCount[i]<<std::endl;
+            letterCount[index] = letterCount[index] + 1;
         }
     }
     // for ( int i = 0; i < ALPHABET; i++ ) {
@@ -55,8 +52,8 @@ void wordSplitter (std::string str) {
     // std::cout<<std::endl;
 
     for ( int i = 0; i < ALPHABET; i++ ) {
-        if ( letterCount[i - 'a'] > 0 ) {
-            std::cout<<letterCount[i - 97]<<'\t'<<static_cast<char>(i + 'a')<<std::endl;
+        if ( letterCount[i] > 0 ) {
+            std::cout<<letterCount[i]<<'\t'<<static_cast<char>(i + 'a')<<std::endl;
         }
     }
     
