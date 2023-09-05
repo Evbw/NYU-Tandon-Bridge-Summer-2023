@@ -20,8 +20,8 @@ int main() {
     int* posNumsPtr2;
     int* posNumsSize2 = new int;
 
-    int* posNumsPtr3;
-    int posNumsSize3;
+    int* posNumsArray3 = new int;
+    int posNumsSize3 = 0;
 
     int* posNums4 = nullptr;
     int** posNumsPtr4 = &posNums4;
@@ -41,11 +41,7 @@ int main() {
     delete [] posNumsPtr2;
     posNumsPtr2 = nullptr;
 
-    // getPosNums3(arr, ARRAYSIZE, posNumsSize3);
-    
-    // printArray(posNumsPtr1, posNumsSize1);
-    // delete [] posNumsPtr1;
-    // posNumsPtr1 = nullptr;
+    getPosNums3(arr, ARRAYSIZE, posNumsArray3, posNumsSize3);
 
     getPosNums4(arr, ARRAYSIZE, posNumsPtr4, posNumsSize4);
 
@@ -60,16 +56,16 @@ void printArray(int* arr, int arrSize) {
 
 int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
     
-    int tempSize = 0;
+    int count = 0;
     int j = 0;
 
     for ( int i = 0; i < arrSize; i++ ) {
         if ( arr[i] > 0 ) {
-            tempSize++;
+            count++;
         }
     }
-    outPosArrSize = tempSize;
-    int *temp = new int[tempSize];
+    outPosArrSize = count;
+    int *temp = new int[count];
 
     for ( int i = 0; i < arrSize; i++ ) {
         if ( arr[i] > 0 ) {
@@ -83,8 +79,9 @@ int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
 
 int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr) {
     
-    int j = 0;
     int count = 0;
+    int j = 0;
+
     for ( int i = 0; i < arrSize; i++ ) {
         if ( arr[i] > 0 ) {
             count++;
@@ -106,7 +103,29 @@ int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr) {
 
 void getPosNums3(int* arr, int arrSize, int*& outPosArr, int& outPosArrSize) {
     
-    arrSize = outPosArrSize;
+    int count = 0;
+    for ( int i = 0; i < arrSize; i++ ) {
+        if ( arr[i] > 0 ) {
+            count++;
+        }
+    }
+
+    int* newPosArr = new int[count];
+
+    int j = 0;
+    for ( int i = 0; i < arrSize; i++ ) {
+        if (arr[i] > 0){
+            newPosArr[j] = arr[i];
+            j++;
+        }
+    }
+    outPosArr = newPosArr;
+    outPosArrSize = count;
+    
+    cout<<"c) ";
+    printArray(newPosArr, outPosArrSize);
+    delete [] newPosArr;
+    newPosArr = nullptr;
 }
 
 void getPosNums4(int* arr, int arrSize, int** outPosArrPtr, int* outPosArrSizePtr) {
