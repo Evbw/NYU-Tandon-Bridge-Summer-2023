@@ -16,13 +16,17 @@ int main() {
     
     int* posNumsPtr1;
     int posNumsSize1 = 0;
+
     int* posNumsPtr2;
     int* posNumsSize2 = new int;
+
     int* posNumsPtr3;
     int posNumsSize3;
-    int** posNumsPtr4;
-    int* posNumsSize4;
 
+    int* posNums4 = nullptr;
+    int** posNumsPtr4 = &posNums4;
+    int* posNumsSize4 = new int;
+ 
     posNumsPtr1 = getPosNums1(arr, ARRAYSIZE, posNumsSize1);
     
     cout<<"a) ";
@@ -89,6 +93,7 @@ int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr) {
 
     int *temp = new int[count];
     *outPosArrSizePtr = count;
+
     for ( int i = 0; i < arrSize; i++ ) {
         if ( arr[i] > 0 ) {
             temp[j] = arr[i];
@@ -114,7 +119,7 @@ void getPosNums4(int* arr, int arrSize, int** outPosArrPtr, int* outPosArrSizePt
     }
 
     int *outPosArr = new int[count];
-    *outPosArrPtr = outPosArr;
+    *outPosArrPtr = new int[count];
 
     int j = 0;
     for ( int i = 0; i < arrSize; i++ ) {
