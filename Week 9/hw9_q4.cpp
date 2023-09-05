@@ -11,5 +11,28 @@ int main() {
 }
 
 void oddsKeepEvensFlip(int arr[], int arrSize) {
-    cout<<"Function call test"<<endl;
+    
+    int zeroindex = 0;
+    int lastindex = arrSize - 1;
+    int temp[arrSize] = {};
+
+    for ( int i = 0; i < arrSize; i++ ) {
+        if ( arr[i] % 2 == 1 ) {
+            temp[zeroindex] = arr[i];
+            zeroindex++;
+        }
+        else {
+            temp[lastindex] = arr[i];
+            lastindex--;
+        }
+    }
+
+    for ( int i = 0; i < arrSize; i++ ) {
+        arr[i] = temp[i];
+    }
+
+    for ( int i = 0; i < arrSize; i++ ) {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
