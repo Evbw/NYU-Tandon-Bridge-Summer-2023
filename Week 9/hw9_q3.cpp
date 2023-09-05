@@ -17,12 +17,35 @@ int main() {
     int* posNumsPtr1;
     int posNumsSize1 = 0;
     int* posNumsPtr2;
+    int posNumsSize2 = 0;
     int* posNumsPtr3;
+    int posNumsSize3 = 0;
     int* posNumsPtr4;
+    int posNumsSize4 = 0;
 
     posNumsPtr1 = getPosNums1(arr, ARRAYSIZE, posNumsSize1);
     
     printArray(posNumsPtr1, posNumsSize1);
+    delete [] posNumsPtr1;
+    posNumsPtr1 = nullptr;
+
+    // posNumsPtr2 = getPosNums2(arr, ARRAYSIZE, posNumsSize2);
+    
+    // printArray(posNumsPtr2, posNumsSize2);
+    // delete [] posNumsPtr2;
+    // posNumsPtr2 = nullptr;
+
+    // getPosNums3(arr, ARRAYSIZE, posNumsSize3);
+    
+    // printArray(posNumsPtr1, posNumsSize1);
+    // delete [] posNumsPtr1;
+    // posNumsPtr1 = nullptr;
+
+    // getPosNums4(arr, ARRAYSIZE, posNumsSize4);
+    
+    // printArray(posNumsPtr1, posNumsSize1);
+    // delete [] posNumsPtr1;
+    // posNumsPtr1 = nullptr;
 }
 
 void printArray(int* arr, int arrSize) {
@@ -41,7 +64,7 @@ int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
             tempSize++;
         }
     }
-
+    outPosArrSize = tempSize;
     int *temp = new int[tempSize];
 
     for ( int i = 0; i < arrSize; i++ ) {
@@ -50,7 +73,6 @@ int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
             j++;
         }
     }
-    
     return temp;
 }
 
