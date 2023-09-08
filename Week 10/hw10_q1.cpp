@@ -8,12 +8,15 @@ void printArray(int* arr, int arrSize);
 int main() {
    string line;
    int arrSize = 0;
-   string stingarr[arrSize] = {};
+   string* stringarr = new string;
 
    cout<<"Please enter a sentence: "<<endl;
    getline(cin, line);
 
    stringarr = createWordsArray(line, arrSize);
+
+    delete [] stringarr;
+    stringarr = nullptr;
 }
 
 void printArray(int* arr, int arrSize) {
