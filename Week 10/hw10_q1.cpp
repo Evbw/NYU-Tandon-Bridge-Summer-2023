@@ -15,8 +15,8 @@ int main() {
 
    stringarr = createWordsArray(line, arrSize);
 
-    delete [] stringarr;
-    stringarr = nullptr;
+   delete [] stringarr;
+   stringarr = nullptr;
 }
 
 void printArray(int* arr, int arrSize) {
@@ -28,5 +28,22 @@ void printArray(int* arr, int arrSize) {
 
 string* createWordsArray(string sentence, int& outWordsArrSize) {
     string word;
+    int wordcounter = 0;
+
+    for ( i = 0; i < sentence.length(); i++ ) {
+        if ( sentence[i] == " " ) {
+            wordcounter++;
+        }
+    }
+
+    string *temp = new string[wordcounter++];
+
+    int wordcounter = 0;
+    for ( i = 0; i < sentence.length(); i++ ) {
+        if ( sentence[i] == " " ) {
+            
+            wordcounter++;
+        }
+    }
 
 }
