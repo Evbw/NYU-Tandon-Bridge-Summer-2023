@@ -32,20 +32,23 @@ std::string* createWordsArray(std::string sentence, int& outWordsArrSize) {
     std::string word;
     int wordcounter = 0;
 
-    for ( int i = 0; i < sentence.length(); i++ ) {
-        if ( sentence[i] == 32 || sentence[i] == sentence.length() - 1 ) {
+
+    for ( int i = 0; i <= ( sentence.length() ); i++ ) {
+        if ( sentence[i] == ' ' || i == sentence.length() ) {
             wordcounter++;
         }
     }
 
     std::string *temp = new std::string[wordcounter];
     outWordsArrSize = wordcounter;
-    std::cout<<outWordsArrSize<<std::endl;
+
     int j = 0;
     int w = 0;
-    for ( int i = 0; i < sentence.length(); i++ ) {
-        if ( sentence[i] == 32 || sentence[i] == sentence.length() - 1 ) {
-            std::cout<<sentence.substr(i, (i-j))<<std::endl;
+    for ( int i = 0; i <= ( sentence.length() ); i++ ) {
+        // std::cout<<i<<std::endl;
+        if ( sentence[i] == ' ' || i == sentence.length() ) {
+            // std::cout<<sentence.length()<<std::endl;
+            // std::cout<<sentence.substr(i, (i-j))<<std::endl;
             temp[w] = sentence.substr(j, (i-j));
             j = ( i + 1 );
             w++;
@@ -53,5 +56,4 @@ std::string* createWordsArray(std::string sentence, int& outWordsArrSize) {
     }
     
     return temp;
-
 }
