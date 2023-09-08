@@ -1,14 +1,29 @@
 #include <iostream>
 using namespace std;
 
-//Declare function
-string* createWordsArray(string sentence, int& outWordsArrSize)
-
+//Declare functions
+string* createWordsArray(string sentence, int& outWordsArrSize);
+void printArray(int* arr, int arrSize);
 
 int main() {
-   
+   string line;
+   int arrSize = 0;
+   string stingarr[arrSize] = {};
+
+   cout<<"Please enter a sentence: "<<endl;
+   getline(cin, line);
+
+   stringarr = createWordsArray(line, arrSize);
+}
+
+void printArray(int* arr, int arrSize) {
+    for ( int i = 0; i < arrSize; i++ ) {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
 
 string* createWordsArray(string sentence, int& outWordsArrSize) {
+    string word;
 
 }
