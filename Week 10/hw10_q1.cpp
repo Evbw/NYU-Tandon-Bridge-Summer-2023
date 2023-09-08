@@ -1,17 +1,17 @@
 #include <iostream>
-using namespace std;
+#include <string>
 
 //Declare functions
-string* createWordsArray(string sentence, int& outWordsArrSize);
-void printArray(int* arr, int arrSize);
+std::string* createWordsArray(std::string sentence, int& outWordsArrSize);
+void printArray(std::string* arr, int arrSize);
 
 int main() {
-    string line;
+    std::string line = "";
     int arrSize = 0;
-    string* stringarr = new string;
+    std::string* stringarr = new std::string;
 
-    cout<<"Please enter a sentence: "<<endl;
-    getline(cin, line);
+    std::cout<<"Please enter a sentence: "<<std::endl;
+    getline(std::cin, line);
 
     stringarr = createWordsArray(line, arrSize);
 
@@ -21,34 +21,37 @@ int main() {
     stringarr = nullptr;
 }
 
-void printArray(int* arr, int arrSize) {
+void printArray(std::string* arr, int arrSize) {
     for ( int i = 0; i < arrSize; i++ ) {
-        cout<<arr[i]<<" ";
+        std::cout<<arr[i]<<" ";
     }
-    cout<<endl;
+    std::cout<<std::endl;
 }
 
-string* createWordsArray(string sentence, int& outWordsArrSize) {
-    string word;
+std::string* createWordsArray(std::string sentence, int& outWordsArrSize) {
+    std::string word;
     int wordcounter = 0;
 
-    for ( i = 0; i < sentence.length(); i++ ) {
-        if ( sentence[i] == " " ) {
+    for ( int i = 0; i < sentence.length(); i++ ) {
+        if ( sentence[i] == 32 || sentence[i] == sentence.length() - 1 ) {
             wordcounter++;
         }
     }
 
-    string *temp = new string[wordcounter];
+    std::string *temp = new std::string[wordcounter];
     outWordsArrSize = wordcounter;
-
+    std::cout<<outWordsArrSize<<std::endl;
     int j = 0;
     int w = 0;
-    for ( i = 0; i < sentence.length(); i++ ) {
-        if ( sentence[i] == " " ) {
-            temp[w] = str.string(j, (i-1));
+    for ( int i = 0; i < sentence.length(); i++ ) {
+        if ( sentence[i] == 32 || sentence[i] == sentence.length() - 1 ) {
+            std::cout<<sentence.substr(i, (i-j))<<std::endl;
+            temp[w] = sentence.substr(j, (i-j));
             j = ( i + 1 );
             w++;
         }
     }
+    
+    return temp;
 
 }
