@@ -13,7 +13,7 @@ int main() {
     int newArrSize = 0;
     int* arr2[newArrSize];
 
-    arr2 = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
+    arr2[newArrSize] = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
 
     std::cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
 
@@ -36,6 +36,12 @@ int* findMissing(int arr[], int n, int& resArrSize) {
     std::string stringArr[n];
 
     for ( int i = 0; i < n ; i++ ) {
-        arr[i] = arr
+        stringArr[i] = std::to_string(arr[i]);
     }
+
+    for ( int i = 0; i < n; i++ ) {
+        std::cout<<stringArr[i]<<" ";
+    }
+
+    return arrPtr[resArrSize];
 }
