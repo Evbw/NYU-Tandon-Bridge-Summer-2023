@@ -4,6 +4,7 @@
 int* findMissing(int arr[], int n, int& resArrSize);
 //Precondition: An array filled with valid, non-negative integers of size n
 //Postcondition: Integers not in the 
+bool nonNegative(int arr[], int arrSize);
 void printArray(int arr, int arrSize);
 
 const int FIRSTARRAYSIZE = 6;
@@ -12,6 +13,11 @@ int main() {
     int arr[FIRSTARRAYSIZE] = {3, 1, 3, 0, 6, 4};
     int newArrSize = 0;
     int* arr2[newArrSize];
+
+    if ( !nonNegative(arr, FIRSTARRAYSIZE) ) {
+        std::cout<<"There is a negative number in the array"<<std::endl;
+        return 0;
+    }
 
     arr2[newArrSize] = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
 
@@ -33,15 +39,34 @@ void printArray(int* arr, int arrSize) {
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
     int* arrPtr[resArrSize];
-    std::string stringArr[n];
+    std::string intArrayAsString;
 
     for ( int i = 0; i < n ; i++ ) {
-        stringArr[i] = std::to_string(arr[i]);
+        intArrayAsString += std::to_string(arr[i]);
     }
 
     for ( int i = 0; i < n; i++ ) {
-        std::cout<<stringArr[i]<<" ";
+        std::cout<<intArrayAsString[i]<<" ";
+    }
+
+    int j = 0;
+    for ( int i = 0; i < n; i++ ) {
+        std::cout<<"i "<<i<<std::endl;
+        if ( intArrayAsString.find(i) != std::string::npos ) {
+            std::cout<<intArrayAsString[i]<<std::endl;
+            resArrSize++;
+            *arrPtr[j] = i;
+        }
     }
 
     return arrPtr[resArrSize];
+}
+
+bool nonNegative(int arr[], int arrSize) {
+    for ( int i = 0; i < arrSize; i++ ) {
+        if ( arr[i] < 0 ) {
+            return false;
+        }
+    }
+    return true;
 }
