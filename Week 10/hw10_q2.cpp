@@ -15,9 +15,10 @@ int main() {
 
     arr2 = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
 
-    cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
+    std::cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
+
     for ( int i = 0; i < newArrSize; i++ ) {
-        cout<<arr2[i]<<" ";
+        std::cout<<arr2[i]<<" ";
     }
    
 }
@@ -32,4 +33,9 @@ void printArray(int* arr, int arrSize) {
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
     int* arrPtr[resArrSize];
+    std::string stringArr[n];
+
+    for ( int i = 0; i < n ; i++ ) {
+        arr[i] = arr
+    }
 }
