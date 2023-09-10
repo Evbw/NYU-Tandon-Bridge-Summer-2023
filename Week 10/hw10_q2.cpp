@@ -11,10 +11,14 @@ const int FIRSTARRAYSIZE = 6;
 int main() {
     int arr[FIRSTARRAYSIZE] = {3, 1, 3, 0, 6, 4};
     int newArrSize = 0;
+    int* arr2[newArrSize];
 
-    findMissing(arr, FIRSTARRAYSIZE, newArrSize);
+    arr2 = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
 
-    int arr2[newArrSize];
+    cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
+    for ( int i = 0; i < newArrSize; i++ ) {
+        cout<<arr2[i]<<" ";
+    }
    
 }
 //Simple function to print an array
