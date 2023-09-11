@@ -14,7 +14,7 @@ const int FIRSTARRAYSIZE = 6;
 int main() {
     int arr[FIRSTARRAYSIZE] = {3, 1, 3, 0, 6, 4};
     int newArrSize = 0;
-    int* arr2;
+    int* arr2 = new int[FIRSTARRAYSIZE];
 
     if ( !nonNegative(arr, FIRSTARRAYSIZE) ) {
         cout<<"There is a negative number in the array"<<endl;
@@ -38,7 +38,7 @@ void printArray(int* arr, int arrSize) {
 
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
-    int* arr2 = new int[n + 1]();
+    int* arr2 = new int[n + 1];
 
     for ( int i = 0; i < n ; i++ ) {
         arr2[arr[i]]++;
@@ -51,7 +51,8 @@ int* findMissing(int arr[], int n, int& resArrSize) {
             j++;
         }
     }
-
+    resArrSize = j;
+    
     delete [] arr2;
 
     return temp;
