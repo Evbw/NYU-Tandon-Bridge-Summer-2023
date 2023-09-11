@@ -27,6 +27,8 @@ int main() {
 
     // printArray(arr2, newArrSize);
     delete [] arr2;
+    arr2 = nullptr;
+    return 0;
 }
 //Simple function to print an array
 void printArray(int* arr, int arrSize) {
@@ -38,7 +40,7 @@ void printArray(int* arr, int arrSize) {
 
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
-    int* arr2 = new int[n + 1];
+    int* arr2 = new int[n + 1]();
 
     for ( int i = 0; i < n ; i++ ) {
         arr2[arr[i]]++;
@@ -52,9 +54,11 @@ int* findMissing(int arr[], int n, int& resArrSize) {
         }
     }
     resArrSize = j;
+    cout<<resArrSize<<endl;
+    printArray(temp, resArrSize);
     
     delete [] arr2;
-
+    arr2 = nullptr;
     return temp;
 }
 
