@@ -1,10 +1,12 @@
 #include <iostream>
-#include <string>
+using namespace std;
 //Declare functions
 int* findMissing(int arr[], int n, int& resArrSize);
-//Precondition: An array filled with valid, non-negative integers of size n
-//Postcondition: Integers not in the 
+//Precondition: An array filled with valid, non-negative integers of size n. The range of values is n+1
+//Postcondition: Integers not in the array will be updated and the size of the array changed
 bool nonNegative(int arr[], int arrSize);
+//Precondition: An array filled with valid, non-negative integers of size n
+//Postcondition: Will return false if their exists a non-negative number
 void printArray(int arr, int arrSize);
 
 const int FIRSTARRAYSIZE = 6;
@@ -12,54 +14,47 @@ const int FIRSTARRAYSIZE = 6;
 int main() {
     int arr[FIRSTARRAYSIZE] = {3, 1, 3, 0, 6, 4};
     int newArrSize = 0;
-    int* arr2[newArrSize];
+    int* arr2;
 
     if ( !nonNegative(arr, FIRSTARRAYSIZE) ) {
-        std::cout<<"There is a negative number in the array"<<std::endl;
+        cout<<"There is a negative number in the array"<<endl;
         return 0;
     }
 
-    arr2[newArrSize] = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
+    arr2 = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
 
-    std::cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
+    cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
 
-    for ( int i = 0; i < newArrSize; i++ ) {
-        std::cout<<arr2[i]<<" ";
-    }
-   
+    // printArray(arr2, newArrSize);
+    delete [] arr2;
 }
 //Simple function to print an array
 void printArray(int* arr, int arrSize) {
     for ( int i = 0; i < arrSize; i++ ) {
-        std::cout<<arr[i]<<" ";
+        cout<<arr[i]<<" ";
     }
-    std::cout<<std::endl;
+    cout<<endl;
 }
 
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
-    int* arrPtr[resArrSize];
-    std::string intArrayAsString;
+    int* arr2 = new int[n + 1]();
 
     for ( int i = 0; i < n ; i++ ) {
-        intArrayAsString += std::to_string(arr[i]);
+        arr2[arr[i]]++;
     }
-
-    for ( int i = 0; i < n; i++ ) {
-        std::cout<<intArrayAsString[i]<<" ";
-    }
-
+    int* temp = new int[n]();
     int j = 0;
-    for ( int i = 0; i < n; i++ ) {
-        std::cout<<"i "<<i<<std::endl;
-        if ( intArrayAsString.find(i) != std::string::npos ) {
-            std::cout<<intArrayAsString[i]<<std::endl;
-            resArrSize++;
-            *arrPtr[j] = i;
+    for ( int i = 0; i < n + 1; i++ ) {
+        if ( arr2[i] == 0 ) {
+            temp[j] = i;
+            j++;
         }
     }
 
-    return arrPtr[resArrSize];
+    delete [] arr2;
+
+    return temp;
 }
 
 bool nonNegative(int arr[], int arrSize) {
