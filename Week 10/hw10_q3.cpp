@@ -13,8 +13,8 @@ int main() {
     cout<<"Non-vector version: "<<endl;
     main1();
 
-    // cout<<"Vector version: "<<endl;
-    // main2();
+    cout<<"Vector version: "<<endl;
+    main2();
 }
 
 int main1() {
@@ -69,34 +69,27 @@ int main2() {
     cout<<"End you input by typing -1."<<endl;
     cin>>n;
 
-    int i = 0;
     while ( n > -1 ) {
-        arr[i] = n;
-        cin>>n;
-        i++;
-        newArraySize++;       
+        v.push_back(n);
+        cin>>n;  
     }
 
     cout<<"Please enter a number you want to search."<<endl;
-    cin>>searchn;
+    cin>>searchN;
 
-    int j = 0;
-
-    for ( int i = 0; i < newArraySize; i++ ) {
-        if ( searchn == arr[i] ) {
-            searchArr[j] = i + 1;
-            j++;
-            cout<<j<<endl;
+    for ( int i = 0; i < v.size(); i++ ) {
+        if ( searchN == v[i] ) {
+            searchV.push_back(i + 1);
         }
     }
 
-    cout<<searchn<<" shows in lines ";
-    for ( int i = 0; i < j; i++ ) {
-        if ( i == j - 1 ) {
-            cout<<searchArr[i]<<".";    
+    cout<<searchN<<" shows in lines ";
+    for ( int i = 0; i < searchV.size(); i++ ) {
+        if ( i == searchV.size() - 1 ) {
+            cout<<searchV[i]<<".";    
         }
         else { 
-            cout<<searchArr[i]<<", ";
+            cout<<searchV[i]<<", ";
         }   
     }
     return 0;
