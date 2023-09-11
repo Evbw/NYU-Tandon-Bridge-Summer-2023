@@ -21,6 +21,7 @@ int main1() {
     int n, searchn;
     int* arr = new int[ARRAYSIZE]();
     int* searchArr = new int[ARRAYSIZE]();
+    int newArraySize = 1;
 
     cout<<"Please enter a sequence of positive integers, each in a separate line."<<endl;
     cout<<"End you input by typing -1."<<endl;
@@ -31,20 +32,30 @@ int main1() {
         arr[i] = n;
         cin>>n;
         i++;
+        newArraySize++;       
     }
 
     cout<<"Please enter a number you want to search."<<endl;
     cin>>searchn;
 
     int j = 0;
-    for ( int i = 0; i < j; i++ ) {
+
+    for ( int i = 0; i < newArraySize; i++ ) {
         if ( searchn == arr[i] ) {
             searchArr[j] = i + 1;
             j++;
         }
     }
 
-    printArray(searchArr, j);
+    cout<<searchn<<"shows in lines ";
+    for ( int i = 0; i < j; i++ ) {
+        if ( i = j - 1 ) {
+            cout<<searchArr[i]<<".";    
+        }
+        cout<<searchArr[i]<<", ";
+    }
+
+    return 0;
 }
 
 void printArray(int* arr, int arrSize) {
