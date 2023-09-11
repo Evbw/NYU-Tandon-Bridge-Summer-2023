@@ -17,6 +17,8 @@ int main() {
     //Call the createWordsArray to add the individual words as elements of an array
     stringarr = createWordsArray(line, arrSize);
     //No reason to have an array just hanging around, so we test it by printing
+    std::cout<<"There were "<<arrSize<<" words in that sentence, so the array size is "<<arrSize<<"."<<std::endl;
+    std::cout<<"The elements are:"<<std::endl;
     printArray(stringarr, arrSize);
     //And then we delete that pointer that's pointing to some random place in memory
     delete [] stringarr;
