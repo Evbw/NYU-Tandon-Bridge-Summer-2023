@@ -7,7 +7,7 @@ int* findMissing(int arr[], int n, int& resArrSize);
 bool nonNegative(int arr[], int arrSize);
 //Precondition: An array filled with valid, non-negative integers of size n
 //Postcondition: Will return false if their exists a non-negative number
-void printArray(int arr, int arrSize);
+void printArray(int* arr, int arrSize);
 
 const int FIRSTARRAYSIZE = 6;
 
@@ -25,7 +25,7 @@ int main() {
 
     cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
 
-    // printArray(arr2, newArrSize);
+    printArray(arr2, newArrSize);
     delete [] arr2;
     arr2 = nullptr;
     return 0;
@@ -40,12 +40,18 @@ void printArray(int* arr, int arrSize) {
 
 int* findMissing(int arr[], int n, int& resArrSize) {
     int resSizedArr = 0;
-    int* arr2 = new int[n + 1]();
+    int* arr2 = new int[n + 1]{0};
 
     for ( int i = 0; i < n ; i++ ) {
         arr2[arr[i]]++;
     }
-    int* temp = new int[n]();
+    int k = 0;
+    for ( int i = 0; i < n + 1; i++ ) {
+        if ( arr2[i] == 0 ) {
+            k++;
+        }
+    }
+    int* temp = new int[k]{0};
     int j = 0;
     for ( int i = 0; i < n + 1; i++ ) {
         if ( arr2[i] == 0 ) {
