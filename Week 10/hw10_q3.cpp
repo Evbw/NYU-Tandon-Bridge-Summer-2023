@@ -44,17 +44,19 @@ int main1() {
         if ( searchn == arr[i] ) {
             searchArr[j] = i + 1;
             j++;
+            cout<<j<<endl;
         }
     }
-
-    cout<<searchn<<"shows in lines ";
+    
+    cout<<searchn<<" shows in lines ";
     for ( int i = 0; i < j; i++ ) {
-        if ( i = j - 1 ) {
+        if ( i == j - 1 ) {
             cout<<searchArr[i]<<".";    
         }
-        cout<<searchArr[i]<<", ";
+        else { 
+            cout<<searchArr[i]<<", ";
+        }   
     }
-
     return 0;
 }
 
