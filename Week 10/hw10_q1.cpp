@@ -26,10 +26,14 @@ int main() {
 }
 //Simple function to print an array
 void printArray(std::string* arr, int arrSize) {
+    std::cout<<"[";
     for ( int i = 0; i < arrSize; i++ ) {
-        std::cout<<arr[i]<<" ";
+        if ( i == arrSize - 1 ) {
+            break;
+        }
+        std::cout<<"\""<<arr[i]<<"\", ";
     }
-    std::cout<<std::endl;
+    std::cout<<"\""<<arr[arrSize - 1]<<"\"]"<<std::endl;
 }
 
 std::string* createWordsArray(std::string sentence, int& outWordsArrSize) {
