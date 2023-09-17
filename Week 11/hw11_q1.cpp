@@ -13,7 +13,7 @@ int main() {
     cout<<endl;
     printOppositeTriangles (size);
     cout<<endl;
-    // printRuler (size);
+    printRuler (size);
 
 }
 
@@ -52,5 +52,17 @@ void printOppositeTriangles (int n) {
 }
 
 void printRuler (int n) {
+    int temp = n;
     
+    if ( n == 1 ) {
+        cout<<"-"<<endl;
+    }
+    else {
+        printRuler(temp - 1);
+        for ( int i = n; i > 0; i-- ) {
+            cout<<"-";
+        }
+        cout<<endl;
+        printRuler(temp - 1);
+    }
 }
