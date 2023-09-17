@@ -20,8 +20,8 @@ int main() {
 void printTriangle (int n) {
     int temp = n;
     
-    if ( n == 0 ) {
-        return;
+    if ( n == 1 ) {
+        cout<<"*"<<endl;
     }
     else {
         printTriangle(temp - 1);
