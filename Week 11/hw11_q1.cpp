@@ -10,22 +10,26 @@ int main() {
     int size = 4;
 
     printTriangle (size);
-    // printOppositeTriangles (size);
+    cout<<endl;
+    printOppositeTriangles (size);
+    cout<<endl;
     // printRuler (size);
 
 }
 
 void printTriangle (int n) {
-
-    if ( n == 1 ) {
-        cout<<"*"<<endl;
+    int temp = n;
+    
+    if ( n == 0 ) {
+        return;
     }
     else {
-        for ( int i = 0; i < n; i++ ) {
+        printTriangle(temp - 1);
+        for ( int i = n; i > 0; i-- ) {
             cout<<"*";
         }
         cout<<endl;
-        printTriangle(n - 1);
+        
     }
 }
 
@@ -39,7 +43,7 @@ void printOppositeTriangles (int n) {
             cout<<"*";
         }
         cout<<endl;
-        printTriangle(n - 1);
+        printOppositeTriangles(n - 1);
     }
 }
 
