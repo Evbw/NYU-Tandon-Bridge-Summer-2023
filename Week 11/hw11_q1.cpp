@@ -18,15 +18,29 @@ int main() {
 void printTriangle (int n) {
 
     if ( n == 1 ) {
-        cout<<"*";
+        cout<<"*"<<endl;
     }
     else {
+        for ( int i = 0; i < n; i++ ) {
+            cout<<"*";
+        }
+        cout<<endl;
         printTriangle(n - 1);
     }
 }
 
 void printOppositeTriangles (int n) {
-    
+   
+    if ( n == 1 ) {
+        cout<<"*"<<endl;
+    }
+    else {
+        for ( int i = 0; i < n; i++ ) {
+            cout<<"*";
+        }
+        cout<<endl;
+        printTriangle(n - 1);
+    }
 }
 
 void printRuler (int n) {
