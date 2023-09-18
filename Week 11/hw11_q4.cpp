@@ -15,21 +15,30 @@ int main() {
 }
 
 int jumpIt (int arr[], int arrSize) {
-    int temp = 0;
-    int index = 0;
+    int temp = arr[arrSize - 1];
+    int index = arrSize - 1;
 
-    if ( temp >= arrSize ) {
-        return arr[arrSize -1];
+    if ( arr[index - 2] < 0 ) {
+        return arr[index - 1];
     }
-    else if ( arr[index + 1] < arr[index + 2])  {
-        temp = jumpIt(arr+1, arrSize);
-        index++;
-        return arr[index + 1];
+
+    if ( arr[arrSize] == 1 ) {
+        return arr[0];
     }
-    else if ( arr[index + 2] < arr[index + 1])  {
-        temp = jumpIt(arr+2, arrSize);
+    else if ( arr[index - 1] < arr[index - 2])  {
+        cout <<"first else if "<<arr[index - 1]<<endl;
+        cout <<"first else if "<<arr[index - 2]<<endl;
+        temp += jumpIt(arr, arrSize - 1);
         index++;
-        return arr[index + 2];
+        return temp;
+    }
+    else if ( arr[index - 2] < arr[index - 1])  {
+        cout <<"second else if "<<arr[index - 1]<<endl;
+        cout <<"second else if "<<arr[index - 2]<<endl;
+        temp += jumpIt(arr, arrSize - 2);
+        cout <<"second else if "<<temp<<endl;
+        index++;
+        return temp;
     }
     return temp;
 }
