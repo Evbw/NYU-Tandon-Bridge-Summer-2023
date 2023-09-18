@@ -10,26 +10,26 @@ int main() {
     int n;
 
     n = jumpIt (arr, ARRSIZE);
-    
+
     cout<<n<<endl;
 }
 
 int jumpIt (int arr[], int arrSize) {
     int temp = 0;
-    int count = 0;
+    int index = 0;
 
     if ( temp >= arrSize ) {
         return arr[arrSize -1];
     }
-    else if ( arr[count + 1] < arr[count + 2])  {
+    else if ( arr[index + 1] < arr[index + 2])  {
         temp = jumpIt(arr+1, arrSize);
-        count++;
-        return temp;
+        index++;
+        return arr[index + 1];
     }
-    else if ( arr[count + 2] < arr[count + 1])  {
+    else if ( arr[index + 2] < arr[index + 1])  {
         temp = jumpIt(arr+2, arrSize);
-        count++;
-        return temp;
+        index++;
+        return arr[index + 2];
     }
     return temp;
 }
