@@ -9,10 +9,10 @@ int main() {
     int res1, res2, res3, res4;
 
     res1 = minInArray1(arr, 10);
-    // res2 = minInArray2(arr, 0, 9);
+    res2 = minInArray2(arr, 0, 9);
     cout<<res1<<" "<<res2<<endl; //should both be -9
 
-    // res3 = minInArray2(arr, 2, 5);
+    res3 = minInArray2(arr, 2, 5);
     res4 = minInArray1(arr+2, 4); //arr+2 is equivalent to &(arr[2])
     cout<<res3<<" "<<res4<<endl; //should both be 3
 
@@ -37,6 +37,20 @@ int minInArray1(int arr[], int arrSize) {
     return min;
 }
 
-// int minInArray2(int arr[], int low, int high) {
-    
-// }
+int minInArray2(int arr[], int low, int high) {
+    int min = arr[low];
+
+    if ( low >= high ) {
+        return arr[high - 1];
+    }
+    else {
+        min = minInArray2(arr, low + 1, high);
+        if ( min < arr[low + 1] ) {
+            return min;
+        }
+        else {
+            return arr[low + 1];
+        }
+    }
+    return min;
+}
