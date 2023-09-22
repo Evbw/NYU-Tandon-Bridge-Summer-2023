@@ -15,5 +15,23 @@ int main() {
 }
 
 int jumpIt (int arr[], int arrSize) {
-    
+    int jump = 0;
+
+    if ( arrSize <= 2 ) {
+        cout<<"arrSize "<<arrSize<<endl;
+        return arr[0];
+    }
+    else {
+        if ( (arr[arrSize - 1] + arr[arrSize - 2]) < (arr[arrSize - 1] + arr[arrSize - 3])) {
+            // jump = arr[arrSize - 1] + arr[arrSize - 2];
+            jump = arr[arrSize - 1] + jumpIt(arr, arrSize - 2);
+            cout<<"jumpif "<<jump<<endl;
+        }
+        else {
+            // jump = arr[arrSize - 1] + arr[arrSize - 3];
+            jump = arr[arrSize - 1] + jumpIt(arr, arrSize - 3);
+            cout<<"jumpelse "<<jump<<endl;
+        }
+    }
+    return jump;
 }
