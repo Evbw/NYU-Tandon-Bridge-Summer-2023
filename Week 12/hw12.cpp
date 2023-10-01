@@ -48,6 +48,57 @@ class Money {
         long all_cents;
 };
 
+class Check {
+    private:
+        int check_number;
+        double check_amount;
+        bool cashed;
+    public:
+        friend Check operator +(const Check& amount1, const Check& amount2);
+        //Returns the sum of the values of amount1 and amount2.
+
+        friend Check operator -(const Check& amount1, const Check& amount2);
+        //Returns amount1 minus amount2.
+
+        friend Check operator -(const Check& amount);
+        //Returns the negative of the value of amount.
+
+        friend bool operator ==(const Check& amount1, const Check& amount2);
+        //Returns true if amount1 and amount2 have the same value; false otherwise.
+
+        friend bool operator <(const Check& amount1, const Check& amount2);
+        //Returns true if amount1 is less than amount2; false otherwise.
+
+        Check(int check_number, long dollars, int cents, bool cashed);
+        //Initializes the object with an identifier value so its value 
+        //represents an amount with the dollars and cents given by the 
+        //arguments. Will not accept negative amounts.
+
+        Check(int check_number, long dollars, bool cashed);
+        //Initalizes the object so its value represents $dollars.00.
+
+        Check(int check_number, bool cashed);
+        //Initalizes the object so its value represents $0.00 and sets the bool value to false.
+
+        Check();
+        //Initalizes numerical values to 0 and the bool value to false.
+
+        double get_value() const;
+        //Returns the amount of money recorded in the data portion of the calling object.
+
+        friend istream& operator >>(istream& ins, Check& amount);
+        //Overloads the >> operator so it can be used to input values of type Money.
+        //Notation for inputting negative amounts is as in -$100.00.
+        //Precondition: If ins is a file input stream, then ins has already been
+        //connected to a file.
+
+        friend ostream& operator <<(ostream& outs, const Check& amount);
+        //Overloads the << operator so it can be used to output values of type Money.
+        //Precedes each output value of type Money with a dollar sign.
+        //Precondition: If outs is a file output stream, then outs has already been
+        //connected to a file.
+};
+
 //Reads in 5 amounts of money and shows how much each
 //amount differs from the largest amount.
 int main() {
