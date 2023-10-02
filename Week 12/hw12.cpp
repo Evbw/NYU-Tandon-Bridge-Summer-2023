@@ -51,7 +51,7 @@ class Money {
 class Check {
     private:
         int check_number;
-        double check_amount;
+        Money check_amount;
         bool cashed;
     public:
     
@@ -69,8 +69,21 @@ class Check {
         Check();
         //Initalizes numerical values to 0 and the bool value to false.
 
-        double get_value() const;
+        int get_check_number() const;
+
+        Money get_check_amount() const;
         //Returns the amount of money recorded in the data portion of the calling object.
+
+        bool get_cashed() const;
+
+        int set_check_number(int check_number);
+
+        Money set_check_amount(Money check_amount);
+
+        bool set_cashed(bool cashed);
+
+        friend bool operator <(const Check& amount1, const Check& amount2);
+        //Returns true if amount1 is less than amount2; false otherwise.
 
         friend istream& operator >>(istream& ins, Check& amount);
         //Overloads the >> operator so it can be used to input values of type Money.
@@ -88,10 +101,10 @@ class Check {
 //Reads in 5 amounts of money and shows how much each
 //amount differs from the largest amount.
 int main() {
-    Money amount[5], max;
+    Check amount[5], max;
     int i;
     
-    cout<<"Enter 5 amounts of money:\n";
+    cout<<"Enter 5 checks:\n";
     cin>>amount[0];
     max = amount[0];
     for (i = 1; i < 5; i++) {
@@ -101,16 +114,7 @@ int main() {
         //max is the largest of amount[0]...amount[i].
     }
 
-    Money difference[5];
-    for (i = 0; i < 5; i++)
-        difference[i] = max - amount[i];
-    cout<<"The highest amount is "<<max<<endl;
-    cout<<"The amounts and their\n"
-        <<"differences from the largest are:\n";
-    for (i = 0; i < 5; i++)
-    {
-        cout<<amount[i]<<" of by "<<difference[i]<<endl;
-    }
+    
     return 0;
 }
 
@@ -234,7 +238,7 @@ Check::Check(int check_number, long dollars, int cents, bool cashed) {
 Check::Check(int check_number, long dollars, bool cashed) {
     check_number = check_number;
     if (dollars < 0) {
-        cout<<"Illegal values for dollars and cents.\n";
+        cout<<"Illegal values for check amount.\n";
         exit(1);
     }
     check_amount = dollars * 100;
@@ -248,4 +252,50 @@ Check::Check(int check_number, bool cashed) {
 
 Check::Check() : check_number(0), check_amount(0), cashed(false) {
     //Body intentionally left blank.
+}
+
+bool operator <(const Check& amount1, const Check& amount2) {
+    return (amount1.check_amount < amount2.check_amount);
+}
+
+int set_check_number(int check_number) {
+    return check_number;
+}
+
+Money set_check_amount(Money check_amount) {
+    if (check_amount < 0) {
+        cout<<"Illegal values for check amount.\n";
+        exit(1);
+    }
+    Money amount = check_amount;
+    return amount;
+}
+
+bool set_cashed(bool cashed) {
+    return true;
+}
+
+istream& operator >>(istream& ins, Check& amount) {
+    char one_char, decimal_point, digit1, digit2;
+    long dollars;
+    int cents;
+
+    ins>>one_char>>dollars>>decimal_point>>digit1>>digit2;
+
+    if (one_char != '$' || decimal_point != '.' || !isdigit(digit1) || !isdigit(digit2)) {
+        cout<<"Error illegal form for check input\n";
+        exit(1);
+    }
+
+    cents = digit_to_int(digit1) * 10 + digit_to_int(digit2);
+    amount.check_amount = dollars * 100 + cents;
+
+    return ins;
+}
+
+ostream& operator <<(ostream& outs, const Check& amount) {
+           
+    outs<<"$"<<amount;
+
+    return outs;
 }
