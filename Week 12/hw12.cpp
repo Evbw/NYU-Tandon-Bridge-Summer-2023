@@ -12,6 +12,12 @@ class Money {
         friend Money operator -(const Money& amount);
         //Returns the negative of the value of amount.
 
+        friend Money operator /(const Money& amount, const Money& amount2);
+        //Returns the negative of the value of amount.
+
+        friend Money operator %(const Money& amount, const Money& amount2);
+        //Returns the negative of the value of amount.
+
         friend bool operator ==(const Money& amount1, const Money& amount2);
         //Returns true if amount1 and amount2 have the same value; false otherwise.
 
@@ -101,20 +107,27 @@ class Check {
 //Reads in 5 amounts of money and shows how much each
 //amount differs from the largest amount.
 int main() {
-    Check amount[5], max;
+    // Check amount[5];
+    // Check cashed_checks[5];
     int i;
+    Check amount;
     
-    cout<<"Enter 5 checks:\n";
-    cin>>amount[0];
-    max = amount[0];
-    for (i = 1; i < 5; i++) {
-        cin>>amount[i];
-        if (max < amount[i])
-            max = amount[i];
-        //max is the largest of amount[0]...amount[i].
-    }
+    cout<<"Enter a check to deposit:\n";
+    cin>>amount;
+    // cin>>amount[0];
+    // for (i = 1; i < 5; i++) {
+    //     cin>>amount[i];
+    //     set_cashed(amount[i].cashed);
+    // }
+    
+    cout<<"Checks of the amounts: "<<amount<<"\n";
+    
+    // for (i = 1; i < 5; i++) {
+    //     cout<<amount[i]<<endl;
+    // }
+    
+    cout<<" have been cashed.";
 
-    
     return 0;
 }
 
@@ -159,6 +172,18 @@ Money operator -(const Money& amount1, const Money& amount2) {
 Money operator -(const Money& amount) {
     Money temp;
     temp.all_cents = -amount.all_cents;
+    return temp;
+}
+
+Money operator /(const Money& amount1, const Money& amount2) {
+    Money temp;
+    temp.all_cents = amount1.all_cents / 100;
+    return temp;
+}
+
+Money operator %(const Money& amount1, const Money& amount2) {
+    Money temp;
+    temp.all_cents = amount1.all_cents % 100;
     return temp;
 }
 
@@ -267,7 +292,8 @@ Money set_check_amount(Money check_amount) {
         cout<<"Illegal values for check amount.\n";
         exit(1);
     }
-    Money amount = check_amount;
+    Money amount;
+    amount = (check_amount/100) + (check_amount%100);
     return amount;
 }
 
@@ -293,9 +319,9 @@ istream& operator >>(istream& ins, Check& amount) {
     return ins;
 }
 
-ostream& operator <<(ostream& outs, const Check& amount) {
-           
-    outs<<"$"<<amount;
+ostream& operator <<(ostream& outs, const Check& check) {
+        
+    outs<<check.check_amount<<" has been cashed.";
 
     return outs;
 }
