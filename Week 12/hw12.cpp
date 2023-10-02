@@ -54,21 +54,7 @@ class Check {
         double check_amount;
         bool cashed;
     public:
-        friend Check operator +(const Check& amount1, const Check& amount2);
-        //Returns the sum of the values of amount1 and amount2.
-
-        friend Check operator -(const Check& amount1, const Check& amount2);
-        //Returns amount1 minus amount2.
-
-        friend Check operator -(const Check& amount);
-        //Returns the negative of the value of amount.
-
-        friend bool operator ==(const Check& amount1, const Check& amount2);
-        //Returns true if amount1 and amount2 have the same value; false otherwise.
-
-        friend bool operator <(const Check& amount1, const Check& amount2);
-        //Returns true if amount1 is less than amount2; false otherwise.
-
+    
         Check(int check_number, long dollars, int cents, bool cashed);
         //Initializes the object with an identifier value so its value 
         //represents an amount with the dollars and cents given by the 
@@ -233,4 +219,33 @@ ostream& operator <<(ostream& outs, const Money& amount) {
     outs<<cents;
 
     return outs;
+}
+
+Check::Check(int check_number, long dollars, int cents, bool cashed) {
+    check_number = check_number;
+    if (dollars * cents < 0) {
+        cout<<"Illegal values for dollars and cents.\n";
+        exit(1);
+    }
+    check_amount = dollars * 100 + cents;
+    cashed = false;
+}
+
+Check::Check(int check_number, long dollars, bool cashed) {
+    check_number = check_number;
+    if (dollars < 0) {
+        cout<<"Illegal values for dollars and cents.\n";
+        exit(1);
+    }
+    check_amount = dollars * 100;
+    cashed = false;
+}
+
+Check::Check(int check_number, bool cashed) {
+    check_number = check_number;
+    cashed = false;
+}
+
+Check::Check() : check_number(0), check_amount(0), cashed(false) {
+    //Body intentionally left blank.
 }
