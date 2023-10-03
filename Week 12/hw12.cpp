@@ -52,7 +52,7 @@ class Check {
         bool cashed;
     public:
     
-        Check(int check_num, Money check_am, bool cashedCheck);
+        Check(int check_num, Money check_am, bool cashed_check);
         //Initializes the object with an identifier value so its value 
         //represents an amount with the dollars and cents given by the 
         //arguments. Will not accept negative amounts.
@@ -71,7 +71,7 @@ class Check {
 
         void set_check_amount(Money check_am);
 
-        void set_cashed(bool cashedCheck);
+        void set_cashed(bool cashed_check);
 
         friend bool operator <(const Check& amount1, const Check& amount2);
         //Returns true if amount1 is less than amount2; false otherwise.
@@ -92,6 +92,65 @@ class Check {
 
 int main() {
     vector<Check> uncashed_check_vector, cashed_check_vector;
+    double current_balance, new_balance;
+    double amount;
+    int check_num;
+    Money check_am, sum_cashed_checks, sum_uncashed_checks;
+    bool cashed_check;
+    char cashed_check_char;
+
+    cout<<"Please enter your current bank balance without a dollar sign (e.g. 100.00): "<<endl;
+    cin>>current_balance;
+    new_balance = current_balance;
+
+    cout<<"Please enter any deposits you may have. Enter 0 when you have no more deposits: "<<endl;
+    cin>>amount;
+    
+    while(amount > 0) {
+        new_balance += amount;
+        cin>>amount;
+    }
+
+    cout<<"With the added deposits, the new balance is $"<<new_balance<<"."<<endl;
+    
+    cout<<"Please enter any checks you have written in the format check-number, check-amount,"
+        <<" cashed-status (e.g. 112 100.11 N). End output with 0 0 N: ";
+    
+    while(true) {
+        cin>>check_num>>amount>>cashed_check_char;
+        if((check_num == 0 && amount == 0 && cashed_check_char == 78) || (check_num == 0 && check_am == 0 && cashed_check_char == 110)) {
+            break;
+        }
+        
+        if (cashed_check_char == 78 || cashed_check_char == 110) {
+            cashed_check = false;
+        }
+        else if (cashed_check_char == 89 || cashed_check_char == 121) {
+            cashed_check = true;
+        }
+
+        Money amount_of_check(amount);
+
+        Check new_check(check_num, amount_of_check, cashed_check);
+        
+        if(cashed_check) {
+            cashed_check_vector.push_back(new_check);
+        }
+        else {
+            uncashed_check_vector.push_back(new_check);
+        }
+    }
+
+    for (Check check: cashed_check_vector) {
+        sum_cashed_checks = sum_cashed_checks + check.get_check_amount();
+    }
+        
+    for (Check check: uncashed_check_vector) {
+        sum_uncashed_checks = sum_uncashed_checks + check.get_check_amount();
+    }
+
+    cout<<"The current balance $"<<new_balance<<" less the cashed checks is "<<new_balance - sum_cashed_checks<<"."<<endl;
+    cout<<"The usable balance is "<<new_balance - sum_cashed_checks - sum_uncashed_checks<<"."<<endl;
 }
 
 int digit_to_int(char c) {
@@ -137,69 +196,34 @@ bool operator <(const Money& amount1, const Money& amount2) {
     return (amount1.all_cents < amount2.all_cents);
 }
 
-istream& operator >>(istream& ins, Money& amount) {
-    char one_char, decimal_point, digit1, digit2;
-    long dollars;
-    int cents;
-    bool negative;
+// istream& operator >>(istream& ins, Money& amount1) {
+//     double amount;
 
-    ins>>one_char;
+//     ins>>amount;
 
-    if (one_char == '-') {
-        negative = true;
-        ins>>one_char; //read '$'
-    }
-    else {
-        negative = false;
-    }
-
-    ins>>dollars>>decimal_point>>digit1>>digit2;
-
-    if (one_char != '$' || decimal_point != '.' || !isdigit(digit1) || !isdigit(digit2)) {
-        cout<<"Error illegal form for money input\n";
-        exit(1);
-    }
-
-    cents = digit_to_int(digit1) * 10 + digit_to_int(digit2);
-    amount.all_cents = dollars * 100 + cents;
-
-    if (negative) {
-        amount.all_cents = -amount.all_cents;
-    }
-
-    return ins;
-}
+//     return ins;
+// }
 
 ostream& operator <<(ostream& outs, const Money& amount) {
-    long positive_cents, dollars, cents;
-    positive_cents = labs(amount.all_cents);
-    dollars = positive_cents / 100;
-    cents = positive_cents % 100;
-
+    
     if (amount.all_cents < 0 ) {
-        outs<<"-$"<<dollars<<'.';
+        outs<<"-$"<<-amount.all_cents;
     }
     else {
-        outs<<"$"<<dollars<<'.';
+        outs<<"$"<<amount.all_cents;
     }
-
-    if (cents < 10) {
-        outs<<'0';
-    }
-
-    outs<<cents;
 
     return outs;
 }
 
-Check::Check(int check_num, Money check_am, bool cashedCheck) {
+Check::Check(int check_num, Money check_am, bool cashed_check) {
     check_number = check_num;
     if (check_am < 0) {
         cout<<"Illegal values for dollars and cents.\n";
         exit(1);
     }
     check_amount = check_am;
-    cashed = cashedCheck;
+    cashed = cashed_check;
 }
 
 Check::Check() : check_number(0), cashed(false) {
@@ -211,6 +235,18 @@ bool operator <(const Check& amount1, const Check& amount2) {
     return (amount1.check_amount < amount2.check_amount);
 }
 
+int Check::get_check_number() const {
+    return check_number;
+};
+
+Money Check::get_check_amount() const {
+    return check_amount;
+}
+
+bool Check::get_cashed() const {
+    return cashed;
+};
+
 void Check::set_check_number(int check_num) {
     check_number = check_num;
 }
@@ -219,27 +255,27 @@ void Check::set_check_amount(Money check_am) {
     check_amount = check_am;
 }
 
-void Check::set_cashed(bool cashedCheck) {
-    cashed = cashedCheck;
+void Check::set_cashed(bool cashed_check) {
+    cashed = cashed_check;
 }
 
-istream& operator >>(istream& ins, Check& amount) {
-    char one_char, decimal_point, digit1, digit2;
-    long dollars;
-    int cents;
+// istream& operator >>(istream& ins, Check& amount) {
+//     char one_char, decimal_point, digit1, digit2;
+//     long dollars;
+//     int cents;
 
-    ins>>one_char>>dollars>>decimal_point>>digit1>>digit2;
+//     ins>>one_char>>dollars>>decimal_point>>digit1>>digit2;
 
-    if (one_char != '$' || decimal_point != '.' || !isdigit(digit1) || !isdigit(digit2)) {
-        cout<<"Error illegal form for check input\n";
-        exit(1);
-    }
+//     if (one_char != '$' || decimal_point != '.' || !isdigit(digit1) || !isdigit(digit2)) {
+//         cout<<"Error illegal form for check input\n";
+//         exit(1);
+//     }
 
-    cents = digit_to_int(digit1) * 10 + digit_to_int(digit2);
-    amount.check_amount = dollars * 100 + cents;
+//     cents = digit_to_int(digit1) * 10 + digit_to_int(digit2);
+//     amount.check_amount = dollars * 100 + cents;
 
-    return ins;
-}
+//     return ins;
+// }
 
 ostream& operator <<(ostream& outs, const Check& check) {
         
