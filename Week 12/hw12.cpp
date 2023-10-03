@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Money {
@@ -88,30 +89,9 @@ class Check {
         //connected to a file.
 };
 
-//Reads in 5 amounts of money and shows how much each
-//amount differs from the largest amount.
-int main() {
-    Check amount[5];
-    // Check cashed_checks[5];
-    int i;
-    // Check amount;
-    
-    cout<<"Enter 5 checks to deposit:\n";
-    // cin>>amount;
-    cin>>amount[0];
-    for (i = 1; i < 5; i++) {
-        cin>>amount[i];
-    }
-    
-    cout<<"Checks of the amounts:\n";
-    
-    for (i = 0; i < 5; i++) {
-        cout<<amount[i]<<endl;
-    }
-    
-    cout<<" have been cashed.";
 
-    return 0;
+int main() {
+    vector<Check> uncashed_check_vector, cashed_check_vector;
 }
 
 int digit_to_int(char c) {
