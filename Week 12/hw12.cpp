@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Money {
@@ -53,17 +54,12 @@ class Check {
     public:
     
         Check(int check_num, Money check_am, bool cashed_check);
-        //Initializes the object with an identifier value so its value 
-        //represents an amount with the dollars and cents given by the 
-        //arguments. Will not accept negative amounts.
 
         Check();
-        //Initalizes numerical values to 0 and the bool value to false.
 
         int get_check_number() const;
 
         Money get_check_amount() const;
-        //Returns the amount of money recorded in the data portion of the calling object.
 
         bool get_cashed() const;
 
@@ -74,19 +70,11 @@ class Check {
         void set_cashed(bool cashed_check);
 
         friend bool operator <(const Check& amount1, const Check& amount2);
-        //Returns true if amount1 is less than amount2; false otherwise.
 
         friend istream& operator >>(istream& ins, Check& amount);
-        //Overloads the >> operator so it can be used to input values of type Money.
-        //Notation for inputting negative amounts is as in -$100.00.
-        //Precondition: If ins is a file input stream, then ins has already been
-        //connected to a file.
 
         friend ostream& operator <<(ostream& outs, const Check& amount);
-        //Overloads the << operator so it can be used to output values of type Money.
-        //Precedes each output value of type Money with a dollar sign.
-        //Precondition: If outs is a file output stream, then outs has already been
-        //connected to a file.
+        
 };
 
 
@@ -141,6 +129,9 @@ int main() {
         }
     }
 
+    sort(cashed_check_vector.begin(), cashed_check_vector.end());
+    sort(uncashed_check_vector.begin(), uncashed_check_vector.end());
+
     for (Check check: cashed_check_vector) {
         sum_cashed_checks = sum_cashed_checks + check.get_check_amount();
     }
@@ -151,6 +142,15 @@ int main() {
 
     cout<<"The current balance $"<<new_balance<<" less the cashed checks is "<<new_balance - sum_cashed_checks<<"."<<endl;
     cout<<"The usable balance is "<<new_balance - sum_cashed_checks - sum_uncashed_checks<<"."<<endl;
+    
+    cout<<"The cashed checks are: "<<endl;
+    for (Check check: cashed_check_vector) {
+        cout<<"Check number "<<check.get_check_number()<<endl;
+    }
+    cout<<"The uncashed checks are: "<<endl;
+    for (Check check: uncashed_check_vector) {
+        cout<<"Check number "<<check.get_check_number()<<endl;
+    }
 }
 
 int digit_to_int(char c) {
@@ -164,11 +164,6 @@ Money::Money(double amount) : all_cents(amount) {
 Money::Money() : all_cents(0) {
     //Body intentionally left blank.
 }
-
-int digit_to_int(char c);
-//Used in the definition of the overloaded input operator >>.
-//Precondition: c is one of the digits '0' through '9'.
-//Returns the integer for the digit; for example, digit_to_int('3') returns 3.
 
 Money operator +(const Money& amount1, const Money& amount2) {
     Money temp;
@@ -195,14 +190,6 @@ bool operator ==(const Money& amount1, const Money& amount2) {
 bool operator <(const Money& amount1, const Money& amount2) {
     return (amount1.all_cents < amount2.all_cents);
 }
-
-// istream& operator >>(istream& ins, Money& amount1) {
-//     double amount;
-
-//     ins>>amount;
-
-//     return ins;
-// }
 
 ostream& operator <<(ostream& outs, const Money& amount) {
     
@@ -258,24 +245,6 @@ void Check::set_check_amount(Money check_am) {
 void Check::set_cashed(bool cashed_check) {
     cashed = cashed_check;
 }
-
-// istream& operator >>(istream& ins, Check& amount) {
-//     char one_char, decimal_point, digit1, digit2;
-//     long dollars;
-//     int cents;
-
-//     ins>>one_char>>dollars>>decimal_point>>digit1>>digit2;
-
-//     if (one_char != '$' || decimal_point != '.' || !isdigit(digit1) || !isdigit(digit2)) {
-//         cout<<"Error illegal form for check input\n";
-//         exit(1);
-//     }
-
-//     cents = digit_to_int(digit1) * 10 + digit_to_int(digit2);
-//     amount.check_amount = dollars * 100 + cents;
-
-//     return ins;
-// }
 
 ostream& operator <<(ostream& outs, const Check& check) {
         
