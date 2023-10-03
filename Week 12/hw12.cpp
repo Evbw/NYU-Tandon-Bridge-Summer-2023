@@ -12,32 +12,22 @@ class Money {
         friend Money operator -(const Money& amount);
         //Returns the negative of the value of amount.
 
-        friend Money operator /(const Money& amount, const Money& amount2);
-        //Returns the negative of the value of amount.
-
-        friend Money operator %(const Money& amount, const Money& amount2);
-        //Returns the negative of the value of amount.
-
         friend bool operator ==(const Money& amount1, const Money& amount2);
         //Returns true if amount1 and amount2 have the same value; false otherwise.
 
         friend bool operator <(const Money& amount1, const Money& amount2);
         //Returns true if amount1 is less than amount2; false otherwise.
 
-        Money(long dollars, int cents);
-        //Initializes the object so its value represents an amount with
-        //the dollars and cents given by the arguments. If the amount
-        //is negative, then both dollars and cents should be negative.
-
-        Money(long dollars);
+        Money(double dollars);
         //Initalizes the object so its value represents $dollars.00.
 
         Money();
         //Initalizes the object so its value represents $0.00.
 
-        double get_value() const;
+        double get_value() const {return all_cents;}
         //Returns the amount of money recorded in the data portion of the calling object.
 
+        void set_value(double amount) {all_cents = amount;}
         friend istream& operator >>(istream& ins, Money& amount);
         //Overloads the >> operator so it can be used to input values of type Money.
         //Notation for inputting negative amounts is as in -$100.00.
@@ -51,7 +41,7 @@ class Money {
         //connected to a file.
 
     private:
-        long all_cents;
+        double all_cents;
 };
 
 class Check {
@@ -61,16 +51,10 @@ class Check {
         bool cashed;
     public:
     
-        Check(int check_number, long dollars, int cents, bool cashed);
+        Check(int check_num, Money check_am, bool cashedCheck);
         //Initializes the object with an identifier value so its value 
         //represents an amount with the dollars and cents given by the 
         //arguments. Will not accept negative amounts.
-
-        Check(int check_number, long dollars, bool cashed);
-        //Initalizes the object so its value represents $dollars.00.
-
-        Check(int check_number, bool cashed);
-        //Initalizes the object so its value represents $0.00 and sets the bool value to false.
 
         Check();
         //Initalizes numerical values to 0 and the bool value to false.
@@ -82,11 +66,11 @@ class Check {
 
         bool get_cashed() const;
 
-        int set_check_number(int check_number);
+        void set_check_number(int check_num);
 
-        Money set_check_amount(Money check_amount);
+        void set_check_amount(Money check_am);
 
-        bool set_cashed(bool cashed);
+        void set_cashed(bool cashedCheck);
 
         friend bool operator <(const Check& amount1, const Check& amount2);
         //Returns true if amount1 is less than amount2; false otherwise.
@@ -107,24 +91,23 @@ class Check {
 //Reads in 5 amounts of money and shows how much each
 //amount differs from the largest amount.
 int main() {
-    // Check amount[5];
+    Check amount[5];
     // Check cashed_checks[5];
     int i;
-    Check amount;
+    // Check amount;
     
-    cout<<"Enter a check to deposit:\n";
-    cin>>amount;
-    // cin>>amount[0];
-    // for (i = 1; i < 5; i++) {
-    //     cin>>amount[i];
-    //     set_cashed(amount[i].cashed);
-    // }
+    cout<<"Enter 5 checks to deposit:\n";
+    // cin>>amount;
+    cin>>amount[0];
+    for (i = 1; i < 5; i++) {
+        cin>>amount[i];
+    }
     
-    cout<<"Checks of the amounts: "<<amount<<"\n";
+    cout<<"Checks of the amounts:\n";
     
-    // for (i = 1; i < 5; i++) {
-    //     cout<<amount[i]<<endl;
-    // }
+    for (i = 0; i < 5; i++) {
+        cout<<amount[i]<<endl;
+    }
     
     cout<<" have been cashed.";
 
@@ -135,16 +118,7 @@ int digit_to_int(char c) {
     return static_cast<int>(c) - static_cast<int>('0');
 }
 
-Money::Money(long dollars, int cents) {
-    if (dollars * cents < 0) {
-        cout<<"Illegal values for dollars and cents.\n";
-        exit(1);
-    }
-
-    all_cents = dollars * 100 + cents;
-}
-
-Money::Money(long dollars) : all_cents(dollars * 100) {
+Money::Money(double amount) : all_cents(amount) {
     //Body intentionally left blank.
 }
 
@@ -172,18 +146,6 @@ Money operator -(const Money& amount1, const Money& amount2) {
 Money operator -(const Money& amount) {
     Money temp;
     temp.all_cents = -amount.all_cents;
-    return temp;
-}
-
-Money operator /(const Money& amount1, const Money& amount2) {
-    Money temp;
-    temp.all_cents = amount1.all_cents / 100;
-    return temp;
-}
-
-Money operator %(const Money& amount1, const Money& amount2) {
-    Money temp;
-    temp.all_cents = amount1.all_cents % 100;
     return temp;
 }
 
@@ -250,55 +212,35 @@ ostream& operator <<(ostream& outs, const Money& amount) {
     return outs;
 }
 
-Check::Check(int check_number, long dollars, int cents, bool cashed) {
-    check_number = check_number;
-    if (dollars * cents < 0) {
+Check::Check(int check_num, Money check_am, bool cashedCheck) {
+    check_number = check_num;
+    if (check_am < 0) {
         cout<<"Illegal values for dollars and cents.\n";
         exit(1);
     }
-    check_amount = dollars * 100 + cents;
-    cashed = false;
+    check_amount = check_am;
+    cashed = cashedCheck;
 }
 
-Check::Check(int check_number, long dollars, bool cashed) {
-    check_number = check_number;
-    if (dollars < 0) {
-        cout<<"Illegal values for check amount.\n";
-        exit(1);
-    }
-    check_amount = dollars * 100;
-    cashed = false;
-}
-
-Check::Check(int check_number, bool cashed) {
-    check_number = check_number;
-    cashed = false;
-}
-
-Check::Check() : check_number(0), check_amount(0), cashed(false) {
-    //Body intentionally left blank.
+Check::Check() : check_number(0), cashed(false) {
+    Money check_am;
+    check_amount = check_am;
 }
 
 bool operator <(const Check& amount1, const Check& amount2) {
     return (amount1.check_amount < amount2.check_amount);
 }
 
-int set_check_number(int check_number) {
-    return check_number;
+void Check::set_check_number(int check_num) {
+    check_number = check_num;
 }
 
-Money set_check_amount(Money check_amount) {
-    if (check_amount < 0) {
-        cout<<"Illegal values for check amount.\n";
-        exit(1);
-    }
-    Money amount;
-    amount = (check_amount/100) + (check_amount%100);
-    return amount;
+void Check::set_check_amount(Money check_am) {
+    check_amount = check_am;
 }
 
-bool set_cashed(bool cashed) {
-    return true;
+void Check::set_cashed(bool cashedCheck) {
+    cashed = cashedCheck;
 }
 
 istream& operator >>(istream& ins, Check& amount) {
@@ -321,7 +263,7 @@ istream& operator >>(istream& ins, Check& amount) {
 
 ostream& operator <<(ostream& outs, const Check& check) {
         
-    outs<<check.check_amount<<" has been cashed.";
+    outs<<check.check_amount;
 
     return outs;
 }
