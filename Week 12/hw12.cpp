@@ -103,7 +103,7 @@ int main() {
     cout<<"With the added deposits, the new balance is $"<<new_balance<<"."<<endl;
     
     cout<<"Please enter any checks you have written in the format check-number, check-amount,"
-        <<" cashed-status (e.g. 112 100.11 N). End output with 0 0 N: ";
+        <<" cashed-status (e.g. 112 100.11 N). End output with 0 0 N: "<<endl;
     
     while(true) {
         cin>>check_num>>amount>>cashed_check_char;
@@ -146,11 +146,11 @@ int main() {
     
     cout<<"The cashed checks are: "<<endl;
     for (auto x: cashed_check_vector) {
-        cout<<"Check number "<<x.get_check_number()<<endl;
+        cout<<"Check number "<<x.get_check_number()<<" for amount "<<x.get_check_amount()<<endl;
     }
     cout<<"The uncashed checks are: "<<endl;
     for (auto y: uncashed_check_vector) {
-        cout<<"Check number "<<y.get_check_number()<<endl;
+        cout<<"Check number "<<y.get_check_number()<<" for amount "<<y.get_check_amount()<<endl;
     }
 }
 
