@@ -141,16 +141,20 @@ int main() {
         sum_uncashed_checks = sum_uncashed_checks + check.get_check_amount();
     }
 
-    cout<<"The current balance $"<<new_balance<<" less the cashed checks is "<<new_balance - sum_cashed_checks<<"."<<endl;
-    cout<<"The usable balance is "<<new_balance - sum_cashed_checks - sum_uncashed_checks<<"."<<endl;
+    cout<<"The current balance $"<<setprecision(2)<<fixed<<new_balance<<" less the cashed checks is "<<setprecision(2)<<fixed<<new_balance - sum_cashed_checks<<"."<<endl;
+    cout<<"The usable balance is "<<setprecision(2)<<fixed<<new_balance - sum_cashed_checks - sum_uncashed_checks<<"."<<endl;
     
-    cout<<"The cashed checks are: "<<endl;
-    for (auto x: cashed_check_vector) {
-        cout<<"Check number "<<x.get_check_number()<<" for amount "<<x.get_check_amount()<<endl;
+    if ( !cashed_check_vector.empty() ) {
+        cout<<"The cashed checks are: "<<endl;
+        for (auto x: cashed_check_vector) {
+            cout<<"Check number "<<x.get_check_number()<<" for amount "<<setprecision(2)<<fixed<<x.get_check_amount()<<endl;
+        }
     }
-    cout<<"The uncashed checks are: "<<endl;
-    for (auto y: uncashed_check_vector) {
-        cout<<"Check number "<<y.get_check_number()<<" for amount "<<y.get_check_amount()<<endl;
+    if ( !uncashed_check_vector.empty() ) {
+        cout<<"The uncashed checks are: "<<endl;
+        for (auto y: uncashed_check_vector) {
+            cout<<"Check number "<<y.get_check_number()<<" for amount "<<setprecision(2)<<fixed<<y.get_check_amount()<<endl;
+        }
     }
 }
 
