@@ -77,6 +77,7 @@ class Check {
         
 };
 
+bool compareChecksByNumber(Check check1, Check check2);
 
 int main() {
     vector<Check> uncashed_check_vector, cashed_check_vector;
@@ -129,8 +130,8 @@ int main() {
         }
     }
 
-    sort(cashed_check_vector.begin(), cashed_check_vector.end());
-    sort(uncashed_check_vector.begin(), uncashed_check_vector.end());
+    sort(cashed_check_vector.begin(), cashed_check_vector.end(), compareChecksByNumber);
+    sort(uncashed_check_vector.begin(), uncashed_check_vector.end(), compareChecksByNumber);
 
     for (Check check: cashed_check_vector) {
         sum_cashed_checks = sum_cashed_checks + check.get_check_amount();
@@ -144,13 +145,17 @@ int main() {
     cout<<"The usable balance is "<<new_balance - sum_cashed_checks - sum_uncashed_checks<<"."<<endl;
     
     cout<<"The cashed checks are: "<<endl;
-    for (Check check: cashed_check_vector) {
-        cout<<"Check number "<<check.get_check_number()<<endl;
+    for (auto x: cashed_check_vector) {
+        cout<<"Check number "<<x.get_check_number()<<endl;
     }
     cout<<"The uncashed checks are: "<<endl;
-    for (Check check: uncashed_check_vector) {
-        cout<<"Check number "<<check.get_check_number()<<endl;
+    for (auto y: uncashed_check_vector) {
+        cout<<"Check number "<<y.get_check_number()<<endl;
     }
+}
+
+bool compareChecksByNumber(Check check1, Check check2) { 
+    return (check1.get_check_number()<check2.get_check_number());
 }
 
 int digit_to_int(char c) {
