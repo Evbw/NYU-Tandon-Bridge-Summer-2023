@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <list>
+#include <iomanip>
 using namespace std;
 
 template<class T>
@@ -32,7 +33,9 @@ class Diner {
 };
 
 ostream& operator<<(ostream& outs, const Diner& diner) {
-    outs<<diner.getName()<<" has paid $"<<diner.getAmountPaid()<<"."<<endl;
+    outs.setf(ios::fixed);
+    outs.setf(ios::showpoint);
+    outs<<diner.getName()<<" has paid $"<<setprecision(2)<<diner.getAmountPaid()<<"."<<endl;
     return outs;
 }
 
@@ -164,12 +167,14 @@ int main() {
     openInputFile(inFile);
     LList<Diner> dinerList;
     string input, name;
-    double amount;
+    double amount, total, party = 0;    
 
     while (getline(inFile, input)) {
         size_t inSpace = input.find(' ');
         if ( inSpace != string::npos ) {
             amount = stod(input.substr(0, inSpace));
+            total += amount;
+            party += 1;
             name = input.substr(inSpace + 1);
             Diner d(amount, name);
             node<Diner>* newDinerNode = new node<Diner>(d);
@@ -188,7 +193,59 @@ int main() {
         }
     }
     inFile.close();
-    dinerList.print();
+    double average = total/party;
+    
+    LList<Diner> oweList;
+    LList<Diner> owedList;
+    LList<Diner> square;
+
+    node<Diner>* currentDiner = dinerList.head;
+    while ( currentDiner != nullptr ) {
+        if ( currentDiner->val.getAmountPaid() < average ) {
+            Diner d(currentDiner->val.getAmountPaid(), currentDiner->val.getName());
+            node<Diner>* newDinerNode = new node<Diner>(d);
+            if (oweList.size == 0) {
+                oweList.head = newDinerNode;
+                oweList.tail = newDinerNode;
+                oweList.size++;
+            }
+            else {
+                oweList.addend(newDinerNode);
+            }
+        }
+        else if ( currentDiner->val.getAmountPaid() > average ) {
+            Diner d(currentDiner->val.getAmountPaid(), currentDiner->val.getName());
+            node<Diner>* newDinerNode = new node<Diner>(d);
+            if ( owedList.size == 0) {
+                owedList.head = newDinerNode;
+                owedList.tail = newDinerNode;
+                owedList.size++;
+            }
+            else {
+                owedList.addend(newDinerNode);
+            }
+        }
+        else if ( currentDiner->val.getAmountPaid() == average ) {
+            Diner d(currentDiner->val.getAmountPaid(), currentDiner->val.getName());
+            node<Diner>* newDinerNode = new node<Diner>(d);
+            if ( square.size == 0) {
+                square.head = newDinerNode;
+                square.tail = newDinerNode;
+                square.size++;
+            }
+            else {
+                square.addend(newDinerNode);
+            }
+        }
+        currentDiner = currentDiner->next;
+    }
+    cout<<setprecision(2);
+    cout<<"Diners who owe: "<<endl;
+    oweList.print();
+    cout<<"Diners who are owed: "<<endl;
+    owedList.print();
+    cout<<"Diners who are square: "<<endl;
+    square.print();
 
 return 0;    
 }
