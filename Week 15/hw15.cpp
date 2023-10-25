@@ -111,6 +111,7 @@ LList<T>::~LList() {
 }
 
 void payBack(Diner& loanShark, Diner& debtor, double groupAverage) {
+    cout<<loanShark.getName()<<" and "<<loanShark.getAmountPaid()<<endl;
     double amountOwed;
     double amountOwing;
     double amountStillOwed;
@@ -268,8 +269,15 @@ int main() {
             if(loanSharkNode->val.getAmountPaid() == average) {
                 square.addend(new node<Diner>(loanSharkNode->val));
                 owedList.removebeginning();
-                loanSharkNode = oweList.head;
+                loanSharkNode = owedList.head;
             }
+                cout<<setprecision(2);
+                cout<<"Diners who owe: "<<endl;
+                oweList.print();
+                cout<<"Diners who are owed: "<<endl;
+                owedList.print();
+                cout<<"Diners who are square: "<<endl;
+                square.print();
         }
     }
     cout<<setprecision(2);
