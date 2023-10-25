@@ -117,15 +117,19 @@ void payBack(Diner& loanShark, Diner& debtor, double groupAverage) {
     double newAmountPaid;
     double newAmountPaidBack;
     
-    amountOwing = debtor.getAmountPaid() - groupAverage;
+    amountOwing = groupAverage - debtor.getAmountPaid();
     amountOwed = loanShark.getAmountPaid() - groupAverage;
+    cout<<debtor.getName()<<" owes "<<amountOwing<<endl;
+    cout<<loanShark.getName()<<" is owed "<<amountOwed<<endl;
 
-    if( amountOwing > amountOwed ) {
+    if( amountOwed > 0.00 ) {
         amountOwing -= amountOwed;
         newAmountPaid = loanShark.getAmountPaid() - amountOwed;
         loanShark.setAmountPaid(newAmountPaid);
-        newAmountPaidBack = debtor.getAmountPaid() + amountOwing;
+        cout<<loanShark.getAmountPaid()<<endl;
+        newAmountPaidBack = groupAverage - amountOwing;
         debtor.setAmountPaid(newAmountPaidBack);
+        cout<<debtor.getAmountPaid()<<endl;
         if (loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() != groupAverage) {
             cout<<loanShark.getName()<<" is paid back! ";
             cout<<debtor.getName()<<" still owes $"<<amountOwing<<endl;
@@ -238,6 +242,35 @@ int main() {
             }
         }
         currentDiner = currentDiner->next;
+    }
+    cout<<setprecision(2);
+    cout<<"Diners who owe: "<<endl;
+    oweList.print();
+    cout<<"Diners who are owed: "<<endl;
+    owedList.print();
+    cout<<"Diners who are square: "<<endl;
+    square.print();
+
+    while ( oweList.size != 0 && owedList.size != 0 ) {
+        node<Diner>* debtorNode = oweList.head;
+        node<Diner>* loanSharkNode = owedList.head;
+
+        while ( debtorNode != nullptr && loanSharkNode != nullptr ) {
+            cout<<"Inside while loop"<<endl;
+            payBack(loanSharkNode->val, debtorNode->val, average);
+            cout<<"past the payback function"<<endl;
+            if(debtorNode->val.getAmountPaid() == average) {
+                square.addend(new node<Diner>(debtorNode->val));
+                oweList.removebeginning();
+                debtorNode = oweList.head;
+            }
+
+            if(loanSharkNode->val.getAmountPaid() == average) {
+                square.addend(new node<Diner>(loanSharkNode->val));
+                owedList.removebeginning();
+                loanSharkNode = oweList.head;
+            }
+        }
     }
     cout<<setprecision(2);
     cout<<"Diners who owe: "<<endl;
