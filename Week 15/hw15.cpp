@@ -60,10 +60,15 @@ public:
     }
     ~LList();
     void addend(node<T>* end){
-        if(this->size==0){this->head=end;}
-        this->tail->next=end;
-        end->prev=this->tail;
-        this->tail=end;
+        if(this->size==0){
+            this->head=end;
+            this->tail=end;
+        }
+        else {
+            this->tail->next=end;
+            end->prev=this->tail;
+            this->tail=end;
+        }        
         this->size++;
         
     }
@@ -186,7 +191,8 @@ int main() {
     openInputFile(inFile);
     LList<Diner> dinerList;
     string input, name;
-    double amount, total, party = 0;    
+    double amount, total, party = 0.0;
+    
     cout<<endl;
     while (getline(inFile, input)) {
         size_t inSpace = input.find(' ');
@@ -213,7 +219,9 @@ int main() {
     }
     inFile.close();
     double average = total/party;
-    
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout<<"The total ticket price is $"<<setprecision(2)<<total<<". The average ticket price is $"<<setprecision(2)<<average<<"."<<endl;
     LList<Diner> oweList;
     LList<Diner> owedList;
     LList<Diner> square;
@@ -258,7 +266,7 @@ int main() {
         }
         currentDiner = currentDiner->next;
     }
-    cout<<setprecision(2);
+    cout<<setprecision(2)<<endl;
     cout<<"Diners who owe: "<<endl;
     oweList.print();
     cout<<"Diners who are owed: "<<endl;
