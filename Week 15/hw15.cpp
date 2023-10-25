@@ -4,7 +4,10 @@
 #include <vector>
 #include <list>
 #include <iomanip>
+#include <cmath>
 using namespace std;
+
+const double NOTHING = 0.00;
 
 template<class T>
 class node {
@@ -111,46 +114,57 @@ LList<T>::~LList() {
 }
 
 void payBack(Diner& loanShark, Diner& debtor, double groupAverage) {
-    cout<<loanShark.getName()<<" and "<<loanShark.getAmountPaid()<<endl;
     double amountOwed;
     double amountOwing;
     double amountStillOwed;
     double newAmountPaid;
     double newAmountPaidBack;
     
-    amountOwing = groupAverage - debtor.getAmountPaid();
-    amountOwed = loanShark.getAmountPaid() - groupAverage;
-    cout<<debtor.getName()<<" owes "<<amountOwing<<endl;
-    cout<<loanShark.getName()<<" is owed "<<amountOwed<<endl;
-
-    if( amountOwed > 0.00 ) {
-        amountOwing -= amountOwed;
-        newAmountPaid = loanShark.getAmountPaid() - amountOwed;
-        loanShark.setAmountPaid(newAmountPaid);
-        cout<<loanShark.getAmountPaid()<<endl;
-        newAmountPaidBack = groupAverage - amountOwing;
-        debtor.setAmountPaid(newAmountPaidBack);
-        cout<<debtor.getAmountPaid()<<endl;
-        if (loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() != groupAverage) {
-            cout<<loanShark.getName()<<" is paid back! ";
-            cout<<debtor.getName()<<" still owes $"<<amountOwing<<endl;
-        }
-        else if (loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() == groupAverage) {
-            cout<<loanShark.getName()<<" is paid back! ";
-            cout<<debtor.getName()<<" is paid up!"<<endl;
-        }
+    if (debtor.getAmountPaid() > 0) {
+        amountOwing = groupAverage - debtor.getAmountPaid();
     }
     else {
-        newAmountPaid = loanShark.getAmountPaid() - amountOwing;
-        loanShark.setAmountPaid(newAmountPaid);
-        newAmountPaidBack = debtor.getAmountPaid() + amountOwing;
-        debtor.setAmountPaid(newAmountPaidBack);
-        amountStillOwed = loanShark.getAmountPaid() - groupAverage;
-        if (debtor.getAmountPaid() == groupAverage && loanShark.getAmountPaid() != groupAverage) {
+        amountOwing = groupAverage;
+    }
+    amountOwed = loanShark.getAmountPaid() - groupAverage;
+    cout<<debtor.getName()<<" owes $"<<amountOwing<<endl;
+    cout<<loanShark.getName()<<" is owed $"<<amountOwed<<endl;
+
+    if( amountOwed > NOTHING ) {
+        if ( amountOwed >= amountOwing ) {
+            newAmountPaid = loanShark.getAmountPaid() - amountOwing;
+            loanShark.setAmountPaid(newAmountPaid);
+            amountStillOwed = loanShark.getAmountPaid() - groupAverage;
+            debtor.setAmountPaid(groupAverage);
+            cout<<debtor.getName()<<" has paid "<<loanShark.getName()<<"."<<endl;
+        }
+        else if ( amountOwing > amountOwed ) {
+            amountOwing -= amountOwed;
+            newAmountPaid = loanShark.getAmountPaid() - amountOwed;
+            loanShark.setAmountPaid(newAmountPaid);
+            newAmountPaidBack = groupAverage - amountOwing;
+            debtor.setAmountPaid(newAmountPaidBack);    
+            cout<<debtor.getName()<<" has paid "<<loanShark.getName()<<"."<<endl;       
+        }
+        
+        if ((loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() == groupAverage) || ((loanShark.getAmountPaid() - groupAverage) < fabs(.009) && (debtor.getAmountPaid() - groupAverage) < fabs(.009)) ) {
+            cout<<loanShark.getName()<<" is paid back! ";
+            cout<<debtor.getName()<<" is paid up!"<<endl;
+            cout<<endl;
+        }
+        else if (loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() != groupAverage) {
+            cout<<loanShark.getName()<<" is paid back! ";
+            cout<<debtor.getName()<<" still owes $"<<amountOwing<<endl;
+            cout<<endl;
+        }
+        else if (debtor.getAmountPaid() == groupAverage && loanShark.getAmountPaid() != groupAverage) {
             cout<<debtor.getName()<<" is paid up! ";
             cout<<loanShark.getName()<<" is still owed $"<<amountStillOwed<<endl;
+            cout<<endl;
         }
+        
     }
+    
 }
 
 void openInputFile(ifstream& inFile) {
@@ -173,7 +187,7 @@ int main() {
     LList<Diner> dinerList;
     string input, name;
     double amount, total, party = 0;    
-
+    cout<<endl;
     while (getline(inFile, input)) {
         size_t inSpace = input.find(' ');
         if ( inSpace != string::npos ) {
@@ -257,9 +271,8 @@ int main() {
         node<Diner>* loanSharkNode = owedList.head;
 
         while ( debtorNode != nullptr && loanSharkNode != nullptr ) {
-            cout<<"Inside while loop"<<endl;
             payBack(loanSharkNode->val, debtorNode->val, average);
-            cout<<"past the payback function"<<endl;
+            
             if(debtorNode->val.getAmountPaid() == average) {
                 square.addend(new node<Diner>(debtorNode->val));
                 oweList.removebeginning();
@@ -271,15 +284,14 @@ int main() {
                 owedList.removebeginning();
                 loanSharkNode = owedList.head;
             }
-                cout<<setprecision(2);
-                cout<<"Diners who owe: "<<endl;
-                oweList.print();
-                cout<<"Diners who are owed: "<<endl;
-                owedList.print();
-                cout<<"Diners who are square: "<<endl;
-                square.print();
+        }
+        if ( oweList.size == 1 && owedList.size == 0 ) {
+            square.addend(new node<Diner>(debtorNode->val));
+            oweList.removebeginning();
+            debtorNode = oweList.head;
         }
     }
+    
     cout<<setprecision(2);
     cout<<"Diners who owe: "<<endl;
     oweList.print();
