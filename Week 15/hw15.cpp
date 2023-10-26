@@ -8,6 +8,7 @@
 using namespace std;
 
 const double NOTHING = 0.00;
+const double UNDERCENT = 0.009;
 
 template<class T>
 class node {
@@ -152,19 +153,19 @@ void payBack(Diner& loanShark, Diner& debtor, double groupAverage) {
             cout<<debtor.getName()<<" has paid "<<loanShark.getName()<<"."<<endl;       
         }
         
-        if ((loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() == groupAverage) || ((loanShark.getAmountPaid() - groupAverage) < fabs(.009) && (debtor.getAmountPaid() - groupAverage) < fabs(.009)) ) {
+        if ((loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() == groupAverage) || (fabs(loanShark.getAmountPaid() - groupAverage) < UNDERCENT && fabs(debtor.getAmountPaid() - groupAverage) < UNDERCENT) ) {
             cout<<loanShark.getName()<<" is paid back! ";
             cout<<debtor.getName()<<" is paid up!"<<endl;
             cout<<endl;
         }
         else if (loanShark.getAmountPaid() == groupAverage && debtor.getAmountPaid() != groupAverage) {
             cout<<loanShark.getName()<<" is paid back! ";
-            cout<<debtor.getName()<<" still owes $"<<amountOwing<<endl;
+            cout<<debtor.getName()<<" still owes $"<<amountOwing<<"."<<endl;
             cout<<endl;
         }
         else if (debtor.getAmountPaid() == groupAverage && loanShark.getAmountPaid() != groupAverage) {
             cout<<debtor.getName()<<" is paid up! ";
-            cout<<loanShark.getName()<<" is still owed $"<<amountStillOwed<<endl;
+            cout<<loanShark.getName()<<" is still owed $"<<amountStillOwed<<"."<<endl;
             cout<<endl;
         }
         
