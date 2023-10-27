@@ -27,13 +27,11 @@ bool scale(ifstream& inFile) {
             char c = input[i];
             if ( c == 'b' && input.substr(i, 5) == "begin" ) {
                 symbol.push('B');
-                cout<<"pushed begin"<<endl;
                 i += 4;
             }
             if ( c == 'e' && input.substr(i, 3) == "end" ) {
                 if ( !symbol.empty() && symbol.top() == 'B') {
                     symbol.pop();
-                    cout<<"popped begin"<<endl;
                     i += 2;
                 }
                 else {
@@ -42,25 +40,17 @@ bool scale(ifstream& inFile) {
             }
             switch (c) {
                 case '(':
-                    cout<<"push ("<<endl;
                     symbol.push('(');
-                    cout<<"symbol size after ( push "<<symbol.size()<<endl;
                     break;
                 case '[':
-                    cout<<"push ["<<endl;
                     symbol.push('[');
-                    cout<<"symbol size after [ push "<<symbol.size()<<endl;
                     break;
                 case '{':
-                    cout<<"push {"<<endl;
                     symbol.push('{');
-                    cout<<"symbol size after { push "<<symbol.size()<<endl;
                     break;
                 case '}':
                     if ( !symbol.empty() && symbol.top() == '{') {
                         symbol.pop();
-                        cout<<"pop ("<<endl;
-                        cout<<"symbol size after { pop "<<symbol.size()<<endl;
                     }
                     else {
                         return false;
@@ -69,8 +59,6 @@ bool scale(ifstream& inFile) {
                 case ']':
                     if ( !symbol.empty() && symbol.top() == '[') {
                         symbol.pop();
-                        cout<<"pop ["<<endl;
-                        cout<<"symbol size after [ pop "<<symbol.size()<<endl;
                     }
                     else {
                         return false;
@@ -79,8 +67,6 @@ bool scale(ifstream& inFile) {
                 case ')':
                     if ( !symbol.empty() && symbol.top() == '(') {
                         symbol.pop();
-                        cout<<"pop ("<<endl;
-                        cout<<"symbol size after ( pop "<<symbol.size()<<endl;
                     }
                     else {
                         return false;
@@ -97,10 +83,10 @@ int main() {
     openInputFile(inFile);
 
     if(scale(inFile)) {
-        cout<<"You're cool"<<endl;
+        cout<<"The file is balanced!"<<endl;
     }
     else {
-        cout<<"Beans"<<endl;
+        cout<<"Did you ever hear the Tragedy of Darth Plagueis the Wise? - No. - I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself."<<endl;
     }
     return 0;
 }
