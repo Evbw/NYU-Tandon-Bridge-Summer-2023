@@ -24,11 +24,11 @@ class VectorQueue {
 };
 
 int main() {
-    VectorQueue v;
+    VectorQueue vq;
 
     for ( int i = 0; i < 10; i++ ) {
-        v.vectorPush(i);
-        cout<<v<<" ";
+        vq.vectorPush(i);
+        cout<<vq<<" ";
     }
 
     return 0;
