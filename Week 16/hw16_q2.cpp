@@ -32,9 +32,8 @@ class VectorQueue {
             if ( index < size() ) {
                 return vQueue[start + index];
             }
-            if ( index < start || index > size() ) {
-                cout<<"Out of range"<<endl;
-            }
+            cout<<"Out of range"<<endl;
+            return -1;
         }
 
         friend ostream& operator<<( ostream& outs, const VectorQueue& vq );
