@@ -131,9 +131,12 @@ void RBT<T>::singleCR(RBTNode<T> *&point) {
     RBTNode<T> *grandparent = point;
     RBTNode<T> *parent = point->left;
     // TODO: ADD ROTATION CODE HERE
-    grandparent->left = parent->right;
     
-    if ( parent->right != nullptr ) {
+    if ( parent != nullptr ) {
+        grandparent->left = parent->right;
+    }
+    
+    if ( parent != nullptr && parent->right != nullptr ) {
         parent->right->parent = grandparent;
     }
 
@@ -150,11 +153,10 @@ void RBT<T>::singleCR(RBTNode<T> *&point) {
         grandparent->parent->right = parent;
     }
 
+    parent->right = grandparent;
     grandparent->parent = parent;
 
 }
-
-
 
 template <class T>
 void RBT<T>::singleCCR(RBTNode<T> *&point) {
@@ -180,6 +182,7 @@ void RBT<T>::singleCCR(RBTNode<T> *&point) {
         grandparent->parent->right = parent;
     }
 
+    parent->left = grandparent;
     grandparent->parent = parent;
 }
 
@@ -197,7 +200,14 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
             RBTNode<T> *uncle = nullptr;
 
             while ( (point != root) && ( point->color != BLACK ) && ( getColor(point->parent) == RED ) ) {
-                grandparent = point->parent->parent;
+                
+                if ( point->parent->parent != nullptr ) {
+                    grandparent = point->parent->parent;
+                }
+
+                if (!grandparent) {
+                    break;
+                }
 
                 if ( point->parent == grandparent->left ) {
                     uncle = grandparent->right;
@@ -214,6 +224,10 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
                             point = point->parent;
                             singleCR(point);
                         }
+
+                        point->parent->color = BLACK;
+                        grandparent->color = RED;
+                        singleCCR(grandparent);
 
                     }
                     
@@ -234,9 +248,15 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
                             singleCCR(point);
                         }
 
+                        point->parent->color = BLACK;
+                        grandparent->color = RED;
+                        singleCR(grandparent);
+
                     }
                 }
             }
+
+            root->color = BLACK;
         }
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
         insert(toInsert, point->left, point);
