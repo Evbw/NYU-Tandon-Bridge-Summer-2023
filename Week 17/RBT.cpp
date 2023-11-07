@@ -109,6 +109,7 @@ public:
 
     void insert(const T &);
     void insert(const T &, RBTNode<T> *&point, RBTNode<T> *parent);
+    void fixInsert(RBTNode<T> *point);
     void prettyPrint() const { root->prettyPrint(0); }
 
     int height() const { return root->height(); }
@@ -200,74 +201,35 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
 
         RBTNode<T> *curr_node = point; // curr_node will be set appropriately when walking up the tree
         // TODO: ADD RBT RULES HERE
-        if ( point != root && getColor(point->parent) == RED ) {
-            RBTNode<T> *grandparent = nullptr;
-            RBTNode<T> *uncle = nullptr;
-
-            while ( (point != root) && ( point->color != BLACK ) && ( getColor(point->parent) == RED ) ) {
-                
-                if ( point->parent->parent != nullptr ) {
-                    grandparent = point->parent->parent;
-                }
-
-                if (!grandparent) {
-                    break;
-                }
-
-                if ( point->parent == grandparent->left ) {
-                    uncle = grandparent->right;
-
-                    if ( getColor(uncle) == RED ) {
-                        grandparent->color = RED;
-                        point->parent->color = BLACK;
-                        uncle->color = BLACK;
-                        point = grandparent;
-                    }
-                    else { 
-                    
-                        if ( point == point->parent->right ) {
-                            point = point->parent;
-                            singleCR(point);
-                        }
-
-                        point->parent->color = BLACK;
-                        grandparent->color = RED;
-                        singleCCR(grandparent);
-
-                    }
-                    
-                }
-                else {
-                    uncle = grandparent->left;
-
-                    if ( getColor(uncle) == RED ) {
-                        grandparent->color = RED;
-                        point->parent->color = BLACK;
-                        uncle->color = BLACK;
-                        point = grandparent;
-                    }
-                    else { 
-                    
-                        if ( point == point->parent->left ) {
-                            point = point->parent;
-                            singleCCR(point);
-                        }
-
-                        point->parent->color = BLACK;
-                        grandparent->color = RED;
-                        singleCR(grandparent);
-
-                    }
-                }
-            }
-            
-            root->color = BLACK;
-        }
+        point->color = RED;
+        fixInsert(point);
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
         insert(toInsert, point->left, point);
     } else { // recurse down the tree to right to find correct leaf location
         insert(toInsert, point->right, point);
     }
+}
+
+template <class T>
+void RBT<T>::fixInsert(RBTNode<T> *point) {
+    RBTNode<T> *parent = nullptr;
+    RBTNode<T> *grandparent = nullptr;
+
+    while ( (point != root) && ( getColor(point) != BLACK ) && ( getColor(point->parent) == RED ) ) {
+        parent = point->parent;
+        grandparent = parent->parent;
+        RBTNode<T> *uncle = nullptr;
+
+        if ( parent == grandparent->left ) {
+             uncle = grandparent->right;
+        }
+        else {
+            uncle = grandparent->left;
+
+        }
+    }
+    
+    root->color = BLACK;
 }
 
 template <class T>
