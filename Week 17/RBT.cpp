@@ -136,8 +136,23 @@ void RBT<T>::singleCR(RBTNode<T> *&point) {
     if ( parent->right != nullptr ) {
         parent->right->parent = grandparent;
     }
-    
+
+    parent->right = grandparent;
+    parent->parent = grandparent->parent;
+
+    if ( grandparent->parent == nullptr ) {
+        root = parent;
+    }
+    else if (grandparent->parent->left == grandparent) {
+        grandparent->parent->left = parent;
+    }
+    else {
+        grandparent->parent->right = parent;
+    }
+
 }
+
+
 
 template <class T>
 void RBT<T>::singleCCR(RBTNode<T> *&point) {
@@ -149,7 +164,19 @@ void RBT<T>::singleCCR(RBTNode<T> *&point) {
     if ( parent->left != nullptr ) {
         parent->left->parent = grandparent;
     }
-    
+
+    parent->left = grandparent;
+    parent->parent = grandparent->parent;
+
+   if ( grandparent->parent == nullptr ) {
+        root = parent;
+    }
+    else if (grandparent->parent->left == grandparent) {
+        grandparent->parent->left = parent;
+    }
+    else {
+        grandparent->parent->right = parent;
+    }
 }
 
 template <class T>
@@ -161,6 +188,9 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
 
         RBTNode<T> *curr_node = point; // curr_node will be set appropriately when walking up the tree
         // TODO: ADD RBT RULES HERE
+        if ( getColor(point->parent->left) == RED && point->parent->left != point ) {
+
+        }
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
         insert(toInsert, point->left, point);
     } else { // recurse down the tree to right to find correct leaf location
