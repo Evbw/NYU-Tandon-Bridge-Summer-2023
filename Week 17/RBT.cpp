@@ -196,8 +196,15 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
             RBTNode<T> *grandparent = nullptr;
             RBTNode<T> *uncle = nullptr;
 
-            while ( (point != root) && ( point->color != BLACK ) && ( getCOlor(point->parent) == RED ) ) {
+            while ( (point != root) && ( point->color != BLACK ) && ( getColor(point->parent) == RED ) ) {
                 grandparent = point->parent->parent;
+
+                if ( point->parent == grandparent->left ) {
+                    uncle = grandparent->right;
+                }
+                else {
+                    uncle = grandparent->left;
+                }
             }
         }
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
