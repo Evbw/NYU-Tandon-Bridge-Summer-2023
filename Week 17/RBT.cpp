@@ -132,32 +132,30 @@ void RBT<T>::singleCR(RBTNode<T> *&point) {
     RBTNode<T> *parent = point->left;
     // TODO: ADD ROTATION CODE HERE
     
-    if ( parent != nullptr ) {
-        grandparent->left = parent->right;
-        if ( parent->right != nullptr ) {
+    grandparent->left = parent->right;
+
+    if ( parent->right != nullptr ) {
             parent->right->parent = grandparent;
+    }
+    parent->right = grandparent;
+    
+    if ( grandparent != root ) {
+        if ( grandparent->parent->left == grandparent ) {
+            grandparent->parent->left = parent;
+        }
+        else {
+            grandparent->parent->right = parent;
         }
     }
-    
-    if ( parent != nullptr ) {
-        parent->parent = grandparent->parent;
-    }
 
-    if ( grandparent->parent == nullptr ) {
+    parent->parent = grandparent->parent;
+    grandparent->parent = parent;
+
+    if ( grandparent == root ) {
         root = parent;
     }
-    else if (grandparent->parent->left == grandparent) {
-        grandparent->parent->left = parent;
-    }
-    else {
-        grandparent->parent->right = parent;
-    }
 
-    if ( parent != nullptr ) {
-        parent->right = grandparent;
-    }
-
-    grandparent->parent = parent;
+    point = parent;
 
 }
 
@@ -167,32 +165,30 @@ void RBT<T>::singleCCR(RBTNode<T> *&point) {
     RBTNode<T> *parent = point->right;
     // TODO: ADD ROTATION CODE HERE
 
-    if ( parent != nullptr ) {
-        grandparent->right = parent->left;
-        if ( parent->left != nullptr ) {
+    grandparent->right = parent->left;
+
+    if ( parent->left != nullptr ) {
             parent->left->parent = grandparent;
+    }
+    parent->left = grandparent;
+    
+    if ( grandparent != root ) {
+        if ( grandparent->parent->left == grandparent ) {
+            grandparent->parent->left = parent;
+        }
+        else {
+            grandparent->parent->right = parent;
         }
     }
-    
-    if ( parent != nullptr ) {
-        parent->parent = grandparent->parent;
-    }
 
-    if ( grandparent->parent == nullptr ) {
+    parent->parent = grandparent->parent;
+    grandparent->parent = parent;
+
+    if ( grandparent == root ) {
         root = parent;
     }
-    else if (grandparent->parent->left == grandparent) {
-        grandparent->parent->left = parent;
-    }
-    else {
-        grandparent->parent->right = parent;
-    }
 
-    if ( parent != nullptr ) {
-        parent->left = grandparent;
-    }
-
-    grandparent->parent = parent;
+    point = parent;
 }
 
 template <class T>
@@ -264,7 +260,7 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
                     }
                 }
             }
-
+            
             root->color = BLACK;
         }
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
