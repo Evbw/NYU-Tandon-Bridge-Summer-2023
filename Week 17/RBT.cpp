@@ -210,7 +210,7 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
                     }
                     else { 
                     
-                        if ( point == point->grandparent->right ) {
+                        if ( point == point->parent->right ) {
                             point = point->parent;
                             singleCR(point);
                         }
@@ -229,7 +229,7 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
                     }
                     else { 
                     
-                        if ( point == point->grandparent->left ) {
+                        if ( point == point->parent->left ) {
                             point = point->parent;
                             singleCCR(point);
                         }
