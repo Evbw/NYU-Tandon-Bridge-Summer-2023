@@ -131,6 +131,12 @@ void RBT<T>::singleCR(RBTNode<T> *&point) {
     RBTNode<T> *grandparent = point;
     RBTNode<T> *parent = point->left;
     // TODO: ADD ROTATION CODE HERE
+    grandparent->left = parent->right;
+    
+    if ( parent->right != nullptr ) {
+        parent->right->parent = grandparent;
+    }
+    
 }
 
 template <class T>
@@ -138,6 +144,12 @@ void RBT<T>::singleCCR(RBTNode<T> *&point) {
     RBTNode<T> *grandparent = point;
     RBTNode<T> *parent = point->right;
     // TODO: ADD ROTATION CODE HERE
+    grandparent->right = parent->left;
+
+    if ( parent->left != nullptr ) {
+        parent->left->parent = grandparent;
+    }
+    
 }
 
 template <class T>
