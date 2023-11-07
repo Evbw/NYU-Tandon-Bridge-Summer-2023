@@ -201,9 +201,23 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
 
                 if ( point->parent == grandparent->left ) {
                     uncle = grandparent->right;
+
+                    if ( getColor(uncle) == RED ) {
+                        grandparent->color = RED;
+                        point->parent->color = BLACK;
+                        uncle->color = BLACK;
+                        point = grandparent;
+                    }
                 }
                 else {
                     uncle = grandparent->left;
+
+                    if ( getColor(uncle) == RED ) {
+                        grandparent->color = RED;
+                        point->parent->color = BLACK;
+                        uncle->color = BLACK;
+                        point = grandparent;
+                    }
                 }
             }
         }
