@@ -222,9 +222,45 @@ void RBT<T>::fixInsert(RBTNode<T> *point) {
 
         if ( parent == grandparent->left ) {
              uncle = grandparent->right;
+
+             if ( uncle && getColor(uncle) == RED ) {
+                grandparent->color = RED;
+                parent->color = BLACK;
+                uncle->color = BLACK;
+                point = grandparent;
+            }
+            else {
+                if ( point == parent->right ) {
+                    singleCR(parent);
+                    point = parent;
+                    parent = point->parent;
+                }
+
+                singleCCR(grandparent);
+                swap(parent->color, grandparent->color);
+                point = parent;
+            }
         }
         else {
             uncle = grandparent->left;
+
+            if ( uncle && getColor(uncle) == RED ) {
+                grandparent->color = RED;
+                parent->color = BLACK;
+                uncle->color = BLACK;
+                point = grandparent;
+            }
+            else {
+                if ( point == parent->left ) {
+                    singleCCR(parent);
+                    point = parent;
+                    parent = point->parent;
+                }
+
+                singleCR(grandparent);
+                swap(parent->color, grandparent->color);
+                point = parent;
+            }
 
         }
     }
