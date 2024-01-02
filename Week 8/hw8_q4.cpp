@@ -1,7 +1,10 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 //Initialize PIN as a constant array and its size as a constant int
 const int PIN[5] = {1, 2, 3, 4, 5};
+const int PIN_SIZE = 5;
 //Initialize functions
 void encryptedPIN (int arr[], int userInput, int arrSize);
 //Precondition: The array is filled with valid values

@@ -53,26 +53,19 @@ void reverseArray(int arr[], int arrSize) {
     //Swap each element of the array up to the middle value
     for ( i = 0 ; i < arrSize/2 ; i++ ) {
         temp = arr[i];
-        arr[i] = arr[arrSize - ( 1 + i)];
-        arr[arrSize - ( 1 + i)] = temp;
+        arr[i] = arr[arrSize - ( 1 + i )];
+        arr[arrSize - ( 1 + i )] = temp;
     }
 }
 
 void removeOdd(int arr[], int& arrSize) {
-    //Initialize variables
-    int temp, i;
-    //Begin loop to identify odd values, move them to the end, and reduce the size of the array
-    for ( i = 0 ; i < arrSize ; i++ ) {
-        if ( arr[arrSize - 1] % 2 == 1 ) {
-            arrSize--;
-        }
-        if ( arr[i] % 2 == 1  ) {            
-            temp = arr[i];
-            arr[i] = arr[arrSize - 1];
-            arr[arrSize - 1] = temp;
-            arrSize--;
+    int nextEven = 0;
+    for (int i = 0; i < arrSize; i++) {
+        if (arr[i] % 2 == 0) {
+            arr[nextEven++] = arr[i];
         }
     }
+    arrSize = nextEven;
 }
 
 void splitParity(int arr[], int arrSize) {
