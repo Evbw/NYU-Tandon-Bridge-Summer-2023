@@ -16,6 +16,16 @@ int main() {
     main2();
 }
 
+void resizeArray(int*& arr, int& capacity) {
+    capacity *= 2;
+    int* newArr = new int[capacity];
+    for (int i = 0; i < capacity / 2; i++) {
+        newArr[i] = arr[i];
+    }
+    delete[] arr;
+    arr = newArr;
+}
+
 int main1() {
     //Declare variables for user input
     int n, searchN;
@@ -24,20 +34,24 @@ int main1() {
     int* searchArr = new int[ARRAYSIZE]();
     //Declare an integer for the array size
     int newArraySize = 1;
+    int capacity = ARRAYSIZE;
     //Request user input
     cout<<"Please enter a sequence of positive integers, each in a separate line."<<endl;
-    //I'm keeping the typo because of the requirements of the assignment
-    cout<<"End you input by typing -1."<<endl;
+    
+    cout<<"End your input by typing -1."<<endl;
     cin>>n;
     //Declare variable i for while loop iteration
-    int i = 0;
-    while ( n > -1 ) {
-        //Assign input to elements of an array
-        arr[i] = n;
-        cin>>n;
-        //Iterate counter and newArraySize
-        i++;
-        newArraySize++;       
+    
+    while (cin >> n && n != -1) {
+        // Check if the array is full and resize if necessary
+        if (newArraySize == capacity) {
+            resizeArray(arr, capacity);
+            resizeArray(searchArr, capacity);
+        }
+        
+        // Assign input to elements of an array
+        arr[newArraySize] = n;
+        newArraySize++;
     }
     //Request a variable to search for inside the array
     cout<<"Please enter a number you want to search."<<endl;
@@ -52,7 +66,7 @@ int main1() {
         }
     }
     //Begin output. If the number doesn't appear in the list, note it
-    if ( searchArr[0] == false ) {
+    if ( j == 0 ) {
         cout<<searchN<<" does not appear in the list of numbers."<<endl;
         return 0;
     }
@@ -69,6 +83,10 @@ int main1() {
         }
     }
     cout<<endl;
+
+    delete[] arr;
+    delete[] searchArr;
+    
     return 0;
 }
 
@@ -80,7 +98,7 @@ int main2() {
     vector<int> searchV;
     //Request user input
     cout<<"Please enter a sequence of positive integers, each in a separate line."<<endl;
-    cout<<"End you input by typing -1."<<endl;
+    cout<<"End your input by typing -1."<<endl;
     cin>>n;
     //Being loop to add elements to the vector
     while ( n > -1 ) {

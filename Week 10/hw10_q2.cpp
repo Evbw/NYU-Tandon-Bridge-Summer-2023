@@ -8,24 +8,30 @@ bool nonNegative(int arr[], int arrSize);
 //Precondition: An array filled with valid, non-negative integers of size n
 //Postcondition: Will return false if their exists a non-negative number
 void printArray(int* arr, int arrSize);
+//Precondition: An array filled with valid, non-negative integers of size n
+//Postcondition: Will print out all elements of the array
 
+//Declare a size for the array size
 const int FIRSTARRAYSIZE = 6;
 
 int main() {
+    //Declare and array of FIRSTARRAYSIZE
     int arr[FIRSTARRAYSIZE] = {3, 1, 3, 0, 6, 4};
+    //Declare an integer for the size of the array that can be changed.
     int newArrSize = 0;
+    //Declare a pointer array of the same size
     int* arr2 = new int[FIRSTARRAYSIZE];
-
+    //Check if there are negative numbers in the array
     if ( !nonNegative(arr, FIRSTARRAYSIZE) ) {
         cout<<"There is a negative number in the array"<<endl;
         return 0;
     }
-
+    //Assign the pointer array to an array of the missing numbers
     arr2 = findMissing(arr, FIRSTARRAYSIZE, newArrSize);
-
+    //Print output
     cout<<"There were "<<newArrSize<<" missing numbers in the sequence and they were: ";
-
     printArray(arr2, newArrSize);
+    //Delete the temporary array
     delete [] arr2;
     arr2 = nullptr;
     return 0;
