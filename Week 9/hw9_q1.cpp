@@ -21,7 +21,7 @@ void wordSplitter (std::string str) {
     int wordcount = 1;    
     //Begin loop to isolate individual letters
     for ( int i = 0 ; i <= str.length() ; i++ ) {
-        //Check if the element of the string is a space. If so, increase wordcount        
+        //Check if the element of the string is a space. If so, increase wordcount
         if ( str[i] == ' ' ) {
             wordcount++;
         }
@@ -48,5 +48,4 @@ void wordSplitter (std::string str) {
             std::cout<<letterCount[i]<<'\t'<<static_cast<char>(i + 'a')<<std::endl;
         }
     }
-    
 }
