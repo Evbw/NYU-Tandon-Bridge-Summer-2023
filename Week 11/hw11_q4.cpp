@@ -8,11 +8,15 @@ int jumpIt (int arr[], int arrSize);
 //Declare constants for array sizes
 const int ARRSIZE = 6;
 const int ARRSIZE2 = 9;
+const int ARRSIZE3 = 10;
+const int ARRSIZE4 = 8;
 
 int main() {
     //Declare arrays
     int arr[ARRSIZE] = {0, 3, 80, 6, 57, 10};
     int arr2[ARRSIZE2] = {0, 3, 80, 100, 100, 100, 6, 57, 10};
+    int arr3[ARRSIZE3] = {0, 12, 16, 12, 5, 4, 15, 2, 10, 15};
+    int arr4[ARRSIZE4] = {0, 56, 55, 54, 53, 52, 51, 50} ;
     //Declare a variable to handle the sum of the function
     int n;
     //Call the function with two array sizes and print the result
@@ -20,6 +24,10 @@ int main() {
     cout<<"The lowest total cost for the first set is "<<n<<endl;
     n = jumpIt (arr2, ARRSIZE2);
     cout<<"The lowest total cost for the second set is "<<n<<endl;
+    n = jumpIt (arr3, ARRSIZE3);
+    cout<<"The lowest total cost for the third set is "<<n<<endl;
+    n = jumpIt (arr4, ARRSIZE4);
+    cout<<"The lowest total cost for the fourth set is "<<n<<endl;
 }
 
 int jumpIt (int arr[], int arrSize) {
