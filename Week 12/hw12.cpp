@@ -104,12 +104,47 @@ int main() {
     new_balance = current_balance;
     //Request and accept input for the bank balance. Set the new balance to the current balance so adding deposits and deducting checks will be accurate
 
-    cout<<"Please enter any deposits you may have. Enter 0 when you have no more deposits: "<<endl;
-    cin>>amount;
-    //Request input for the deposits and add them in until the escape clause has been triggered
-    while(amount > 0) {
-        new_balance += amount;
-        cin>>amount;
+     cout << "Please enter your checks (check number, amount, cashed status). End with 0 0 N:" << endl;
+    while (true) {
+        cin >> check_num >> amount >> cashed_check_char;
+
+        // Check for termination condition
+        if ((check_num == 0 && amount == 0 && toupper(cashed_check_char) == 'N')) {
+            break;
+        }
+
+        // Convert char to boolean for cashed status
+        cashed_check = (toupper(cashed_check_char) == 'Y');
+
+        Money amount_of_check(amount);
+
+        // Check for duplicate check number
+        bool isDuplicate = false;
+        for (const Check& c : uncashed_check_vector) {
+            if (c.get_check_number() == check_num) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        for (const Check& c : cashed_check_vector) {
+            if (c.get_check_number() == check_num) {
+                isDuplicate = true;
+                break;
+            }
+        }
+
+        if (isDuplicate) {
+            cout << "Duplicate check number entered. Please re-enter check details." << endl;
+            continue;
+        }
+
+        // Create and add the check to the appropriate vector
+        Check new_check(check_num, amount_of_check, cashed_check);
+        if (cashed_check) {
+            cashed_check_vector.push_back(new_check);
+        } else {
+            uncashed_check_vector.push_back(new_check);
+        }
     }
 
     cout<<"With the added deposits, the new balance is $"<<new_balance<<"."<<endl;
