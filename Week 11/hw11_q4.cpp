@@ -5,7 +5,7 @@ int jumpIt (int arr[], int arrSize);
 //Precondition: arr is filled with valid integers of arrSize
 //Postcondition: The sums of the shortest path, moving forward 1 or 2 steps from index 0, will be returned
 
-//Declare constants for array sizes
+//Declare constants for array sizes including graded test cases
 const int ARRSIZE = 6;
 const int ARRSIZE2 = 9;
 const int ARRSIZE3 = 10;
