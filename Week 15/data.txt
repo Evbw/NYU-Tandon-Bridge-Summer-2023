@@ -1,0 +1,47 @@
+76.8 Jason J. Jones
+89 Natalie Johnson
+11 Dalton Smith
+44.2 Sheryl Carter
+0 John Martin
+54.3 Alice A. Anderson
+23.9 Bob B. Barker
+34 Michael Thompson
+92.5 Carol C. Clarke
+67.8 Derek D. Drake
+19.1 Elizabeth E. Elliot
+45.6 Frank F. Foster
+20 Gary G. Griffin
+11.1 Hannah H. Hall
+52.9 Ian I. Isaac
+78.3 Jenna J. Jackson
+33.4 Kevin K. King
+12 Laura L. Lewis
+88.2 Mike M. Miller
+2.9 Nancy N. Nolan
+14.5 Olivia O. O'Brien
+90.1 Peter P. Parker
+11.5 Quinn Q. Queen
+13.2 Rachel R. Raymond
+15.3 Steve S. Scott
+42.6 Tina T. Turner
+28.9 Ursula U. Underwood
+79.1 Victor V. Vance
+4.9 Wendy W. Warner
+9.8 Xavier X. Xander
+91.1 Yasmine Y. Young
+10.5 Zachary Z. Zimmerman
+36.9 Anna Smith
+70.2 Barry Jones
+59.3 Catherine Clark
+18.6 Doug Douglas
+32.9 Emma Edwards
+72.1 Felix Franklin
+43.5 Grace Graham
+40 Hector Henderson
+12.9 Iris Ives
+51.4 Jack Johnson
+26.5 Karen Knight
+17.2 Lewis Leonard
+47.9 Monica Montgomery
+80.4 Neil Nielson
+69.6 Opal Owen
