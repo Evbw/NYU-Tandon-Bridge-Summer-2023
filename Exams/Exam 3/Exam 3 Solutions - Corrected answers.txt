@@ -1,0 +1,168 @@
+
+Name: Everett Bowline
+ 
+
+NYU Email: eb111@nyu.edu
+
+
+
+
+Solutions to midterm exam
+
+
+Question 1 (Multiple choice answer): B - This is a dangling pointer. The destination it was pointing to has changed and so it is no longer valid.
+Question 2 (Multiple choice answer): D - I think Linked Lists and Arrays/Vectors were linear time as well, so also A and B
+Question 3 (Multiple choice answer): A - void would have no return type, and we need to return something of the same type. For that reason, a pointer or a copy by reference may not be a good idea, since we're not trying to copy it. 
+Question 4 (Provide Code): ptr->member(); - It has to be dereferenced to call the function anyway, so that should do it in one swoop.
+Question 5 (Conversion): 234*+567/++
+
+Question 6 (One line of code): cout<<root->right->data;
+
+Question 7 (Algorithm; English answer): In a typical BST, duplicates are often andled by deciding whether to place them in the left or right subtree.
+					In this case, it seems duplicates are placed in the right subtree. To find duplicates, we need to examine node values equal to
+					the value of its left or right child. My first thought was simply navigating to the far right of the tree and checking if
+					node == node->right, but that isn't sufficient. This approach might miss duplicates located elsewhere in the tree.
+					Instead, we should do in-order traversal of the tree. This way, we can keep track of the previous node's value and
+					compare it with the current node's value. If at any point these values are equal, we've found a duplicate.
+					The runtime of this algorithm is Θ(n), where n is the number of nodes in the tree. This is because, in the worst case,
+					every node in the tree must be visited once during the in-order traversal.
+					The memory usage of this algorithm is O(h), where h is the height of the tree, due to the recursive nature of in-order traversal.
+
+Question 8 (Algorithm; English answer): I would check both ways to make sure the structure was intact, like using a bool to finde if (node == node->next->prev) and 
+					node->next == node->next->prev->next;
+					Those together should catch any mistakes in the ordering, in case the next or prev pointers weren't pointing to the correct place.
+
+
+Question 9: (Program): 
+
+	#include <iostream>
+	#include <fstream>
+	#include <vector>
+	using namespace std;
+
+	struct Student {
+	    int id;
+	    double grade;
+	};
+
+	void sortByID(vector<Student> &students) {
+	    for (size_t i = 0; i < students.size(); i++) {
+        	for (size_t j = i + 1; j < students.size(); j++) {
+	            if (students[i].id > students[j].id) {
+        	        swap(students[i], students[j]);
+	            }
+        	}
+	    }
+	}
+
+	void sortByGrade(vector<Student> &students) {
+	    for (size_t i = 0; i < students.size(); i++) {
+        	for (size_t j = i + 1; j < students.size(); j++) {
+	            if (students[i].grade > students[j].grade) {
+        	        swap(students[i], students[j]);
+	            }
+        	}
+	    }
+	}
+
+	int main() {
+	    ifstream inFile("exam3.txt");
+	    vector<Student> students;
+
+	    int id;
+	    double grade;
+	    while (inFile >> id >> grade) {
+        	Student student;
+	        student.id = id;
+        	student.grade = grade;
+	        students.push_back(student);
+	    }
+	    inFile.close();
+
+	    sortByID(students);
+	    ofstream sortedByIDFile("sortedbyID.txt");
+	    for (const auto &student : students) {
+	        sortedByIDFile<<student.id<<" "<<student.grade<<endl;
+ 	   }
+ 	   sortedByIDFile.close();
+
+ 	   sortByGrade(students);
+ 	   ofstream sortedByGradeFile("sortedbyGrade.txt");
+	   for (const auto &student : students) {
+ 	       sortedByGradeFile<<student.id<<" "<<student.grade<<endl;
+ 	   }
+	    sortedByGradeFile.close();
+
+	    return 0;
+	}
+
+
+Question 10: (Classes):
+
+        #include <iostream>
+	#include <vector>
+	using namespace std;
+
+	const int CARCOST = 5;
+	const int TRUCKCOST = 25;
+
+	class Vehicle{
+	protected:
+	    int totalToll;
+	public:
+	    Vehicle():totalToll(0){};
+
+	    int getTollTotal(){
+ 	       return totalToll;
+ 	   }
+
+ 	   virtual int incurToll() = 0;
+	};
+
+	class Car:public Vehicle{
+	public:
+ 	   int incurToll(){
+  	      totalToll += CARCOST;
+ 	       return CARCOST;
+ 	   }
+	};
+
+	class Truck:public Vehicle{
+	public:
+	    int incurToll(){
+	        totalToll += TRUCKCOST;
+   	     return TRUCKCOST;
+  	  }
+	};
+
+	class TollBooth{
+	    int totalToll;
+	public:
+	    TollBooth():totalToll(0){}
+	    int getBothTotal(){return totalToll;}
+
+ 	   void processToll(Vehicle* vehicle){
+ 	       totalToll += vehicle->incurToll();
+ 	   }
+	};
+
+	int main(){
+	 TollBooth tollBooth;
+	  Car car;
+ 	 Truck truck;
+
+ 	 cout<<"Beginning tollBooth: "<<tollBooth.getBothTotal()<<endl;  //expect 0
+ 	 cout<<"Beginning car: "<<car.getTollTotal()<<endl; //expect 0
+ 	 cout<<"Beginning truck: "<<truck.getTollTotal()<<endl; //expect 0
+  
+ 	 tollBooth.processToll(&car);
+ 	 tollBooth.processToll(&truck);
+	  tollBooth.processToll(&car);
+ 	 tollBooth.processToll(&truck);
+  
+ 	 cout<<"Total earning for this toll booth: "<<tollBooth.getBothTotal()<<endl; //expect 60
+ 	 cout<<"Car toll: "<<car.getTollTotal()<<endl; //expect 10
+ 	 cout<<"Truck toll: "<<truck.getTollTotal()<<endl; //expect 50
+  
+ 	 return 0;
+	}
