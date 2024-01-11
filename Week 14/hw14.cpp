@@ -6,7 +6,7 @@ vector<int> minMax(vector<int>& v);
 vector<int> minMax(vector<int>& v, int start, int end);
 
 int main() {
-    vector<int> testVector = {9, 0, 8, 1, 7, -50, 2, 6, 4};
+    vector<int> testVector = {4, 6, 2, -50, 7, 1, 8, 0, 9};
         
     if (testVector.size() == 0) {
         cout<<"Vector is empty. No result.";
@@ -15,10 +15,14 @@ int main() {
 
     vector<int> minMaxResult = minMax(testVector);
     
-    for (int i = 0; i < minMaxResult.size(); i++) {
-        cout<<minMaxResult[i]<<" ";
+    if ( minMaxResult[0] > minMaxResult[1] ) {
+        cout<<"The maximum number is "<<minMaxResult[0]<<"."<<endl;
+        cout<<"The minimum number is "<<minMaxResult[1]<<"."<<endl;
     }
-    cout<<endl;
+    else {
+        cout<<"The maximum number is "<<minMaxResult[1]<<"."<<endl;
+        cout<<"The minimum number is "<<minMaxResult[0]<<"."<<endl;
+    }
     return 0;
 }
 
