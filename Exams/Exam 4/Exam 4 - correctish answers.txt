@@ -1,0 +1,203 @@
+1) (3pts) Multiple Choice:	A
+
+I'm choosing when it was most recently interrupted because I'm interpreting that as "how recently it was in the Running State". The PMT is in a protected area
+of RAM, so that's irrelevant.
+
+If it's Blocked, when it exits likely won't matter, because it will go back to the Ready state. (by the way, there's a typo in B: "When it will be exit the blocked
+state)
+
+When it started is only relevant if it's a recently used process.
+
+
+2) (3pts) Multiple Choice:	C
+
+The webcam and driver both operate at some level through the HAL. The "Hello World" application is a user-level process which doesn't interact with hardware.
+
+Still the driver needs access to the mouse to update it.
+
+
+3) (3pts) Multiple Choice:	A
+
+ESP involves the most amount of overhead, as determined by the psychic overlords.
+
+
+4) (3pts) Fill in the blank:	Fetch-Decode-Execute
+
+
+5) (3pts) Fill in the blank:	NS
+
+NS does domain & authoritative hostname, CNAME does name & canonical name, and MX
+is mail records.
+
+
+6) (5 pts) Short answer:
+
+The source port will be determined by the OS of the machine initiating the connection. It is 'randomly' selected from the range of available ports.
+
+
+7) (10 pts) Short answer:
+
+There are a couple of ports, 443, or if they're using the QUIC protocol, UDP could technically be designated a specific port. 
+
+A server could respond to UDP traffic by forwarding the packets to a different port or by denying the connection altogether.
+
+If a server receives UDP traffic for a port that isn’t open or listening, it typically sends an ICMP "Destination Unreachable"
+message back to the sender. Specific behavior might vary based on the server configuration and the operating system.
+
+
+8) (10 pts) Short answer:
+
+Protection involves finding ways to prevent memory from being corrupted. There are many instances, like in all of the programs we've written, where shared
+libraries for different programs are used by many or all of them.
+
+If they're frequently used, creating a cached copy of the shared file will both allow for faster access and protection from possible corruption by a
+poorly written or malicious program. Memory segmentation and paging play crucial roles in achieving this balance.
+
+
+9) (10 pts) Short answer:
+
+A page fault is when a process requests a page that is not currently stored in main memory (RAM), but in secondary storage being used as Virtual Memory (VM).
+
+The OS has to use a medium-term scheduling algorithm to determine which page to pull out so it has access and conversely, which pages to put into VM. There are
+a variety of algorithms to help determine this, ideally Least Recently Used, but keeping track of that is expensive and will slow overall performance of the
+machine. It is crucial for the OS to check if the page is in a swap space, read it into RAM, update the page table for multiple pages.
+
+The PFF and VSWS algorithms are also used, but they don't keep the number of page faults between an optimized upper and lower bound. If there aren't very many
+page faults, we want to store some in VM, if there are a lot, we need to pull some pages out. The Clock Algorithm will visit each page, check a "use bit" to see
+if it was recently used and if it has, set that "use bit" to 0. If the use bit is still 0 when it comes back around, the page is stored in the VM. This is a
+compromise between LRU and a First-in First-out approach, because a frequently accessed page should remain in memory.
+
+
+10) (10 pts) Short answer:
+
+A connected network is something like the old telephone system, hard wires making direct connections. Today we use a connectionless network, where there are plenty
+of hard wires still, but any individual data packet may not take the same route to its destination. If all packets took the same route and traffic along that
+route got backed up, it would slow the connection or perhaps even lose data.
+
+IP fragmentation typically occurs when a packet's size exceeds the Maximum Transmission Unit (MTU) of the network through which it must pass. The MTU is the
+largest size of a packet that can be transmitted on a network segment without needing to be fragmented. When an IP packet is larger than the MTU, it must be
+divided into smaller fragments to pass through the network. Each fragment becomes its own IP packet, with its own header.
+The reassembly of the fragments into the original IP packet occurs at the destination host.
+
+The destination host uses the IP headers of the fragments – particularly the identification field (which is the same for all
+fragments of a packet), the fragment offset, and the more fragments flag – to reassemble the packet in the correct order.
+If any fragment of a packet is lost during transmission, the destination will be unable to completely reassemble the original
+packet, leading to the eventual discard of the incomplete packet after a timeout.
+
+A situation where that may occur is perhaps doing a Zoom lecture to 30-60 people across the world. Traveling from NYC to Taiwan or India involves a lot of 
+switching between nodes to reach the other side of the world, which could incur a lot of data lost if it wasn't quickly rerouted to where it needed to go
+dynamically.
+
+In IPv6, the approach to fragmentation is different. IPv6 does not allow routers to fragment packets; it must be done by the sending host, guided by Path
+MTU Discovery. This change addresses some of the inefficiencies and security concerns associated with IPv4 fragmentation.
+
+
+11) (10 pts) Short answer:
+
+I think performing a context switch between threads in the same process only involves a yield. All of the threads share the same resources as the process, so
+perhaps a preemption of that thread's locked resources may help the transition. Threads only have Ready, Running, and Blocked states, so assuming that we only
+had a single processor to run the instructions on, this makes the most sense.
+
+A context switch involves saving the state of the old thread and loading the state of the new thread, which includes updating the CPU's
+registers and possibly the memory map.
+
+
+12) (10 pts) Short answer:
+
+I know the DHCP request involves a client sending a DHCPDISCOVER to the DHCP servers, which then send DHCPOFFERs, followed by the client's DHCPREQUEST, and
+finally the DHCP server sends a DHCP ACK. 
+
+The key is in the DHCPREQUEST message broadcast by the client, which includes the server identifier option specifying the chosen server. Other servers
+withdraw their offers upon receiving this broadcast.
+
+
+13) (20 pts) Code (1 function):
+
+My answer:
+
+bool is_valid(BSTNode<int>* node) {
+    if (node == nullptr) {
+        return true;
+    }
+
+    if (node->value > 2) {
+        return false;
+    }
+
+    if (node->value == 0 && (node->left == nullptr && node->right == nullptr )) {
+        return true;
+    }
+
+    if (node->value == 0 && (node->left != nullptr || node->right != nullptr )) {
+        return false;
+    }
+
+    if (node->value == 2 && (node->left == nullptr || node->right == nullptr )) {
+        return false;
+    }
+
+    if (node->value == 1 && (node->left != nullptr && node->right != nullptr )) {
+        return false;
+    }
+
+    if (node->value == 1 && (node->left == nullptr && node->right == nullptr )) {
+        return false;
+    }
+
+    if (node->value == 0 && (node->left != nullptr || node->right != nullptr )) {
+        return false;
+    }
+
+    if (!isValid(node->left)) {
+        return false;
+    }
+    if (!isValid(node->right)) {
+        return false;
+    }
+
+    return true;
+
+}
+
+From the TA:
+
+bool is_valid(node* root){
+    if(root==nullptr){return true;}
+    int children=0;
+    if(root->left!=nullptr){children++;}
+    if(root->right!=nullptr){children++;}
+    if(root->val!=children){return false;}
+    else return is_valid(root->left)&&is_valid(root->right);
+}
+
+Another solution:
+
+bool is_valid(node* root){
+    if(root==nullptr){return true;}
+    int children;
+    if(root->left!=nullptr&&root->right!=nullptr){children=2;}
+    else if(root->left==nullptr&&root->right==nullptr){children=0;}
+    else{children=1;}
+    bool here=root->val==children;
+    bool x=is_valid(root->left);
+    bool y=is_valid(root->right);
+    return x&&y&&here;
+}
+
+And another:
+bool is_valid(TreeNode* root) {
+    if (root == nullptr) {
+        return true;
+    }
+    if (root->left == nullptr && root->right == nullptr) {
+        return root->data == 0;
+    }
+    if (root->left == nullptr) {
+        return root->data == 1 && is_valid(root->right);
+    }
+    if (root->right == nullptr) {
+        return root->data == 1 && is_valid(root->left);
+    }
+    return root->data == 2 && is_valid(root->left) && is_valid(root->right);    
+
+}
