@@ -1,0 +1,53 @@
+Showing the file I ended up with would be useless, so here are some instructions. Note that the process may have change after November 2023:
+
+Step 1: Install VirtualBox
+
+    Search for VirtualBox and download it for your appropriate OS, then run the downloaded installer and follow the on-screen instructions to install VirtualBox.
+
+Step 2: Download Ubuntu ISO
+
+    You'll also need to search for the proper Ubuntu version and download that. Download the ISO file for the latest LTS (Long Term Support) version of Ubuntu.
+
+Step 3: Create a New Virtual Machine
+
+    Launch VirtualBox, click on the "New" button to start creating a new virtual machine, and enter a name for your VM (I used my netID_HW18) and select "Linux" as the type
+    and "Ubuntu" as the version. There are settings you'll need to mess around with, so allocate at least 2GB (2048 MB) of RAM to the VM. The virtual hard disk (VDI) should use
+    the recommended size, unless you're running out of space. You won't need much.
+
+Step 4: Install Ubuntu
+
+    Before starting the VM, go to the VM settings, navigate to the "Storage" section, and attach the downloaded Ubuntu ISO file to the virtual CD/DVD drive. Start the virtual
+    machine and follow the prompts to install Ubuntu. Choose your preferred language, timezone, keyboard layout, and user account details.
+
+Step 5: Configure Virtual Machine
+
+    After installing Ubuntu, shut down the VM and adjust the settings in VirtualBox. Set the CPU count to 2 and confirm the RAM is set to at least 2GB. Start the VM again for
+    the changes to take effect.
+
+Step 6: Explore Ubuntu and CLI
+
+    Once in Ubuntu, open the Terminal application. You can find it by searching in the Ubuntu applications menu or by using the shortcut Ctrl+Alt+T. Use commands like cd (change directory)
+    and ls (list files) to explore the file system. Create a directory with
+
+    mkdir
+    
+    using yournet_ID. Navigate to the new directory and use 
+  
+    nano My HW.txt
+
+    to create and edit a file. Add some text to it.
+
+    Use the
+
+    ls 
+
+    command to list all files in your directory.
+
+Step 7: Take a Screenshot
+
+    Take a screenshot of your terminal window showing the files and the Ubuntu environment. It's the PrtScn button on a Windows keyboard, but this is something else you may need to search.
+    
+    I saved it with MS Paint, but use whatever you need to save the screenshot to a location on your host machine.
+
+
+Remember, the focus of this assignment is to get familiar with the Linux environment, particularly the command-line interface, so feel free to explore and try out different commands and settings in Ubuntu.
