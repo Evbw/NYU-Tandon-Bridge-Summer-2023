@@ -1,0 +1,44 @@
+Step 1: Install Wireshark
+
+    Go to Wireshark.org and download the latest version of Wireshark suitable for your OS
+
+    Run the downloaded installer and follow the on-screen instructions to install Wireshark.
+
+Step 2: Start a Capture Session
+
+    Open Wireshark, select Network Interface for Capture: Click on the gear icon next to one of the network interfaces listed on the start page.
+    Your computer might have multiple interfaces (like Wi-Fi, Ethernet, etc.), so choose the one that is actively being used for internet access.
+    
+    If you're unsure which interface to select, look for the interface with changing graphs or numbers, indicating active traffic.
+
+Step 3: Set Capture Filters
+
+    In the "Capture filter for selected interfaces" field, you need to enter a filter that captures both DNS and HTTP traffic.
+    The standard port for HTTP traffic is 80, and DNS uses port 53. You can set a filter to capture both by entering: port 80 or port 53
+    
+    Click the "Start" button to begin capturing traffic.
+
+Step 4: Generate Traffic
+
+    Open your web browser while Wireshark is running in the background.
+    
+    Find a website that uses HTTP (not HTTPS). You might need to search for older websites or specific HTTP page, but I used http://httpforever.com/
+    
+    To ensure you capture a DNS query, you may want to clear your DNS cache first. This process varies depending on your operating system.
+
+Step 5: Capture DNS Query and HTTP GET Request
+
+    Type the URL of the HTTP website into your browser and press enter. This action should generate a DNS query.
+    
+    The browser will send an HTTP GET request to the web server hosting the HTTP website.
+
+Step 6: Stop Capture and Save File
+
+    Once you've loaded the website, return to Wireshark and click the red square button to stop the capture.
+
+    Go to "File" > "Save As" and choose a location to save your capture file. Save it in the .pcapng format.
+
+Additional Notes:
+
+    Filtering in Wireshark: Remember, the capture filter syntax is different from the display filter syntax. The capture filter limits what packets are captured, while the display filter only changes what you see from what was captured.
+    Remember to verify that your capture file contains both a DNS query and an HTTP GET request before submission.
